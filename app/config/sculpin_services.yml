@@ -1,0 +1,6 @@
+services:
+    forthehorde.extension.text:
+        class: FortheHorde\Twig\Extensions\Text
+        tags: 
+           - { name: twig.extension }
+           
