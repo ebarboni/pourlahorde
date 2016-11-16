@@ -3,6 +3,7 @@
 namespace FortheHorde\Twig\Extensions;
 
 use Twig_Extension;
+use Twig_SimpleFunction;
 
 class Text extends Twig_Extension {
 
