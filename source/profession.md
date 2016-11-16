@@ -1,5 +1,5 @@
 ---
- title: Pour la horde : profession
+title: Pour la horde : profession
 ---
 
 # Profession

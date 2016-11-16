@@ -1,5 +1,5 @@
 ---
- title: Pour la horde
+title: Pour la horde
 ---
 
 # Hello World
