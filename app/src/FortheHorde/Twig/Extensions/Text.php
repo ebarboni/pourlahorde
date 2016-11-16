@@ -2,6 +2,8 @@
 
 namespace FortheHorde\Twig\Extensions;
 
+use Twig_Extension;
+
 class Text extends Twig_Extension {
 
     public function getFunctions() {
@@ -12,7 +14,7 @@ class Text extends Twig_Extension {
     }
 
     public function showRoster() {
-        $cool="ABC";
+        $cool = "ABC";
         return $cool;
     }
 
