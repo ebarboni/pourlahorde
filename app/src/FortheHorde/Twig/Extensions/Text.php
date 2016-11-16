@@ -14,7 +14,7 @@ class Text extends Twig_Extension {
         return $functions;
     }
 
-    public function showRoster() {
+    public function showGURoster() {
         $cool = "ABC";
         return $cool;
     }
