@@ -2,5 +2,10 @@
     "require": {
         "sculpin/sculpin": "^2.1@dev",
         "dflydev/embedded-composer": "@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "FortheHorde": "app/src"
+        }
     }
 }
