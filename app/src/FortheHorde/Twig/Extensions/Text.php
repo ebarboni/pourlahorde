@@ -16,6 +16,75 @@ class Text extends Twig_Extension {
         return $functions;
     }
 
+    private function getIcon($d) {
+        switch ($d) {
+            case 1:
+                return "#C79C6E";
+            case 2:
+                return "#f48cba";
+            case 3:
+                return "#ABD473";
+            case 4:
+                return "#FFF569";
+            case 5:
+                return "#FFFFFF";
+            case 6:
+                return "#C41F3B";
+            case 7:
+                return "#0070DE";
+            case 8:
+                return "#69CCF0";
+            case 9:
+                return "#9482C9";
+            case 10:
+                return "#00FF96";
+            case 11:
+                return "#FF7D0A";
+            case 12:
+                return "#A330C9";
+        }
+        return "cyan";
+    }
+
+    private function getColor($d) {
+        switch ($d) {
+            case 1:
+                return "#C79C6E";
+            case 2:
+                return "#f48cba";
+            case 3:
+                return "#ABD473";
+            case 4:
+                return "#FFF569";
+            case 5:
+                return "#FFFFFF";
+            case 6:
+                return "#C41F3B";
+            case 7:
+                return "#0070DE";
+            case 8:
+                return "#69CCF0";
+            case 9:
+                return "#9482C9";
+            case 10:
+                return "#00FF96";
+            case 11:
+                return "#FF7D0A";
+            case 12:
+                return "#A330C9";
+        }
+        return "cyan";
+    }
+
+    private function displayRoster($charobject) {
+        $color = $this->getColor($charobject->character->class);
+        $c = '<div class="aperso">';
+        $c .= '<img src="http://render-eu.worldofwarcraft.com/character/' . $charobject->character->thumbnail . '" class="persoimg" />';
+        $c .= '<span class="pname" style="color:' . $color . '">' . $charobject->character->name . '<span class="level">' . $charobject->character->level . '</span></span>';
+        $c .= '</div>';
+        return $c;
+    }
+
     public function showGURoster(Twig_Environment $env) {
 
         $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
@@ -23,15 +92,19 @@ class Text extends Twig_Extension {
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
-        $cool = "";
+        $cool = '<div class="roster">';
         $json_decoded = json_decode($json);
         for ($rank = 0; $rank <= 1; $rank++) {
             foreach ($json_decoded->members as $character) {
                 if ($character->rank == $rank) {
-                    $cool .= $character->character->name;
+                    $cool .= $this->displayRoster($character);
+                    /* '<div>';
+                      $cool .= $character->character->name;
+                      $cool .= '</div>'; */
                 }
             }
         }
+        $cool .= "</div>";
         return $cool;
     }
 
@@ -42,15 +115,16 @@ class Text extends Twig_Extension {
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
-        $cool = "";
+        $cool = '<div class="roster">';
         $json_decoded = json_decode($json);
         for ($rank = 2; $rank < 10; $rank++) {
             foreach ($json_decoded->members as $character) {
                 if ($character->rank == $rank) {
-                    $cool .= $character->character->name;
+                    $cool .= $this->displayRoster($character);
                 }
             }
         }
+        $cool .= "</div>";
         return $cool;
     }
 

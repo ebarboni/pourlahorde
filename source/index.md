@@ -3,11 +3,10 @@ layout : default
 title: Pour la horde
 ---
 
-<h2>Perso principaux</h2>
-
+##Persos principaux
 {{ showMain() }}
 
-<h2>Perso secondaires</h2>
+##Persos secondaires
 {{ showAlts() }}
 
 

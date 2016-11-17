@@ -1,0 +1,65 @@
+
+html, 
+body, 
+div {
+    padding:0;
+    margin:0;
+
+}
+html {font-family: PT Sans }
+body{ color: white;
+      background-color: #231a13;}
+
+h2 { color:darkgoldenrod;clear:both;
+}
+.content { padding: 10px;}
+.server { color: lightsteelblue;font-size: 15px !important;}
+.banner {
+    font-size: 40px !important;
+    /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
+
+    width: 100%;
+
+    position: relative;
+    background: black;
+    color: darkblue;
+    text-align: left;
+    padding: .5em 1.5em; /* Adjust to suit */
+    /*margin: 2em auto 3em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+}
+
+.aperso {
+    display:table;
+    float:left;
+    border-spacing: 8px;
+}
+.pname {
+    display:table-row;
+    text-align: center;
+}
+.persoimg {
+    display:table-row;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+.roster{display: table;}
+.level{color:white;font-size: 8px;}
+
+nav {
+    color:white;
+    font-size: 15px;
+}
+nav li {
+    display: inline;
+    list-style: none;
+}
+nav a {
+    display:inline-block;
+    margin: 0 30px;
+    color: wheat;
+    font-style: normal;
+    text-decoration: none;
+}
