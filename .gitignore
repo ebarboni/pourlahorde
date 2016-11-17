@@ -1,3 +1,6 @@
 /source/_data/
 /nbproject/private/
 /nbproject/
+/vendor/
+/composer.lock
+/output_prod/
