@@ -12,6 +12,8 @@ class Text extends Twig_Extension {
         $functions = array(
             new Twig_SimpleFunction('showMain', array($this, 'showGURoster'), array('needs_environment' => true, 'is_safe' => array('html'))),
             new Twig_SimpleFunction('showAlts', array($this, 'showGURosterAlts'), array('needs_environment' => true, 'is_safe' => array('html'))),
+            new Twig_SimpleFunction('showTrade', array($this, 'showTrade'), array('needs_environment' => true, 'is_safe' => array('html'))),
+                //  new Twig_SimpleFunction('showItem', array($this, 'showTrade'), array('needs_environment' => true, 'is_safe' => array('html'))),
         );
         return $functions;
     }
@@ -85,6 +87,117 @@ class Text extends Twig_Extension {
         return $c;
     }
 
+    private function getprofession($name, $trade) {
+
+        //$cool = "";
+        $path = realpath(__DIR__ . "/../../../../../app/_data/" . $name . ".json");
+        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $json = fread($myfile, filesize($path));
+        fclose($myfile);
+        $json_decoded = json_decode($json);
+        foreach ($json_decoded->professions as $typeofprof) {
+            foreach ($typeofprof as $prof) {
+                //     $cool .= $prof->id;
+                // $custom = ;
+
+                $trade[$prof->id][$name] = ["rank" => $prof->rank, "max" => $prof->max];
+                $trade[$prof->id]["icon"] = $prof->icon;
+            }
+        }
+        return $trade;
+    }
+
+    public function showTrade(Twig_Environment $env) {
+
+        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
+
+        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $json = fread($myfile, filesize($path));
+        fclose($myfile);
+        // 182	186	393	171	773	164	202	755	165	333	197	185	129	356	794	
+
+        $trade = ["182" => [],
+            "186" => [],
+            "393" => [],
+            "171" => [],
+            "773" => [],
+            "164" => [],
+            "202" => [],
+            "755" => [],
+            "165" => [],
+            "333" => [],
+            "197" => [],
+            "185" => [],
+            "129" => [],
+            "356" => [],
+            "794" => []];
+        $json_decoded = json_decode($json);
+        for ($rank = 0; $rank <= 1; $rank++) {
+            foreach ($json_decoded->members as $character) {
+                if ($character->rank == $rank) {
+                    $trade = $this->getprofession($character->character->name, $trade);
+                }
+            }
+        }
+        for ($rank = 2; $rank < 10; $rank++) {
+            foreach ($json_decoded->members as $character) {
+                if ($character->rank == $rank) {
+                    $trade = $this->getprofession($character->character->name, $trade);
+                }
+            }
+        }
+        $cool = '<table class="roster">';
+        $cool .= "<tr>";
+        $cool .= "<th>Name</th>";
+        foreach ($trade as $atrade) {
+            $cool .= '<th><img src="http://media.blizzard.com/wow/icons/56/' . $atrade['icon'] . '.jpg"/></th>';
+        }
+        $cool .= "</tr>";
+        for ($rank = 0; $rank <= 1; $rank++) {
+            foreach ($json_decoded->members as $character) {
+                if ($character->rank == $rank) {
+                    $cool .= "<tr>";
+                    $cool .= '<td>' . $character->character->name . '</td>';
+                    foreach ($trade as $atrade) {
+                        $cool .= '<td>';
+                        if (@is_array($atrade[$character->character->name])) {
+                            if ($atrade[$character->character->name]["rank"] > 0) {
+                                $cool .= $atrade[$character->character->name]["rank"];
+                            }
+                        } else {
+                            
+                        }
+                        $cool .= '</td>';
+                    }
+                    $cool .= "</tr>";
+                }
+            }
+        }
+        for ($rank = 2; $rank < 10; $rank++) {
+            foreach ($json_decoded->members as $character) {
+                if ($character->rank == $rank) {
+                    $cool .= "<tr>";
+                    $cool .= '<td>' . $character->character->name . '</td>';
+                    foreach ($trade as $atrade) {
+                        $cool .= '<td>';
+                        if (@is_array($atrade[$character->character->name])) {
+                            if ($atrade[$character->character->name]["rank"] > 0) {
+                                $cool .= $atrade[$character->character->name]["rank"];
+                            }
+                        } else {
+                            
+                        }
+                        $cool .= '</td>';
+                    }
+                    $cool .= "</tr>";
+                }
+            }
+        }
+        //$cool .= var_dump($trade);
+        $cool .= "</table>";
+        return $cool;
+    }
+
     public function showGURoster(Twig_Environment $env) {
 
         $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
@@ -98,9 +211,6 @@ class Text extends Twig_Extension {
             foreach ($json_decoded->members as $character) {
                 if ($character->rank == $rank) {
                     $cool .= $this->displayRoster($character);
-                    /* '<div>';
-                      $cool .= $character->character->name;
-                      $cool .= '</div>'; */
                 }
             }
         }
