@@ -81,7 +81,7 @@ class Text extends Twig_Extension {
     private function displayRoster($charobject) {
         $color = $this->getColor($charobject->character->class);
         $c = '<div class="aperso">';
-        $c .= '<img src="https://render-eu.worldofwarcraft.com/character/' . $charobject->character->thumbnail . '" class="persoimg" />';
+        $c .= '<img src="https://render-eu.worldofwarcraft.com/character/' . $charobject->character->thumbnail . '" class="persoimg" height="84" width="84" />';
         $c .= '<span class="pname" style="color:' . $color . '">' . $charobject->character->name . '<span class="level">' . $charobject->character->level . '</span></span>';
         $c .= '</div>';
         return $c;
