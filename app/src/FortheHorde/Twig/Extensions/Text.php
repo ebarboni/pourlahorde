@@ -82,7 +82,11 @@ class Text extends Twig_Extension {
         $color = $this->getColor($charobject->character->class);
         $c = '<div class="aperso">';
         $c .= '<img src="https://render-eu.worldofwarcraft.com/character/' . $charobject->character->thumbnail . '" class="persoimg" height="84" width="84" />';
-        $c .= '<span class="pname" style="color:' . $color . '">' . $charobject->character->name . '<span class="level">' . $charobject->character->level . '</span></span>';
+        $c .= '<span class="pname" style="color:' . $color . '">' . $charobject->character->name;
+        if ($charobject->character->level < 110) { // max level
+            $c .= '<span class="level">' . $charobject->character->level . '</span>';
+        }
+        $c .= '</span>';
         $c .= '</div>';
         return $c;
     }
