@@ -8,10 +8,28 @@
         {% block head_styles %}
         {% endblock %}
 
-        <script type="text/javascript" src="http://static.wowhead.com/widgets/power.js"></script>
-        <script>var wowhead_tooltips = {"iconizelinks": true, "renamelinks": true}</script>
+
         {% block head_scripts %}
         {% endblock %}
+        <script type="text/javascript" src="{{ site.url }}js/jquery-3.1.1.min.js">
+        </script>
+        <script type="text/javascript" src="http://static.wowhead.com/widgets/power.js">
+            // tooltip options
+            var wowhead_tooltips = {
+                'colorlinks': true,
+                'iconizelinks': true,
+                'renamelinks': true,
+            };
+
+            $(document).ready(function () {
+                // update tooltips
+                if (typeof $WowheadPower == 'undefined') {
+                    $.getScript('//wow.zamimg.com/widgets/power.js');
+                } else {
+                    $WowheadPower.refreshLinks();
+                }
+            });
+        </script>
     </head>
     <body>
         <header class="banner">
