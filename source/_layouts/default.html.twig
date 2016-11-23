@@ -4,12 +4,15 @@
         <title>{{ page.title }}</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans" />
-        
         <link href="{{ site.url }}/css/pourlahorde.css" rel="stylesheet" type="text/css">
         {% block head_styles %}
         {% endblock %}
         {% block head_scripts %}
         {% endblock %}
+        <script type="text/javascript" src="//fr.zamimg.com/widgets/power.js"></script>
+        <script type="text/javascript">
+            var wowhead_tooltips = {"colorlinks": true, "iconizelinks": true, "renamelinks": true};
+        </script>
     </head>
     <body>
         <header class="banner">
@@ -25,8 +28,6 @@
 
         <div class="content">
     {% block content_wrapper %}{% block content %}{% endblock %}{% endblock %}
-</div>
-</body>
-<script type="text/javascript" src="//fr.zamimg.com/widgets/power.js"></script>
-<script>var wowhead_tooltips = { "colorlinks": true, "iconizelinks": true, "renamelinks": true }</script>
+        </div>
+    </body>
 </html>

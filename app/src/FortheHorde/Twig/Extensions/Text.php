@@ -13,6 +13,7 @@ class Text extends Twig_Extension {
             new Twig_SimpleFunction('showMain', array($this, 'showGURoster'), array('needs_environment' => true, 'is_safe' => array('html'))),
             new Twig_SimpleFunction('showAlts', array($this, 'showGURosterAlts'), array('needs_environment' => true, 'is_safe' => array('html'))),
             new Twig_SimpleFunction('showTrade', array($this, 'showTrade'), array('needs_environment' => true, 'is_safe' => array('html'))),
+            new Twig_SimpleFunction('item', array($this, 'itemIcon'), array('needs_environment' => true, 'is_safe' => array('html'))),
                 //  new Twig_SimpleFunction('showItem', array($this, 'showTrade'), array('needs_environment' => true, 'is_safe' => array('html'))),
         );
         return $functions;
@@ -239,6 +240,13 @@ class Text extends Twig_Extension {
             }
         }
         $cool .= "</div>";
+        return $cool;
+    }
+
+    public function itemIcon(Twig_Environment $env, $id) {
+        $cool = '';
+        $cool .= '<a href="//fr.wowhead.com/item='.$id.'" rel="item='.$id.'"></a>';
+
         return $cool;
     }
 
