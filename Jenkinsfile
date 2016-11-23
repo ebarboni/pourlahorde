@@ -15,7 +15,7 @@ def f = env.WORKSPACE + '/app/_data/guild.json'
 echo "${f}"
 def character = new groovy.json.JsonSlurper().parse(new File(f));
 for (charact  in character.get("members") ) {
- echo charact.get("name");
+ echo charact.get('character').get('name');
 }
 }
 stage ('build') {
