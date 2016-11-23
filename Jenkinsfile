@@ -14,7 +14,8 @@ sh "curl -o app/_data/guild.json 'https://eu.api.battle.net/wow/guild/Elune/Pour
 def f = env.WORKSPACE + '/app/_data/guild.json'
 echo "${f}"
 def character = new groovy.json.JsonSlurper().parse(new File(f));
-for (charact  in character.get("members") ) {
+for (charact  in character.get('members') ) {
+echo charact.get('character').get('name')
  def n =  charact.get('character').get('name').toString()
 sh "curl -o app/_data/guild.json 'https://eu.api.battle.net/wow/character/Elune/${n}?fields=professions&locale=fr_FR&apikey=${env.APIKEY}'"
 sh 'sleep 1'
