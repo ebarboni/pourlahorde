@@ -14,6 +14,7 @@ sh "curl -o app/_data/guild.json 'https://eu.api.battle.net/wow/guild/Elune/Pour
 def f = env.WORKSPACE + '/app/_data/guild.json'
 echo "${f}"
 def character = new groovy.json.JsonSlurper().parse(new File(f));
+echo character.get("members");
 for (charact  in character.members[].character.name ) {
  echo "${charact}"
 }
