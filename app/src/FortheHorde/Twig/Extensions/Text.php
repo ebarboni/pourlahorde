@@ -244,10 +244,7 @@ class Text extends Twig_Extension {
     }
 
     public function itemIcon(Twig_Environment $env, $id) {
-        $cool = '';
-        $cool .= '<a href="//fr.wowhead.com/item='.$id.'" rel="item='.$id.'"></a>';
-
-        return $cool;
+        return '<a href="http://www.wowhead.com/item=' . $id . '" >item</a>';
     }
 
 }
