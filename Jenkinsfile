@@ -17,7 +17,7 @@ def character = new groovy.json.JsonSlurper().parse(f);
 //echo "$i"
 //sh "for i in $(cat app/_data/guild.json | jq '.members[].character.name' | tr -d '"' );do;curl -o app/_data/$i.json 'https://eu.api.battle.net/wow/character/Elune/$i?fields=professions&locale=fr_FR&apikey=${env.APIKEY}';sleep 1;done"
 //}
-stage ('build') #
+stage ('build') {
    sh "vendor/bin/sculpin generate --env=prod"
 }
 
