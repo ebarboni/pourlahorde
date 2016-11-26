@@ -63,3 +63,6 @@ nav a {
     font-style: normal;
     text-decoration: none;
 }
+
+.jumbotron {color:black;}
+.jumbotron p { color : darkblue;} 
