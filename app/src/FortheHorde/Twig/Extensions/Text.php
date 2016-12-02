@@ -210,7 +210,7 @@ class Text extends Twig_Extension {
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
-        $cool = '<div class="col-md-8">';
+        $cool = '<div class="col-md-10">';
         $json_decoded = json_decode($json);
         for ($rank = 0; $rank <= 1; $rank++) {
             foreach ($json_decoded->members as $character) {
@@ -230,7 +230,7 @@ class Text extends Twig_Extension {
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
-        $cool = '<div class="col-md-8">';
+        $cool = '<div class="col-md-10">';
         $json_decoded = json_decode($json);
         for ($rank = 2; $rank < 10; $rank++) {
             foreach ($json_decoded->members as $character) {

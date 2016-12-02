@@ -32,6 +32,7 @@ h2 { color:darkgoldenrod;clear:both;
     display:table;
     float:left;
     border-spacing: 8px;
+    width: 120px;
 }
 .pname {
     display:table-row;
