@@ -296,7 +296,7 @@ class Text extends Twig_Extension {
                     $cool .= '<td>' . $character->character->name . '</td>';
 
                     $itemlist = "";
-                    for ($i = 0; i < 15; $i++) {
+                    for ($i = 0; $i < 15; $i++) {
                         $itemlist .= '<td>';
                         $itemlist .= $this->getItemLevelL($character->character->name, $i);
                         $itemlist .= '</td>';
@@ -316,7 +316,7 @@ class Text extends Twig_Extension {
                     $cool .= '<td>' . $character->character->name . '</td>';
 
                     $itemlist = "";
-                    for ($i = 0; i < 15; $i++) {
+                    for ($i = 0; $i < 15; $i++) {
                         $itemlist .= '<td>';
                         $itemlist .= $this->getItemLevelL($character->character->name, $i);
                         $itemlist .= '</td>';
