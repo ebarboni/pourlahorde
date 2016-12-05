@@ -280,7 +280,7 @@ class Text extends Twig_Extension {
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
-
+        $json_decoded = json_decode($json);
         $cool = '<table class="roster">';
         $cool .= "<tr>";
         $cool .= "<th>Name</th>";
