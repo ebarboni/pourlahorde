@@ -280,8 +280,10 @@ class Text extends Twig_Extension {
                 $di--;
             }
         }
-
-        return '<td>' . ($tmp / $di) . '</td>';
+        if ($di != 15) {
+            $di = 14;
+        }
+        return '<td>'.$json_decoded["items"]['averageItemLevel'].','.$json_decoded["items"]['averageItemLevelEquipped'].',calc:' . ($tmp / $di) . '</td>';
     }
 
     public function itemLevel(Twig_Environment $env) {
