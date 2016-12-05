@@ -14,6 +14,7 @@ class Text extends Twig_Extension {
             new Twig_SimpleFunction('showAlts', array($this, 'showGURosterAlts'), array('needs_environment' => true, 'is_safe' => array('html'))),
             new Twig_SimpleFunction('showTrade', array($this, 'showTrade'), array('needs_environment' => true, 'is_safe' => array('html'))),
             new Twig_SimpleFunction('item', array($this, 'itemIcon'), array('needs_environment' => true, 'is_safe' => array('html'))),
+            new Twig_SimpleFunction('itemlevel', array($this, 'itemLevel'), array('needs_environment' => true, 'is_safe' => array('html'))),
                 //  new Twig_SimpleFunction('showItem', array($this, 'showTrade'), array('needs_environment' => true, 'is_safe' => array('html'))),
         );
         return $functions;
@@ -196,6 +197,136 @@ class Text extends Twig_Extension {
                     }
                     $cool .= "</tr>";
                 }
+            }
+        }
+        //$cool .= var_dump($trade);
+        $cool .= "</table>";
+        return $cool;
+    }
+
+    private function getItemLevelL($name, $i) {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/" . $name . ".json");
+        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $json = fread($myfile, filesize($path));
+        fclose($myfile);
+        $json_decoded = json_decode($json);
+        $il = [
+            0 => "head",
+            1 => "neck",
+            2 => "shoulder",
+            3 => "back",
+            4 => "chest",
+            5 => "wrist",
+            6 => "mainHand",
+            7 => "offHand",
+            8 => "hands",
+            9 => "waist",
+            10 => "legs",
+            11 => "feet",
+            12 => "finger1",
+            13 => "finger2",
+            14 => "trinket1",
+            15 => "trinket2",
+        ];
+        $itemlvl = $json_decoded->items->$il[$i]->itemLevel;
+        if ($itemlvl == 0) {
+            return "<td></td>";
+        } else {
+            return "<td>" . $itemlvl . "</td>";
+        }
+        //<a href="http://fr.wowhead.com/item=' . $id . '" >item</a>
+    }
+
+    private function getItemLevelALL($name) {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/" . $name . ".json");
+        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $json = fread($myfile, filesize($path));
+        fclose($myfile);
+        $json_decoded = json_decode($json);
+        $il = [
+            0 => "head",
+            1 => "neck",
+            2 => "shoulder",
+            3 => "back",
+            4 => "chest",
+            5 => "wrist",
+            6 => "mainHand",
+            7 => "offHand",
+            8 => "hands",
+            9 => "waist",
+            10 => "legs",
+            11 => "feet",
+            12 => "finger1",
+            13 => "finger2",
+            14 => "trinket1",
+            15 => "trinket2",
+        ];
+        $tmp = 0;
+        $di = 16;
+        for ($i = 0; $i < 15; $i++) {
+            $itemlvl = $json_decoded->items->$il[$i]->itemLevel;
+            $tmp += $itemlvl;
+            if ($itemlvl == 0) {
+                $di--;
+            }
+        }
+        return '<td>' . ($tmp / $di) . '</td>';
+    }
+
+    public function itemLevel(Twig_Environment $env) {
+
+        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
+
+        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $json = fread($myfile, filesize($path));
+        fclose($myfile);
+
+        $cool = '<table class="roster">';
+        $cool .= "<tr>";
+        $cool .= "<th>Name</th>";
+        for ($i = 0; i < 15; $i++) {
+            $cool .= '<th><img src="http://media.blizzard.com/wow/icons/56/' . $atrade['icon'] . '.jpg"/></th>';
+        }
+        $cool .= "</tr>";
+
+        for ($rank = 0; $rank <= 1; $rank++) {
+            foreach ($json_decoded->members as $character) {
+                if ($character->rank == $rank) {
+                    $cool .= "<tr>";
+                    $cool .= '<td>' . $character->character->name . '</td>';
+
+                    $itemlist = "";
+                    for ($i = 0; i < 15; $i++) {
+                        $itemlist .= '<td>';
+                        $itemlist .= $this->getItemLevelL($character->character->name, $i);
+                        $itemlist .= '</td>';
+                    }
+
+
+                    $itemlvl = $this->getItemLevelALL($character->character->name);
+                    $cool .= $itemlvl . $itemlist;
+                }
+                $cool .= "</tr>";
+            }
+        }
+        for ($rank = 2; $rank < 10; $rank++) {
+            foreach ($json_decoded->members as $character) {
+                if ($character->rank == $rank) {
+                    $cool .= "<tr>";
+                    $cool .= '<td>' . $character->character->name . '</td>';
+
+                    $itemlist = "";
+                    for ($i = 0; i < 15; $i++) {
+                        $itemlist .= '<td>';
+                        $itemlist .= $this->getItemLevelL($character->character->name, $i);
+                        $itemlist .= '</td>';
+                    }
+
+
+                    $itemlvl = $this->getItemLevelALL($character->character->name);
+                    $cool .= $itemlvl . $itemlist;
+                }
+                $cool .= "</tr>";
             }
         }
         //$cool .= var_dump($trade);
