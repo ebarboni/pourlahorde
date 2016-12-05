@@ -209,7 +209,7 @@ class Text extends Twig_Extension {
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
-        $json_decoded = json_decode($json);
+        $json_decoded = json_decode($json, true);
         $il = [
             0 => "head",
             1 => "neck",
@@ -228,11 +228,17 @@ class Text extends Twig_Extension {
             14 => "trinket1",
             15 => "trinket2",
         ];
-        $itemlvl = $json_decoded->items->$il[$i]->itemLevel;
-        if ($itemlvl == 0) {
+        $ii = 0;
+        //$itemlvl = $json_decoded->items;
+        //echo serialize($itemlvl);
+        if (array_key_exists($il[$i], $json_decoded["items"])) {
+            $ii = $json_decoded["items"][$il[$i]]["itemLevel"];
+        }
+
+        if ($ii == 0) {
             return "<td></td>";
         } else {
-            return "<td>" . $itemlvl . "</td>";
+            return "<td>" . $ii . "</td>";
         }
         //<a href="http://fr.wowhead.com/item=' . $id . '" >item</a>
     }
@@ -242,7 +248,7 @@ class Text extends Twig_Extension {
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
-        $json_decoded = json_decode($json);
+        $json_decoded = json_decode($json, true);
         $il = [
             0 => "head",
             1 => "neck",
@@ -262,12 +268,15 @@ class Text extends Twig_Extension {
             15 => "trinket2",
         ];
         $tmp = 0;
-        $di = 16;
+        $di = 15;
         for ($i = 0; $i < 15; $i++) {
-            $itemlvl = $json_decoded->items->$il[$i]->itemLevel;
-            $tmp += $itemlvl;
-            if ($itemlvl == 0) {
-                $di--;
+            //echo serialize($json_decoded["items"][$il[$i]]); 
+            if (array_key_exists($il[$i], $json_decoded["items"])) {
+                $itemlvl = $json_decoded["items"][$il[$i]]["itemLevel"];
+                $tmp += $itemlvl;
+                if ($itemlvl == 0) {
+                    $di--;
+                }
             }
         }
         return '<td>' . ($tmp / $di) . '</td>';
