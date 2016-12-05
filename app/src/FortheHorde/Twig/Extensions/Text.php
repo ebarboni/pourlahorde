@@ -284,7 +284,7 @@ class Text extends Twig_Extension {
         $cool = '<table class="roster">';
         $cool .= "<tr>";
         $cool .= "<th>Name</th>";
-        for ($i = 0; i < 15; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             $cool .= '<th><img src="http://media.blizzard.com/wow/icons/56/' . $atrade['icon'] . '.jpg"/></th>';
         }
         $cool .= "</tr>";
