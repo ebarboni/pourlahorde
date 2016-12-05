@@ -4,4 +4,4 @@ title: Pour la horde : stats
 ---
 
 
-{{ itemlevel }}
+{{ itemlevel() }}
