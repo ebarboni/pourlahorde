@@ -271,14 +271,16 @@ class Text extends Twig_Extension {
         $di = 15;
         for ($i = 0; $i < 15; $i++) {
             //echo serialize($json_decoded["items"][$il[$i]]); 
+            $itemlvl = 0;
             if (array_key_exists($il[$i], $json_decoded["items"])) {
                 $itemlvl = $json_decoded["items"][$il[$i]]["itemLevel"];
-                $tmp += $itemlvl;
-                if ($itemlvl == 0) {
-                    $di--;
-                }
+            }
+            $tmp += $itemlvl;
+            if ($itemlvl == 0) {
+                $di--;
             }
         }
+
         return '<td>' . ($tmp / $di) . '</td>';
     }
 
