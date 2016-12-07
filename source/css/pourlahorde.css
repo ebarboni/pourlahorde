@@ -67,3 +67,55 @@ nav a {
 
 .jumbotron {color:black;}
 .jumbotron p { color : darkblue;} 
+
+td {
+    border-width:1px;
+    border-style:solid; 
+    border-color: #332a23;
+    text-align: center;
+}
+
+.mainchar {
+    font-weight: bold;
+}
+.altchar {
+    font-weight: normal;
+}
+.trademax {
+    color:goldenrod;
+}
+.notmaxed {
+    font-size: xx-small;
+    color: lightgrey;
+}
+
+.paladin {
+    color:#f58cba;
+}
+.warrior {
+    color:#c79c6e;
+}
+.hunter {
+    color:#abd473;
+}
+.rogue{
+    color:#fff569;
+}
+.priest{
+    color : #ffffff;
+}
+.monk{
+    color : #00ff96;
+}
+.dk{
+    color:#c41f3b;
+}
+.shaman {
+    color:#0070de;
+}
+.mage{
+    color:#69ccf0;
+}
+.warlock {color:#9482c9;}
+.druid{color:#ff7d0a;}
+.dh{color:#A330C9;}

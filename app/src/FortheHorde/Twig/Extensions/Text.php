@@ -53,29 +53,29 @@ class Text extends Twig_Extension {
     private function getColor($d) {
         switch ($d) {
             case 1:
-                return "#C79C6E";
+                return "warrior";
             case 2:
-                return "#f48cba";
+                return "paladin";
             case 3:
-                return "#ABD473";
+                return "hunter";
             case 4:
-                return "#FFF569";
+                return "rogue";
             case 5:
-                return "#FFFFFF";
+                return "priest";
             case 6:
-                return "#C41F3B";
+                return "dk";
             case 7:
-                return "#0070DE";
+                return "shaman";
             case 8:
-                return "#69CCF0";
+                return "mage";
             case 9:
-                return "#9482C9";
+                return "warlock";
             case 10:
-                return "#00FF96";
+                return "monk";
             case 11:
-                return "#FF7D0A";
+                return "druid";
             case 12:
-                return "#A330C9";
+                return "dh";
         }
         return "cyan";
     }
@@ -84,7 +84,7 @@ class Text extends Twig_Extension {
         $color = $this->getColor($charobject->character->class);
         $c = '<div class="aperso">';
         $c .= '<img src="https://render-eu.worldofwarcraft.com/character/' . $charobject->character->thumbnail . '" class="persoimg" height="84" width="84" />';
-        $c .= '<span class="pname" style="color:' . $color . '">' . $charobject->character->name;
+        $c .= '<span class="pname ' . $color . '">' . $charobject->character->name;
         if ($charobject->character->level < 110) { // max level
             $c .= '<span class="level">' . $charobject->character->level . '</span>';
         }
@@ -94,8 +94,6 @@ class Text extends Twig_Extension {
     }
 
     private function getprofession($name, $trade) {
-
-        //$cool = "";
         $path = realpath(__DIR__ . "/../../../../../app/_data/" . $name . ".json");
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
@@ -103,14 +101,40 @@ class Text extends Twig_Extension {
         $json_decoded = json_decode($json);
         foreach ($json_decoded->professions as $typeofprof) {
             foreach ($typeofprof as $prof) {
-                //     $cool .= $prof->id;
-                // $custom = ;
-
                 $trade[$prof->id][$name] = ["rank" => $prof->rank, "max" => $prof->max];
                 $trade[$prof->id]["icon"] = $prof->icon;
             }
         }
         return $trade;
+    }
+
+    private function displayrowtrade($cssclass, $character, $trade) {
+        $cool = '<tr class="' . $cssclass . '">';
+        $cool .= '<td class=' . $this->getColor($character->character->class) . '>' . $character->character->name . '</td>';
+        foreach ($trade as $atrade) {
+            $cool .= '<td';
+            if (@is_array($atrade[$character->character->name])) {
+                if ($atrade[$character->character->name]["rank"] == 800) {
+                    $cool .= ' class="trademax"';
+                }
+            }
+            $cool .= '>';
+            if (@is_array($atrade[$character->character->name])) {
+                if ($atrade[$character->character->name]["rank"] > 0) {
+                    $cool .= $atrade[$character->character->name]["rank"];
+                }
+            } else {
+                
+            }
+            if (@is_array($atrade[$character->character->name])) {
+                if ($atrade[$character->character->name]["max"] < 800 && $atrade[$character->character->name]["max"] > 0) {
+                    $cool .= '<span class="notmaxed">' . $atrade[$character->character->name]["max"] . '</span>';
+                }
+            }
+            $cool .= '</td>';
+        }
+        $cool .= "</tr>";
+        return $cool;
     }
 
     public function showTrade(Twig_Environment $env) {
@@ -162,40 +186,14 @@ class Text extends Twig_Extension {
         for ($rank = 0; $rank <= 1; $rank++) {
             foreach ($json_decoded->members as $character) {
                 if ($character->rank == $rank) {
-                    $cool .= "<tr>";
-                    $cool .= '<td>' . $character->character->name . '</td>';
-                    foreach ($trade as $atrade) {
-                        $cool .= '<td>';
-                        if (@is_array($atrade[$character->character->name])) {
-                            if ($atrade[$character->character->name]["rank"] > 0) {
-                                $cool .= $atrade[$character->character->name]["rank"];
-                            }
-                        } else {
-                            
-                        }
-                        $cool .= '</td>';
-                    }
-                    $cool .= "</tr>";
+                    $cool .= $this->displayrowtrade("mainchar", $character, $trade);
                 }
             }
         }
         for ($rank = 2; $rank < 10; $rank++) {
             foreach ($json_decoded->members as $character) {
                 if ($character->rank == $rank) {
-                    $cool .= "<tr>";
-                    $cool .= '<td>' . $character->character->name . '</td>';
-                    foreach ($trade as $atrade) {
-                        $cool .= '<td>';
-                        if (@is_array($atrade[$character->character->name])) {
-                            if ($atrade[$character->character->name]["rank"] > 0) {
-                                $cool .= $atrade[$character->character->name]["rank"];
-                            }
-                        } else {
-                            
-                        }
-                        $cool .= '</td>';
-                    }
-                    $cool .= "</tr>";
+                    $cool .= $this->displayrowtrade("altchar", $character, $trade);
                 }
             }
         }
@@ -231,14 +229,16 @@ class Text extends Twig_Extension {
         $ii = 0;
         //$itemlvl = $json_decoded->items;
         //echo serialize($itemlvl);
+        $wowh = '';
         if (array_key_exists($il[$i], $json_decoded["items"])) {
             $ii = $json_decoded["items"][$il[$i]]["itemLevel"];
+            $wowh = '<a href="http://fr.wowhead.com/item=' . $json_decoded["items"][$il[$i]]["id"] . '" >&nbsp;</a><br>';
         }
 
         if ($ii == 0) {
-            return "<td></td>";
+            return '<td>&nbsp;</td>';
         } else {
-            return "<td>" . $ii . "</td>";
+            return '<td>' . $wowh . $ii . '</td>';
         }
         //<a href="http://fr.wowhead.com/item=' . $id . '" >item</a>
     }
@@ -283,7 +283,24 @@ class Text extends Twig_Extension {
         if ($di != 15) {
             $di = 14;
         }
-        return '<td>'.$json_decoded["items"]['averageItemLevel'].','.$json_decoded["items"]['averageItemLevelEquipped'].',calc:' . ($tmp / $di) . '</td>';
+        return '<td>' . $json_decoded["items"]['averageItemLevel'] . '</td><td>' . $json_decoded["items"]['averageItemLevelEquipped'] . '</td><td>' . floor($tmp / $di) . '</td>';
+    }
+
+    private function displayrowItem($classname, $character) {
+        $cool = '<tr class="' . $classname . '">';
+        $cool .= '<td class=' . $this->getColor($character->character->class) . '>' . $character->character->name . '</td>';
+
+
+        $itemlist = "";
+        for ($i = 0; $i < 15; $i++) {
+            $itemlist .= $this->getItemLevelL($character->character->name, $i);
+        }
+
+
+        $itemlvl = $this->getItemLevelALL($character->character->name);
+        $cool .= $itemlvl . $itemlist;
+        $cool .= '</tr>';
+        return $cool;
     }
 
     public function itemLevel(Twig_Environment $env) {
@@ -295,51 +312,28 @@ class Text extends Twig_Extension {
         fclose($myfile);
         $json_decoded = json_decode($json);
         $cool = '<table class="roster">';
-        $cool .= "<tr>";
+        $cool .= '<tr>';
         $cool .= "<th>Name</th>";
+        $cool .= "<th>Pot.</th>";
+        $cool .= "<th>Equ.</th>";
+        $cool .= "<th>Calc</th>";
         for ($i = 0; $i < 15; $i++) {
             $cool .= '<th>&nbsp;</th>';
         }
-        $cool .= "</tr>";
+        $cool .= '</tr>';
 
         for ($rank = 0; $rank <= 1; $rank++) {
             foreach ($json_decoded->members as $character) {
                 if ($character->rank == $rank) {
-                    $cool .= "<tr>";
-                    $cool .= '<td>' . $character->character->name . '</td>';
-
-                    $itemlist = "";
-                    for ($i = 0; $i < 15; $i++) {
-                        $itemlist .= '<td>';
-                        $itemlist .= $this->getItemLevelL($character->character->name, $i);
-                        $itemlist .= '</td>';
-                    }
-
-
-                    $itemlvl = $this->getItemLevelALL($character->character->name);
-                    $cool .= $itemlvl . $itemlist;
+                    $cool .= $this->displayrowItem("mainchar", $character);
                 }
-                $cool .= "</tr>";
             }
         }
         for ($rank = 2; $rank < 10; $rank++) {
             foreach ($json_decoded->members as $character) {
                 if ($character->rank == $rank) {
-                    $cool .= "<tr>";
-                    $cool .= '<td>' . $character->character->name . '</td>';
-
-                    $itemlist = "";
-                    for ($i = 0; $i < 15; $i++) {
-                        $itemlist .= '<td>';
-                        $itemlist .= $this->getItemLevelL($character->character->name, $i);
-                        $itemlist .= '</td>';
-                    }
-
-
-                    $itemlvl = $this->getItemLevelALL($character->character->name);
-                    $cool .= $itemlvl . $itemlist;
+                    $cool .= $this->displayrowItem("altchar", $character);
                 }
-                $cool .= "</tr>";
             }
         }
         //$cool .= var_dump($trade);
