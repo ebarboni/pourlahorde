@@ -232,7 +232,14 @@ class Text extends Twig_Extension {
         $wowh = '';
         if (array_key_exists($il[$i], $json_decoded["items"])) {
             $ii = $json_decoded["items"][$il[$i]]["itemLevel"];
-            $wowh = '<a href="http://fr.wowhead.com/item=' . $json_decoded["items"][$il[$i]]["id"] . '" ><img src="http://media.blizzard.com/wow/icons/36/' . $json_decoded["items"][$il[$i]]["icon"] . '.jpg"/></a><br>';
+            $set='';
+            if (!empty($json_decoded["items"][$il[$i]]["tooltipParams"]["set"])) {
+                $set .= '&amp;pcs='.implode(":", $json_decoded["items"][$il[$i]]["tooltipParams"]["set"]);
+            }
+            $wowh = '<a href="http://fr.wowhead.com/item=' . $json_decoded["items"][$il[$i]]["id"] . '" rel="item=' .
+                    $json_decoded["items"][$il[$i]]["id"] . '&amp;bonus=' .
+                    implode(":", $json_decoded["items"][$il[$i]]["bonusLists"])
+                    .$set. '"><img src="http://media.blizzard.com/wow/icons/36/' . $json_decoded["items"][$il[$i]]["icon"] . '.jpg"/></a><br>';
         }
 
         if ($ii == 0) {
