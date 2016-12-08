@@ -232,13 +232,13 @@ class Text extends Twig_Extension {
         $wowh = '';
         if (array_key_exists($il[$i], $json_decoded["items"])) {
             $ii = $json_decoded["items"][$il[$i]]["itemLevel"];
-            $wowh = '<a href="http://fr.wowhead.com/item=' . $json_decoded["items"][$il[$i]]["id"] . '" >&nbsp;</a><br>';
+            $wowh = '<a href="http://fr.wowhead.com/item=' . $json_decoded["items"][$il[$i]]["id"] . '" ><img src="http://media.blizzard.com/wow/icons/36/' . $json_decoded["items"][$il[$i]]["icon"] . '.jpg"/></a><br>';
         }
 
         if ($ii == 0) {
             return '<td>&nbsp;</td>';
         } else {
-            return '<td>' . $wowh . $ii . '</td>';
+            return '<td class="anitem">' . $wowh . $ii . '</td>';
         }
         //<a href="http://fr.wowhead.com/item=' . $id . '" >item</a>
     }
