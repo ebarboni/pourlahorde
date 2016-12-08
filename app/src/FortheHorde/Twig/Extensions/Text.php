@@ -230,20 +230,27 @@ class Text extends Twig_Extension {
         //$itemlvl = $json_decoded->items;
         //echo serialize($itemlvl);
         $wowh = '';
+        $art = false;
         if (array_key_exists($il[$i], $json_decoded["items"])) {
             $ii = $json_decoded["items"][$il[$i]]["itemLevel"];
-            $set='';
+            if ($i == 7 && $json_decoded["items"][$il[$i]]["artifactAppearanceId"] != 0 && ( $json_decoded["items"][$il[$i]]["artifactAppearanceId"] == $json_decoded["items"][$il[$i - 1]]["artifactAppearanceId"])) {
+                $art = true;
+                $ii = 0;
+            }
+            $set = '';
             if (!empty($json_decoded["items"][$il[$i]]["tooltipParams"]["set"])) {
-                $set .= '&amp;pcs='.implode(":", $json_decoded["items"][$il[$i]]["tooltipParams"]["set"]);
+                $set .= '&amp;pcs=' . implode(":", $json_decoded["items"][$il[$i]]["tooltipParams"]["set"]);
             }
             $wowh = '<a href="http://fr.wowhead.com/item=' . $json_decoded["items"][$il[$i]]["id"] . '" rel="item=' .
                     $json_decoded["items"][$il[$i]]["id"] . '&amp;bonus=' .
                     implode(":", $json_decoded["items"][$il[$i]]["bonusLists"])
-                    .$set. '"><img src="http://media.blizzard.com/wow/icons/36/' . $json_decoded["items"][$il[$i]]["icon"] . '.jpg"/></a><br>';
+                    . $set . '"><img src="http://media.blizzard.com/wow/icons/36/' . $json_decoded["items"][$il[$i]]["icon"] . '.jpg"/></a><br>';
         }
 
-        if ($ii == 0) {
+        if ($ii == 0 && !$art) {
             return '<td>&nbsp;</td>';
+        } else if ($ii == 0 && $art) {
+            return '<td>' . $wowh . '&nbsp;</td>';
         } else {
             return '<td class="anitem">' . $wowh . $ii . '</td>';
         }
@@ -281,6 +288,9 @@ class Text extends Twig_Extension {
             $itemlvl = 0;
             if (array_key_exists($il[$i], $json_decoded["items"])) {
                 $itemlvl = $json_decoded["items"][$il[$i]]["itemLevel"];
+            }
+            if ($i == 7 && array_key_exists($il[$i], $json_decoded["items"]) && $json_decoded["items"][$il[$i]]["artifactAppearanceId"] != 0 && ( $json_decoded["items"][$il[$i]]["artifactAppearanceId"] == $json_decoded["items"][$il[$i - 1]]["artifactAppearanceId"])) {
+                $itemlvl = 0;
             }
             $tmp += $itemlvl;
             if ($itemlvl == 0) {
