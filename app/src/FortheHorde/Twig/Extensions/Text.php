@@ -244,9 +244,9 @@ class Text extends Twig_Extension {
             //echo serialize($json_decoded["items"][$il[$i]]); 
             $itemlvl = 0;
             if (array_key_exists($value, $json_decoded["items"])) {
-                $itemlvl = $json_decoded["items"][$value]["itemLevel"];
+                $itemlvl = $json_decoded["items"][$this->slotNameID[17]]["itemLevel"];
             }
-            if ($key == 17 && array_key_exists($value, $json_decoded["items"]) && $json_decoded["items"][$value]["artifactAppearanceId"] != 0 && ( $json_decoded["items"][$value]["artifactAppearanceId"] == $json_decoded["items"]['mainHand']["artifactAppearanceId"])) {
+            if ($key == 17 && array_key_exists($this->slotNameID[17], $json_decoded["items"]) && $json_decoded["items"][$this->slotNameID[17]]["artifactAppearanceId"] != 0 && ( $json_decoded["items"][$this->slotNameID[16]]["artifactAppearanceId"] == $json_decoded["items"][$this->slotNameID[17]]["artifactAppearanceId"])) {
                 $itemlvl = 0;
             }
             $tmp += $itemlvl;
