@@ -250,7 +250,7 @@ class Text extends Twig_Extension {
         if ($ii == 0 && !$art) {
             return '<td>&nbsp;</td>';
         } else if ($ii == 0 && $art) {
-            return '<td>' . $wowh . '&nbsp;</td>';
+            return '<td class="anitem">' . $wowh . '&nbsp;</td>';
         } else {
             return '<td class="anitem">' . $wowh . $ii . '</td>';
         }
