@@ -20,35 +20,26 @@ class Text extends Twig_Extension {
         return $functions;
     }
 
-    private function getIcon($d) {
-        switch ($d) {
-            case 1:
-                return "#C79C6E";
-            case 2:
-                return "#f48cba";
-            case 3:
-                return "#ABD473";
-            case 4:
-                return "#FFF569";
-            case 5:
-                return "#FFFFFF";
-            case 6:
-                return "#C41F3B";
-            case 7:
-                return "#0070DE";
-            case 8:
-                return "#69CCF0";
-            case 9:
-                return "#9482C9";
-            case 10:
-                return "#00FF96";
-            case 11:
-                return "#FF7D0A";
-            case 12:
-                return "#A330C9";
-        }
-        return "cyan";
-    }
+// count for ilevel
+    private $displayitem = [1, 2, 3, 4, 5, 9, 16, 17, 10, 6, 7, 8, 11, 12, 13, 14];
+    private $slotNameID = [
+        1 => "head",
+        2 => "neck",
+        3 => "shoulder",
+        4 => "back",
+        5 => "chest",
+        9 => "wrist",
+        16 => "mainHand",
+        17 => "offHand",
+        10 => "hands",
+        6 => "waist",
+        7 => "legs",
+        8 => "feet",
+        11 => "finger1",
+        12 => "finger2",
+        13 => "trinket1",
+        14 => "trinket2",
+    ];
 
     private function getColor($d) {
         switch ($d) {
@@ -202,49 +193,32 @@ class Text extends Twig_Extension {
         return $cool;
     }
 
-    private function getItemLevelL($name, $i) {
+    private function getItemLevelL($name, $key) {
         $path = realpath(__DIR__ . "/../../../../../app/_data/" . $name . ".json");
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
         $json_decoded = json_decode($json, true);
-        $il = [
-            0 => "head",
-            1 => "neck",
-            2 => "shoulder",
-            3 => "back",
-            4 => "chest",
-            5 => "wrist",
-            6 => "mainHand",
-            7 => "offHand",
-            8 => "hands",
-            9 => "waist",
-            10 => "legs",
-            11 => "feet",
-            12 => "finger1",
-            13 => "finger2",
-            14 => "trinket1",
-            15 => "trinket2",
-        ];
+
         $ii = 0;
         //$itemlvl = $json_decoded->items;
         //echo serialize($itemlvl);
         $wowh = '';
         $art = false;
-        if (array_key_exists($il[$i], $json_decoded["items"])) {
-            $ii = $json_decoded["items"][$il[$i]]["itemLevel"];
-            if ($i == 7 && $json_decoded["items"][$il[$i]]["artifactAppearanceId"] != 0 && ( $json_decoded["items"][$il[$i]]["artifactAppearanceId"] == $json_decoded["items"][$il[$i - 1]]["artifactAppearanceId"])) {
+        if (array_key_exists($this->slotNameID[$key], $json_decoded["items"])) {
+            $ii = $json_decoded["items"][$this->slotNameID[$key]]["itemLevel"];
+            if ($key == 17 && $json_decoded["items"][$this->slotNameID[17]]["artifactAppearanceId"] != 0 && ( $json_decoded["items"][$this->slotNameID[17]]["artifactAppearanceId"] == $json_decoded["items"][$this->slotNameID[16]]["artifactAppearanceId"])) {
                 $art = true;
                 $ii = 0;
             }
             $set = '';
-            if (!empty($json_decoded["items"][$il[$i]]["tooltipParams"]["set"])) {
-                $set .= '&amp;pcs=' . implode(":", $json_decoded["items"][$il[$i]]["tooltipParams"]["set"]);
+            if (!empty($json_decoded["items"][$this->slotNameID[$key]]["tooltipParams"]["set"])) {
+                $set .= '&amp;pcs=' . implode(":", $json_decoded["items"][$this->slotNameID[$key]]["tooltipParams"]["set"]);
             }
-            $wowh = '<a href="http://fr.wowhead.com/item=' . $json_decoded["items"][$il[$i]]["id"] . '" rel="item=' .
-                    $json_decoded["items"][$il[$i]]["id"] . '&amp;bonus=' .
-                    implode(":", $json_decoded["items"][$il[$i]]["bonusLists"])
-                    . $set . '"><img src="http://media.blizzard.com/wow/icons/36/' . $json_decoded["items"][$il[$i]]["icon"] . '.jpg"/></a><br>';
+            $wowh = '<a href="http://fr.wowhead.com/item=' . $json_decoded["items"][$this->slotNameID[$key]]["id"] . '" rel="item=' .
+                    $json_decoded["items"][$this->slotNameID[$key]]["id"] . '&amp;bonus=' .
+                    implode(":", $json_decoded["items"][$this->slotNameID[$key]]["bonusLists"])
+                    . $set . '"><img src="http://media.blizzard.com/wow/icons/36/' . $json_decoded["items"][$this->slotNameID[$key]]["icon"] . '.jpg"/></a><br>';
         }
 
         if ($ii == 0 && !$art) {
@@ -263,33 +237,16 @@ class Text extends Twig_Extension {
         $json = fread($myfile, filesize($path));
         fclose($myfile);
         $json_decoded = json_decode($json, true);
-        $il = [
-            0 => "head",
-            1 => "neck",
-            2 => "shoulder",
-            3 => "back",
-            4 => "chest",
-            5 => "wrist",
-            6 => "mainHand",
-            7 => "offHand",
-            8 => "hands",
-            9 => "waist",
-            10 => "legs",
-            11 => "feet",
-            12 => "finger1",
-            13 => "finger2",
-            14 => "trinket1",
-            15 => "trinket2",
-        ];
+
         $tmp = 0;
         $di = 15;
-        for ($i = 0; $i < 15; $i++) {
+        foreach ($this->displayitem as $key => $value) {
             //echo serialize($json_decoded["items"][$il[$i]]); 
             $itemlvl = 0;
-            if (array_key_exists($il[$i], $json_decoded["items"])) {
-                $itemlvl = $json_decoded["items"][$il[$i]]["itemLevel"];
+            if (array_key_exists($value, $json_decoded["items"])) {
+                $itemlvl = $json_decoded["items"][$value]["itemLevel"];
             }
-            if ($i == 7 && array_key_exists($il[$i], $json_decoded["items"]) && $json_decoded["items"][$il[$i]]["artifactAppearanceId"] != 0 && ( $json_decoded["items"][$il[$i]]["artifactAppearanceId"] == $json_decoded["items"][$il[$i - 1]]["artifactAppearanceId"])) {
+            if ($key == 17 && array_key_exists($value, $json_decoded["items"]) && $json_decoded["items"][$value]["artifactAppearanceId"] != 0 && ( $json_decoded["items"][$value]["artifactAppearanceId"] == $json_decoded["items"]['mainHand']["artifactAppearanceId"])) {
                 $itemlvl = 0;
             }
             $tmp += $itemlvl;
@@ -309,8 +266,8 @@ class Text extends Twig_Extension {
 
 
         $itemlist = "";
-        for ($i = 0; $i < 15; $i++) {
-            $itemlist .= $this->getItemLevelL($character->character->name, $i);
+        foreach ($this->displayitem as $key) {
+            $itemlist .= $this->getItemLevelL($character->character->name, $key);
         }
 
 
@@ -334,7 +291,7 @@ class Text extends Twig_Extension {
         $cool .= "<th>Pot.</th>";
         $cool .= "<th>Equ.</th>";
         $cool .= "<th>Calc</th>";
-        for ($i = 0; $i < 15; $i++) {
+        foreach ($this->displayitem as $item) {
             $cool .= '<th>&nbsp;</th>';
         }
         $cool .= '</tr>';
