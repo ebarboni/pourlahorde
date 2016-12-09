@@ -40,6 +40,24 @@ class Text extends Twig_Extension {
         13 => "trinket1",
         14 => "trinket2",
     ];
+    private $nameofSlot = [
+        1 => "casque",
+        2 => "neck",
+        3 => "shoulder",
+        4 => "back",
+        5 => "chest",
+        9 => "wrist",
+        16 => "mainHand",
+        17 => "offHand",
+        10 => "hands",
+        6 => "waist",
+        7 => "legs",
+        8 => "feet",
+        11 => "finger1",
+        12 => "finger2",
+        13 => "trinket1",
+        14 => "trinket2",
+    ];
 
     private function getColor($d) {
         switch ($d) {
@@ -69,6 +87,42 @@ class Text extends Twig_Extension {
                 return "dh";
         }
         return "cyan";
+    }
+
+    private function getMains() {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
+        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $json = fread($myfile, filesize($path));
+        fclose($myfile);
+        $json_decoded = json_decode($json);
+        $mains = array();
+        for ($rank = 0; $rank <= 1; $rank++) {
+            foreach ($json_decoded->members as $character) {
+                if ($character->rank == $rank) {
+                    $mains[$character->character->name] = $character;
+                }
+            }
+        }
+        ksort($mains);
+        return $mains;
+    }
+
+    private function getAlts() {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
+        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $json = fread($myfile, filesize($path));
+        fclose($myfile);
+        $json_decoded = json_decode($json);
+        $alts = array();
+        for ($rank = 2; $rank < 10; $rank++) {
+            foreach ($json_decoded->members as $character) {
+                if ($character->rank == $rank) {
+                    $alts[$character->character->name] = $character;
+                }
+            }
+        }
+        ksort($alts);
+        return $alts;
     }
 
     private function displayRoster($charobject) {
@@ -153,20 +207,13 @@ class Text extends Twig_Extension {
             "356" => [],
             "794" => []];
         $json_decoded = json_decode($json);
-        for ($rank = 0; $rank <= 1; $rank++) {
-            foreach ($json_decoded->members as $character) {
-                if ($character->rank == $rank) {
-                    $trade = $this->getprofession($character->character->name, $trade);
-                }
-            }
+        foreach ($this->getMains() as $character) {
+            $trade = $this->getprofession($character->character->name, $trade);
         }
-        for ($rank = 2; $rank < 10; $rank++) {
-            foreach ($json_decoded->members as $character) {
-                if ($character->rank == $rank) {
-                    $trade = $this->getprofession($character->character->name, $trade);
-                }
-            }
+        foreach ($this->getAlts() as $character) {
+            $trade = $this->getprofession($character->character->name, $trade);
         }
+
         $cool = '<table class="roster">';
         $cool .= "<tr>";
         $cool .= "<th>Name</th>";
@@ -174,19 +221,11 @@ class Text extends Twig_Extension {
             $cool .= '<th><img src="http://media.blizzard.com/wow/icons/56/' . $atrade['icon'] . '.jpg"/></th>';
         }
         $cool .= "</tr>";
-        for ($rank = 0; $rank <= 1; $rank++) {
-            foreach ($json_decoded->members as $character) {
-                if ($character->rank == $rank) {
-                    $cool .= $this->displayrowtrade("mainchar", $character, $trade);
-                }
-            }
+        foreach ($this->getMains() as $character) {
+            $cool .= $this->displayrowtrade("mainchar", $character, $trade);
         }
-        for ($rank = 2; $rank < 10; $rank++) {
-            foreach ($json_decoded->members as $character) {
-                if ($character->rank == $rank) {
-                    $cool .= $this->displayrowtrade("altchar", $character, $trade);
-                }
-            }
+        foreach ($this->getAlts() as $character) {
+            $cool .= $this->displayrowtrade("altchar", $character, $trade);
         }
         //$cool .= var_dump($trade);
         $cool .= "</table>";
@@ -238,26 +277,26 @@ class Text extends Twig_Extension {
         fclose($myfile);
         $json_decoded = json_decode($json, true);
 
-        $tmp = 0;
-        $di = 15;
-        foreach ($this->displayitem as $key => $value) {
-            //echo serialize($json_decoded["items"][$il[$i]]); 
-            $itemlvl = 0;
-            if (array_key_exists($value, $json_decoded["items"])) {
-                $itemlvl = $json_decoded["items"][$this->slotNameID[17]]["itemLevel"];
-            }
-            if ($key == 17 && array_key_exists($this->slotNameID[17], $json_decoded["items"]) && $json_decoded["items"][$this->slotNameID[17]]["artifactAppearanceId"] != 0 && ( $json_decoded["items"][$this->slotNameID[16]]["artifactAppearanceId"] == $json_decoded["items"][$this->slotNameID[17]]["artifactAppearanceId"])) {
-                $itemlvl = 0;
-            }
-            $tmp += $itemlvl;
-            if ($itemlvl == 0) {
-                $di--;
-            }
-        }
-        if ($di != 15) {
-            $di = 14;
-        }
-        return '<td>' . $json_decoded["items"]['averageItemLevel'] . '</td><td>' . $json_decoded["items"]['averageItemLevelEquipped'] . '</td><td>' . floor($tmp / $di) . '</td>';
+        /* $tmp = 0;
+          $di = 15;
+          foreach ($this->displayitem as $key => $value) {
+          //echo serialize($json_decoded["items"][$il[$i]]);
+          $itemlvl = 0;
+          if (array_key_exists($value, $json_decoded["items"])) {
+          $itemlvl = $json_decoded["items"][$this->slotNameID[$key]]["itemLevel"];
+          }
+          if ($key == 17 && array_key_exists($this->slotNameID[17], $json_decoded["items"]) && $json_decoded["items"][$this->slotNameID[17]]["artifactAppearanceId"] != 0 && ( $json_decoded["items"][$this->slotNameID[16]]["artifactAppearanceId"] == $json_decoded["items"][$this->slotNameID[17]]["artifactAppearanceId"])) {
+          $itemlvl = 0;
+          }
+          $tmp += $itemlvl;
+          if ($itemlvl == 0) {
+          $di--;
+          }
+          }
+          if ($di != 15) {
+          $di = 14;
+          } */
+        return '<td>' . $json_decoded["items"]['averageItemLevel'] . '</td><td>' . $json_decoded["items"]['averageItemLevelEquipped'] . '</td>'; //<td>' . floor($tmp / $di) . '</td>';
     }
 
     private function displayrowItem($classname, $character) {
@@ -278,37 +317,22 @@ class Text extends Twig_Extension {
     }
 
     public function itemLevel(Twig_Environment $env) {
-
-        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
-
-        $myfile = fopen($path, "r") or die("Unable to open file!");
-        $json = fread($myfile, filesize($path));
-        fclose($myfile);
-        $json_decoded = json_decode($json);
         $cool = '<table class="roster">';
         $cool .= '<tr>';
         $cool .= "<th>Name</th>";
         $cool .= "<th>Pot.</th>";
         $cool .= "<th>Equ.</th>";
-        $cool .= "<th>Calc</th>";
+        //$cool .= "<th>Calc</th>";
         foreach ($this->displayitem as $item) {
-            $cool .= '<th>&nbsp;</th>';
+            $cool .= '<th>' . $this->nameofSlot[$item] . '</th>';
         }
         $cool .= '</tr>';
 
-        for ($rank = 0; $rank <= 1; $rank++) {
-            foreach ($json_decoded->members as $character) {
-                if ($character->rank == $rank) {
-                    $cool .= $this->displayrowItem("mainchar", $character);
-                }
-            }
+        foreach ($this->getMains() as $character) {
+            $cool .= $this->displayrowItem("mainchar", $character);
         }
-        for ($rank = 2; $rank < 10; $rank++) {
-            foreach ($json_decoded->members as $character) {
-                if ($character->rank == $rank) {
-                    $cool .= $this->displayrowItem("altchar", $character);
-                }
-            }
+        foreach ($this->getAlts() as $character) {
+            $cool .= $this->displayrowItem("altchar", $character);
         }
         //$cool .= var_dump($trade);
         $cool .= "</table>";
@@ -316,40 +340,18 @@ class Text extends Twig_Extension {
     }
 
     public function showGURoster(Twig_Environment $env) {
-
-        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
-
-        $myfile = fopen($path, "r") or die("Unable to open file!");
-        $json = fread($myfile, filesize($path));
-        fclose($myfile);
         $cool = '<div class="col-md-10">';
-        $json_decoded = json_decode($json);
-        for ($rank = 0; $rank <= 1; $rank++) {
-            foreach ($json_decoded->members as $character) {
-                if ($character->rank == $rank) {
-                    $cool .= $this->displayRoster($character);
-                }
-            }
+        foreach ($this->getMains() as $character) {
+            $cool .= $this->displayRoster($character);
         }
         $cool .= "</div>";
         return $cool;
     }
 
     public function showGURosterAlts(Twig_Environment $env) {
-
-        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
-
-        $myfile = fopen($path, "r") or die("Unable to open file!");
-        $json = fread($myfile, filesize($path));
-        fclose($myfile);
         $cool = '<div class="col-md-10">';
-        $json_decoded = json_decode($json);
-        for ($rank = 2; $rank < 10; $rank++) {
-            foreach ($json_decoded->members as $character) {
-                if ($character->rank == $rank) {
-                    $cool .= $this->displayRoster($character);
-                }
-            }
+        foreach ($this->getAlts() as $character) {
+            $cool .= $this->displayRoster($character);
         }
         $cool .= "</div>";
         return $cool;
