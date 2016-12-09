@@ -324,7 +324,7 @@ class Text extends Twig_Extension {
         $cool .= "<th>Equ.</th>";
         //$cool .= "<th>Calc</th>";
         foreach ($this->displayitem as $item) {
-            $cool .= '<th>' . $this->nameofSlot[$item] . '</th>';
+            $cool .= '<th>&nbsp;</th>';
         }
         $cool .= '</tr>';
 
