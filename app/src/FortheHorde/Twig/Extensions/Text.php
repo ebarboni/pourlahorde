@@ -218,7 +218,7 @@ class Text extends Twig_Extension {
         $cool .= "<tr>";
         $cool .= "<th>Name</th>";
         foreach ($trade as $atrade) {
-            $cool .= '<th><img src="http://media.blizzard.com/wow/icons/56/' . $atrade['icon'] . '.jpg"/></th>';
+            $cool .= '<th><img class="tradeskill" src="http://media.blizzard.com/wow/icons/56/' . $atrade['icon'] . '.jpg"/></th>';
         }
         $cool .= "</tr>";
         foreach ($this->getMains() as $character) {
@@ -254,10 +254,26 @@ class Text extends Twig_Extension {
             if (!empty($json_decoded["items"][$this->slotNameID[$key]]["tooltipParams"]["set"])) {
                 $set .= '&amp;pcs=' . implode(":", $json_decoded["items"][$this->slotNameID[$key]]["tooltipParams"]["set"]);
             }
+            $ench = '';
+            if (!empty($json_decoded["items"][$this->slotNameID[$key]]["tooltipParams"]["enchant"])) {
+                $ench .= '&amp;ench=' . $json_decoded["items"][$this->slotNameID[$key]]["tooltipParams"]["enchant"];
+            }
+            $gem = '';
+
+            if (!empty($json_decoded["items"][$this->slotNameID[$key]]["tooltipParams"]["gem0"])) {
+                $gem .= '&amp;gems=';
+
+                $gem .= $json_decoded["items"][$this->slotNameID[$key]]["tooltipParams"]["gem0"];
+                for ($i = 1; $i < 5; $i++) {
+                    if (!empty($json_decoded["items"][$this->slotNameID[$key]]["tooltipParams"]["gem" . $i])) {
+                        $gem .= ':' . $json_decoded["items"][$this->slotNameID[$key]]["tooltipParams"]["gem" . $i];
+                    }
+                }
+            }
             $wowh = '<a href="http://fr.wowhead.com/item=' . $json_decoded["items"][$this->slotNameID[$key]]["id"] . '" rel="item=' .
                     $json_decoded["items"][$this->slotNameID[$key]]["id"] . '&amp;bonus=' .
                     implode(":", $json_decoded["items"][$this->slotNameID[$key]]["bonusLists"])
-                    . $set . '"><img src="http://media.blizzard.com/wow/icons/36/' . $json_decoded["items"][$this->slotNameID[$key]]["icon"] . '.jpg"/></a><br>';
+                    . $set . $gem . $ench . '&amp;lvl=' . $json_decoded["level"] . '"><img class="wowitem q' . $json_decoded["items"][$this->slotNameID[$key]]['quality'] . '" src="http://media.blizzard.com/wow/icons/36/' . $json_decoded["items"][$this->slotNameID[$key]]["icon"] . '.jpg"/></a><br>';
         }
 
         if ($ii == 0 && !$art) {
@@ -276,26 +292,6 @@ class Text extends Twig_Extension {
         $json = fread($myfile, filesize($path));
         fclose($myfile);
         $json_decoded = json_decode($json, true);
-
-        /* $tmp = 0;
-          $di = 15;
-          foreach ($this->displayitem as $key => $value) {
-          //echo serialize($json_decoded["items"][$il[$i]]);
-          $itemlvl = 0;
-          if (array_key_exists($value, $json_decoded["items"])) {
-          $itemlvl = $json_decoded["items"][$this->slotNameID[$key]]["itemLevel"];
-          }
-          if ($key == 17 && array_key_exists($this->slotNameID[17], $json_decoded["items"]) && $json_decoded["items"][$this->slotNameID[17]]["artifactAppearanceId"] != 0 && ( $json_decoded["items"][$this->slotNameID[16]]["artifactAppearanceId"] == $json_decoded["items"][$this->slotNameID[17]]["artifactAppearanceId"])) {
-          $itemlvl = 0;
-          }
-          $tmp += $itemlvl;
-          if ($itemlvl == 0) {
-          $di--;
-          }
-          }
-          if ($di != 15) {
-          $di = 14;
-          } */
         return '<td>' . $json_decoded["items"]['averageItemLevel'] . '</td><td>' . $json_decoded["items"]['averageItemLevelEquipped'] . '</td>'; //<td>' . floor($tmp / $di) . '</td>';
     }
 

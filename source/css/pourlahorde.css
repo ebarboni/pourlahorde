@@ -38,8 +38,19 @@ h2 { color:darkgoldenrod;clear:both;
     display:table-row;
     text-align: center;
 }
+.tradeskill {
+    border-radius: 3px;
+    border: lightgrey solid 1px; 
+}
+
+.wowitem{
+    border-radius: 3px;
+    border: 1px solid;
+}
 .persoimg {
     display:table-row;
+    border-radius: 3px;
+    border: lightgrey solid 1px;
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
