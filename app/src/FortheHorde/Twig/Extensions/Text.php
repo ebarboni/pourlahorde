@@ -309,7 +309,9 @@ class Text extends Twig_Extension {
         // collier 2 
         // epau 3
         // cape 16
-        $itemslot = [1 => 'collier',
+        $itemslot = [
+            0 => 'casque',
+            1 => 'collier',
             2 => 'epaule',
             4 => 'torse',
             5 => 'ceinture',
