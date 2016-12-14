@@ -335,7 +335,7 @@ class Text extends Twig_Extension {
                 $auditenchant[] = $itemslot[$value];
             }
         }
-        if (sizeof($auditgem) > 0) {
+        if (sizeof($auditenchant) > 0) {
             $audit .= '</br>Enchants  manquants sur : ' . implode(',', $auditenchant);
         }
         /* if (array_key_exists(2, $itemesocket) && ($itemesocket[2] >= 1)) {
