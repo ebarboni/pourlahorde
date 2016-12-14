@@ -318,7 +318,8 @@ class Text extends Twig_Extension {
             9 => 'gants/bottes',
             10 => 'anneau',
             11 => 'anneau',
-            14 => 'cape'];
+            14 => 'cape',
+            15 => 'main gauche'];
         $auditgem = [];
         for ($i = 0; $i < 20; $i++) {
             if (array_key_exists($i, $itemesocket) && ($itemesocket[$i] >= 1)) {
