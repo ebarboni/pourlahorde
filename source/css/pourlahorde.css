@@ -133,3 +133,8 @@ td {
 .anitem{
     font-weight: normal; font-size: xx-small;
 }
+
+.audit{
+    font-weight: lighter;
+    font-size: x-small;
+}

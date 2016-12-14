@@ -326,7 +326,17 @@ class Text extends Twig_Extension {
             }
         }
         if (sizeof($auditgem) > 0) {
-            $audit .= 'Gemmes manquantss sur : ' . implode(',', $auditgem);
+            $audit .= 'Gemmes manquantes sur : ' . implode(',', $auditgem);
+        }
+        $auditenchant = [];
+        $enchantable = ['14', '10', '11', '2'];
+        foreach ($enchantable as $value) {
+            if (array_key_exists($value, $itemenchant)) {
+                $auditenchant[] = $itemslot[$value];
+            }
+        }
+        if (sizeof($auditgem) > 0) {
+            $audit .= '</br>Enchants  manquants sur : ' . implode(',', $auditenchant);
         }
         /* if (array_key_exists(2, $itemesocket) && ($itemesocket[2] >= 1)) {
           $audit .= 'Gemme sur epaule<br>';
@@ -345,7 +355,7 @@ class Text extends Twig_Extension {
           $audit .= 'Gemme sur cape<br>';
           } */
         // echo serialize($itemesocket);
-        return '<td>' . /* serialize($itemesocket) . */ '<br>' . /* serialize($itemenchant) . */'<br>' . $audit . '</td>';
+        return '<td class="audit">' . /* serialize($itemesocket) . */ '<br>' . /* serialize($itemenchant) . */'<br>' . $audit . '</td>';
     }
 
     private function displayrowItem($classname, $character) {
