@@ -295,6 +295,42 @@ class Text extends Twig_Extension {
         return '<td>' . $json_decoded["items"]['averageItemLevel'] . '</td><td>' . $json_decoded["items"]['averageItemLevelEquipped'] . '</td>'; //<td>' . floor($tmp / $di) . '</td>';
     }
 
+    private function displayAudit($character) {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/" . $character . ".json");
+        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $json = fread($myfile, filesize($path));
+        fclose($myfile);
+        $json_decoded = json_decode($json, true);
+        $audit = '';
+        $itemesocket = $json_decoded["audit"]['itemsWithEmptySockets'];
+        $itemenchant = $json_decoded["audit"]['unenchantedItems'];
+        // var_dump($itemesocket);
+        // tete 1
+        // collier 2 
+        // epau 3
+        // cape 16
+        if (array_key_exists(1, $itemesocket) && ($itemesocket[1] >= 1)) {
+            $audit .= 'Gemme sur collier<br>';
+        }if (array_key_exists(2, $itemesocket) && ($itemesocket[2] >= 1)) {
+            $audit .= 'Gemme sur epaule<br>';
+        } if (array_key_exists(4, $itemesocket) && ($itemesocket[4] >= 1)) {
+            $audit .= 'Gemme sur torse<br>';
+        } if (array_key_exists(5, $itemesocket) && ($itemesocket[5] >= 1)) {
+            $audit .= 'Gemme sur ceinture<br>';
+        } if (array_key_exists(8, $itemesocket) && ($itemesocket[8] >= 1)) {
+            $audit .= 'Gemme sur poignet<br>';
+        }if (array_key_exists(10, $itemesocket) && ($itemesocket[10] >= 1)) {
+            $audit .= 'Gemme sur anneau<br>';
+        } if (array_key_exists(11, $itemesocket) && ($itemesocket[11] >= 1)) {
+            $audit .= 'Gemme sur anneau<br>';
+        }
+        if (array_key_exists(14, $itemesocket) && ($itemesocket[14] >= 1)) {
+            $audit .= 'Gemme sur cape<br>';
+        }
+        // echo serialize($itemesocket);
+        return '<td>' . /* serialize($itemesocket) . */ '<br>' . /* serialize($itemenchant) . */'<br>' . $audit . '</td>';
+    }
+
     private function displayrowItem($classname, $character) {
         $cool = '<tr class="' . $classname . '">';
         $cool .= '<td class=' . $this->getColor($character->character->class) . '>' . $character->character->name . '</td>';
@@ -308,6 +344,7 @@ class Text extends Twig_Extension {
 
         $itemlvl = $this->getItemLevelALL($character->character->name);
         $cool .= $itemlvl . $itemlist;
+        $cool .= $this->displayAudit($character->character->name);
         $cool .= '</tr>';
         return $cool;
     }
@@ -322,15 +359,16 @@ class Text extends Twig_Extension {
         foreach ($this->displayitem as $item) {
             $cool .= '<th>&nbsp;</th>';
         }
+        $cool .= '<th>Audit</th>';
         $cool .= '</tr>';
 
         foreach ($this->getMains() as $character) {
             $cool .= $this->displayrowItem("mainchar", $character);
         }
+
         foreach ($this->getAlts() as $character) {
             $cool .= $this->displayrowItem("altchar", $character);
         }
-        //$cool .= var_dump($trade);
         $cool .= "</table>";
         return $cool;
     }
