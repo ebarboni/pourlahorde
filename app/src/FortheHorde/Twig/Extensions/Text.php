@@ -326,7 +326,7 @@ class Text extends Twig_Extension {
             }
         }
         if (sizeof($auditgem) > 0) {
-            $audit .= 'Gemmes manquants sur : ' . implode(',', $auditgem);
+            $audit .= 'Gemmes manquantss sur : ' . implode(',', $auditgem);
         }
         /* if (array_key_exists(2, $itemesocket) && ($itemesocket[2] >= 1)) {
           $audit .= 'Gemme sur epaule<br>';
