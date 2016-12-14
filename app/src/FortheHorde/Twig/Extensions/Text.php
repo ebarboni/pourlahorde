@@ -309,24 +309,41 @@ class Text extends Twig_Extension {
         // collier 2 
         // epau 3
         // cape 16
-        if (array_key_exists(1, $itemesocket) && ($itemesocket[1] >= 1)) {
-            $audit .= 'Gemme sur collier<br>';
-        }if (array_key_exists(2, $itemesocket) && ($itemesocket[2] >= 1)) {
-            $audit .= 'Gemme sur epaule<br>';
-        } if (array_key_exists(4, $itemesocket) && ($itemesocket[4] >= 1)) {
-            $audit .= 'Gemme sur torse<br>';
-        } if (array_key_exists(5, $itemesocket) && ($itemesocket[5] >= 1)) {
-            $audit .= 'Gemme sur ceinture<br>';
-        } if (array_key_exists(8, $itemesocket) && ($itemesocket[8] >= 1)) {
-            $audit .= 'Gemme sur poignet<br>';
-        }if (array_key_exists(10, $itemesocket) && ($itemesocket[10] >= 1)) {
-            $audit .= 'Gemme sur anneau<br>';
-        } if (array_key_exists(11, $itemesocket) && ($itemesocket[11] >= 1)) {
-            $audit .= 'Gemme sur anneau<br>';
+        $itemslot = [1 => 'collier',
+            2 => 'epaule',
+            4 => 'torse',
+            5 => 'ceinture',
+            7 => 'gants/bottes',
+            8 => 'poignet',
+            9 => 'gants/bottes',
+            10 => 'anneau',
+            11 => 'anneau',
+            14 => 'cape'];
+        $auditgem = [];
+        for ($i = 0; $i < 20; $i++) {
+            if (array_key_exists($i, $itemesocket) && ($itemesocket[$i] >= 1)) {
+                $auditgem[] = $itemslot[$i];
+            }
         }
-        if (array_key_exists(14, $itemesocket) && ($itemesocket[14] >= 1)) {
-            $audit .= 'Gemme sur cape<br>';
+        if (sizeof($auditgem) > 0) {
+            $audit .= 'Gemmes manquants sur : ' . implode(',', $auditgem);
         }
+        /* if (array_key_exists(2, $itemesocket) && ($itemesocket[2] >= 1)) {
+          $audit .= 'Gemme sur epaule<br>';
+          } if (array_key_exists(4, $itemesocket) && ($itemesocket[4] >= 1)) {
+          $audit .= 'Gemme sur torse<br>';
+          } if (array_key_exists(5, $itemesocket) && ($itemesocket[5] >= 1)) {
+          $audit .= 'Gemme sur ceinture<br>';
+          } if (array_key_exists(8, $itemesocket) && ($itemesocket[8] >= 1)) {
+          $audit .= 'Gemme sur poignet<br>';
+          }if (array_key_exists(10, $itemesocket) && ($itemesocket[10] >= 1)) {
+          $audit .= 'Gemme sur anneau<br>';
+          } if (array_key_exists(11, $itemesocket) && ($itemesocket[11] >= 1)) {
+          $audit .= 'Gemme sur anneau<br>';
+          }
+          if (array_key_exists(14, $itemesocket) && ($itemesocket[14] >= 1)) {
+          $audit .= 'Gemme sur cape<br>';
+          } */
         // echo serialize($itemesocket);
         return '<td>' . /* serialize($itemesocket) . */ '<br>' . /* serialize($itemenchant) . */'<br>' . $audit . '</td>';
     }
