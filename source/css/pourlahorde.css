@@ -137,4 +137,6 @@ td {
 .audit{
     font-weight: lighter;
     font-size: x-small;
+    vertical-align: top;
+    text-align: left;
 }

@@ -312,11 +312,11 @@ class Text extends Twig_Extension {
         $itemslot = [
             0 => 'casque',
             1 => 'collier',
-            2 => 'epaule',
+            2 => 'spalieres',
             4 => 'torse',
             5 => 'ceinture',
             9 => 'gants',
-            8 => 'poignet',
+            8 => 'manchettes',
             7 => 'bottes',
             10 => 'anneau',
             11 => 'anneau',
@@ -329,7 +329,7 @@ class Text extends Twig_Extension {
             }
         }
         if (sizeof($auditgem) > 0) {
-            $audit .= 'Gemmes manquantes sur : ' . implode(',', $auditgem);
+            $audit .= 'Gemmes manquantes sur : ' . implode(',', $auditgem) . '<br>';
         }
         $auditenchant = [];
         $enchantable = ['14', '10', '11', '2'];
@@ -339,7 +339,7 @@ class Text extends Twig_Extension {
             }
         }
         if (sizeof($auditenchant) > 0) {
-            $audit .= '</br>Enchants  manquants sur : ' . implode(',', $auditenchant);
+            $audit .= 'Enchants  manquants sur : ' . implode(',', $auditenchant);
         }
         /* if (array_key_exists(2, $itemesocket) && ($itemesocket[2] >= 1)) {
           $audit .= 'Gemme sur epaule<br>';
@@ -358,7 +358,7 @@ class Text extends Twig_Extension {
           $audit .= 'Gemme sur cape<br>';
           } */
         // echo serialize($itemesocket);
-        return '<td class="audit">' . /* serialize($itemesocket) . */ '<br>' . /* serialize($itemenchant) . */'<br>' . $audit . '</td>';
+        return '<td class="audit">' . $audit . '</td>';
     }
 
     private function displayrowItem($classname, $character) {
