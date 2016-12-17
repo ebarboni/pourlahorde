@@ -320,6 +320,7 @@ class Text extends Twig_Extension {
             7 => 'bottes',
             10 => 'anneau',
             11 => 'anneau',
+            12 => 'bijou',
             14 => 'cape',
             15 => 'main gauche'];
         $auditgem = [];
