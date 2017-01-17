@@ -335,7 +335,7 @@ class Text extends Twig_Extension {
         $auditenchant = [];
         $enchantable = ['14', '10', '11', '2'];
         foreach ($enchantable as $value) {
-            if (array_key_exists($value, $itemenchant)) {
+            if (@array_key_exists($value, $itemenchant)) {
                 $auditenchant[] = $itemslot[$value];
             }
         }
