@@ -144,7 +144,7 @@ class Text extends Twig_Extension {
         $json = fread($myfile, filesize($path));
         fclose($myfile);
         $json_decoded = json_decode($json);
-        foreach ($json_decoded->professions as $typeofprof) {
+        foreach (@$json_decoded->professions as $typeofprof) {
             foreach ($typeofprof as $prof) {
                 $trade[$prof->id][$name] = ["rank" => $prof->rank, "max" => $prof->max];
                 $trade[$prof->id]["icon"] = $prof->icon;
@@ -244,7 +244,7 @@ class Text extends Twig_Extension {
         //echo serialize($itemlvl);
         $wowh = '';
         $art = false;
-        if (array_key_exists($this->slotNameID[$key], $json_decoded["items"])) {
+        if (@array_key_exists($this->slotNameID[$key], $json_decoded["items"])) {
             $ii = $json_decoded["items"][$this->slotNameID[$key]]["itemLevel"];
             if ($key == 17 && $json_decoded["items"][$this->slotNameID[17]]["artifactAppearanceId"] != 0 && ( $json_decoded["items"][$this->slotNameID[17]]["artifactAppearanceId"] == $json_decoded["items"][$this->slotNameID[16]]["artifactAppearanceId"])) {
                 $art = true;
