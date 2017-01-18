@@ -144,7 +144,7 @@ class Text extends Twig_Extension {
         $json = fread($myfile, filesize($path));
         fclose($myfile);
         $json_decoded = json_decode($json);
-        if (NULL != $json_decoded) {
+        if (is_object($json_decoded)) {
             foreach ($json_decoded->professions as $typeofprof) {
                 foreach ($typeofprof as $prof) {
                     $trade[$prof->id][$name] = ["rank" => $prof->rank, "max" => $prof->max];
