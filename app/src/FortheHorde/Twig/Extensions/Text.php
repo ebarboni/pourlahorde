@@ -309,63 +309,65 @@ class Text extends Twig_Extension {
         fclose($myfile);
         $json_decoded = json_decode($json, true);
         $audit = '';
-        $itemesocket = $json_decoded["audit"]['itemsWithEmptySockets'];
-        $itemenchant = $json_decoded["audit"]['unenchantedItems'];
-        // var_dump($itemesocket);
-        // tete 1
-        // collier 2 
-        // epau 3
-        // cape 16
-        $itemslot = [
-            0 => 'casque',
-            1 => 'collier',
-            2 => 'spalieres',
-            4 => 'torse',
-            5 => 'ceinture',
-            9 => 'gants',
-            8 => 'manchettes',
-            7 => 'bottes',
-            10 => 'anneau',
-            11 => 'anneau',
-            12 => 'bijou',
-            14 => 'cape',
-            15 => 'main gauche'];
-        $auditgem = [];
-        for ($i = 0; $i < 20; $i++) {
-            if (array_key_exists($i, $itemesocket) && ($itemesocket[$i] >= 1)) {
-                $auditgem[] = $itemslot[$i];
+        if (@array_key_exists('audit', $json_decoded)) {
+            $itemesocket = $json_decoded["audit"]['itemsWithEmptySockets'];
+            $itemenchant = $json_decoded["audit"]['unenchantedItems'];
+            // var_dump($itemesocket);
+            // tete 1
+            // collier 2 
+            // epau 3
+            // cape 16
+            $itemslot = [
+                0 => 'casque',
+                1 => 'collier',
+                2 => 'spalieres',
+                4 => 'torse',
+                5 => 'ceinture',
+                9 => 'gants',
+                8 => 'manchettes',
+                7 => 'bottes',
+                10 => 'anneau',
+                11 => 'anneau',
+                12 => 'bijou',
+                14 => 'cape',
+                15 => 'main gauche'];
+            $auditgem = [];
+            for ($i = 0; $i < 20; $i++) {
+                if (array_key_exists($i, $itemesocket) && ($itemesocket[$i] >= 1)) {
+                    $auditgem[] = $itemslot[$i];
+                }
             }
-        }
-        if (sizeof($auditgem) > 0) {
-            $audit .= 'Gemmes manquantes sur : ' . implode(',', $auditgem) . '<br>';
-        }
-        $auditenchant = [];
-        $enchantable = ['14', '10', '11', '2'];
-        foreach ($enchantable as $value) {
-            if (@array_key_exists($value, $itemenchant)) {
-                $auditenchant[] = $itemslot[$value];
+            if (sizeof($auditgem) > 0) {
+                $audit .= 'Gemmes manquantes sur : ' . implode(',', $auditgem) . '<br>';
             }
+            $auditenchant = [];
+            $enchantable = ['14', '10', '11', '2'];
+            foreach ($enchantable as $value) {
+                if (@array_key_exists($value, $itemenchant)) {
+                    $auditenchant[] = $itemslot[$value];
+                }
+            }
+            if (sizeof($auditenchant) > 0) {
+                $audit .= 'Enchants  manquants sur : ' . implode(',', $auditenchant);
+            }
+            /* if (array_key_exists(2, $itemesocket) && ($itemesocket[2] >= 1)) {
+              $audit .= 'Gemme sur epaule<br>';
+              } if (array_key_exists(4, $itemesocket) && ($itemesocket[4] >= 1)) {
+              $audit .= 'Gemme sur torse<br>';
+              } if (array_key_exists(5, $itemesocket) && ($itemesocket[5] >= 1)) {
+              $audit .= 'Gemme sur ceinture<br>';
+              } if (array_key_exists(8, $itemesocket) && ($itemesocket[8] >= 1)) {
+              $audit .= 'Gemme sur poignet<br>';
+              }if (array_key_exists(10, $itemesocket) && ($itemesocket[10] >= 1)) {
+              $audit .= 'Gemme sur anneau<br>';
+              } if (array_key_exists(11, $itemesocket) && ($itemesocket[11] >= 1)) {
+              $audit .= 'Gemme sur anneau<br>';
+              }
+              if (array_key_exists(14, $itemesocket) && ($itemesocket[14] >= 1)) {
+              $audit .= 'Gemme sur cape<br>';
+              } */
+            // echo serialize($itemesocket);
         }
-        if (sizeof($auditenchant) > 0) {
-            $audit .= 'Enchants  manquants sur : ' . implode(',', $auditenchant);
-        }
-        /* if (array_key_exists(2, $itemesocket) && ($itemesocket[2] >= 1)) {
-          $audit .= 'Gemme sur epaule<br>';
-          } if (array_key_exists(4, $itemesocket) && ($itemesocket[4] >= 1)) {
-          $audit .= 'Gemme sur torse<br>';
-          } if (array_key_exists(5, $itemesocket) && ($itemesocket[5] >= 1)) {
-          $audit .= 'Gemme sur ceinture<br>';
-          } if (array_key_exists(8, $itemesocket) && ($itemesocket[8] >= 1)) {
-          $audit .= 'Gemme sur poignet<br>';
-          }if (array_key_exists(10, $itemesocket) && ($itemesocket[10] >= 1)) {
-          $audit .= 'Gemme sur anneau<br>';
-          } if (array_key_exists(11, $itemesocket) && ($itemesocket[11] >= 1)) {
-          $audit .= 'Gemme sur anneau<br>';
-          }
-          if (array_key_exists(14, $itemesocket) && ($itemesocket[14] >= 1)) {
-          $audit .= 'Gemme sur cape<br>';
-          } */
-        // echo serialize($itemesocket);
         return '<td class="audit">' . $audit . '</td>';
     }
 
