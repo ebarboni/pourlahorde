@@ -294,7 +294,7 @@ class Text extends Twig_Extension {
         $json = fread($myfile, filesize($path));
         fclose($myfile);
         $json_decoded = json_decode($json, true);
-        if (@array_key_exists('item', $json_decoded)) {
+        if (@array_key_exists('items', $json_decoded)) {
             return '<td>' . $json_decoded["items"]['averageItemLevel'] . '</td><td>' . $json_decoded["items"]['averageItemLevelEquipped'] . '</td>';
         } //<td>' . floor($tmp / $di) . '</td>';
         else {
