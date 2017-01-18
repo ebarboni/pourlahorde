@@ -144,7 +144,7 @@ class Text extends Twig_Extension {
         $json = fread($myfile, filesize($path));
         fclose($myfile);
         $json_decoded = json_decode($json);
-        if (property_exists($json_decoded,'professions')) {
+        if (property_exists($json_decoded, 'professions')) {
             foreach ($json_decoded->professions as $typeofprof) {
                 foreach ($typeofprof as $prof) {
                     $trade[$prof->id][$name] = ["rank" => $prof->rank, "max" => $prof->max];
@@ -294,7 +294,12 @@ class Text extends Twig_Extension {
         $json = fread($myfile, filesize($path));
         fclose($myfile);
         $json_decoded = json_decode($json, true);
-        return '<td>' . $json_decoded["items"]['averageItemLevel'] . '</td><td>' . $json_decoded["items"]['averageItemLevelEquipped'] . '</td>'; //<td>' . floor($tmp / $di) . '</td>';
+        if (@array_key_exists('item', $json_decoded)) {
+            return '<td>' . $json_decoded["items"]['averageItemLevel'] . '</td><td>' . $json_decoded["items"]['averageItemLevelEquipped'] . '</td>';
+        } //<td>' . floor($tmp / $di) . '</td>';
+        else {
+            return '<td></td><td></td>';
+        }
     }
 
     private function displayAudit($character) {
