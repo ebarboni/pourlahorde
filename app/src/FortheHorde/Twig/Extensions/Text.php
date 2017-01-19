@@ -320,11 +320,11 @@ class Text extends Twig_Extension {
             $itemslot = [
                 0 => 'casque',
                 1 => 'collier',
-                2 => 'spalieres',
+                2 => 'spalières',
                 3 => '1inconnu',
                 4 => 'torse',
                 5 => 'ceinture',
-                6 => 'inconnu',
+                6 => 'jambières',
                 7 => 'bottes',
                 8 => 'manchettes',
                 9 => 'gants',
