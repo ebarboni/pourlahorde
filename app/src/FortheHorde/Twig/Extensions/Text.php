@@ -161,7 +161,7 @@ class Text extends Twig_Extension {
         foreach ($trade as $atrade) {
             $cool .= '<td';
             if (@is_array($atrade[$character->character->name])) {
-                if ($atrade[$character->character->name]["rank"] == 800) {
+                if ($atrade[$character->character->name]["rank"] >= 800) {
                     $cool .= ' class="trademax"';
                 }
             }
