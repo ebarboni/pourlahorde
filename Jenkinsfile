@@ -23,7 +23,7 @@ def f = env.WORKSPACE + '/app/_data/guild.json'
 def character = jsonParse(readFile(f))
 for (charact  in character.get('members') ) {
  def n =  charact.get('character').get('name').toString()
-sh "curl -o app/_data/${n}.json 'https://eu.api.battle.net/wow/character/Elune/${n}?fields=professions,items,statistics,progression,audit,talents&locale=fr_FR&apikey=${env.APIKEY}'"
+sh "curl -o app/_data/${n}.json 'https://eu.api.battle.net/wow/character/Elune/${n}?fields=professions,items,statistics,progression,audit,talents,achievements,reputation&locale=fr_FR&apikey=${env.APIKEY}'"
 sleep 1
 }
 }
