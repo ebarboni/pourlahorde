@@ -11,6 +11,7 @@ class Text extends Twig_Extension {
     public function getFunctions() {
         $functions = array(
             new Twig_SimpleFunction('showMain', array($this, 'showGURoster'), array('needs_environment' => true, 'is_safe' => array('html'))),
+            new Twig_SimpleFunction('showRawAchievement', array($this, 'showGUAchievement'), array('needs_environment' => true, 'is_safe' => array('html'))),
             new Twig_SimpleFunction('showAlts', array($this, 'showGURosterAlts'), array('needs_environment' => true, 'is_safe' => array('html'))),
             new Twig_SimpleFunction('showTrade', array($this, 'showTrade'), array('needs_environment' => true, 'is_safe' => array('html'))),
             new Twig_SimpleFunction('item', array($this, 'itemIcon'), array('needs_environment' => true, 'is_safe' => array('html'))),
@@ -436,6 +437,59 @@ class Text extends Twig_Extension {
 
     public function itemIcon(Twig_Environment $env, $id) {
         return '<a href="http://fr.wowhead.com/item=' . $id . '" >item</a>';
+    }
+
+    private function getCompletedAchievement() {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
+        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $json = fread($myfile, filesize($path));
+        fclose($myfile);
+        $json_decoded = json_decode($json);
+        $mains = array();
+        foreach ($json_decoded->achievements->achievementsCompleted as $completed) {
+            $mains[$completed] = $completed;
+        }
+        ksort($mains);
+        return $mains;
+    }
+
+    private function getAchievementJSon() {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/achievementguild.json");
+        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $json = fread($myfile, filesize($path));
+        fclose($myfile);
+        $json_decoded = json_decode($json);
+
+        return $json_decoded;
+    }
+
+    public function showGUAchievement(Twig_Environment $env) {
+        $cool = '<div class="col-md-10">';
+        $complete = $this->getCompletedAchievement();
+        foreach ($this->getAchievementJSon()->achievements as $achievement) {
+
+            $cool .= '<h2>' . $achievement->name . '(' . $achievement->id . ')' . '</h2>';
+            foreach ($achievement->achievements as $achievementin) {
+                if ($achievementin->factionId == 2  || $achievementin->factionId == 0) {
+                    if (!array_key_exists($achievementin->id, $complete)) {
+                        $cool .= '<h4>' . $achievementin->title . '</h4>' . '(' . $achievementin->description . ')';
+                        //     $cool .= '<br/>';
+                    }
+                }
+            }
+            foreach ($achievement->achievements as $achievementin) {
+                if ($achievementin->factionId == 2  || $achievementin->factionId == 0) {
+                    if (array_key_exists($achievementin->id, $complete)) {
+                        $cool .= '<del><h4>' . $achievementin->title . '</h4>' . '(' . $achievementin->description . ')</del>';
+
+                        //     $cool .= '<br/>';
+                    }
+                }
+                // $cool .= '<br/>';
+            }
+        }
+        $cool .= "</div>";
+        return $cool;
     }
 
 }
