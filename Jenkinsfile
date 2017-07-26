@@ -20,6 +20,8 @@ sh 'mkdir -p app/_data/'
 sh "curl -o app/_data/guild.json 'https://eu.api.battle.net/wow/guild/Elune/Pour%20la%20horde?fields=achievements%2Cchallenge%2Cmembers%2Cnews&locale=fr_FR&apikey=${env.APIKEY}'"
 def f = env.WORKSPACE + '/app/_data/guild.json'
 
+sh "curl -o app/_data/achievementguild.json 'https://eu.api.battle.net/wow/data/guild/achievements&locale=fr_FR&apikey=${env.APIKEY}'"
+
 def character = jsonParse(readFile(f))
 for (charact  in character.get('members') ) {
  def n =  charact.get('character').get('name').toString()

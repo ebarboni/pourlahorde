@@ -4,4 +4,5 @@
 /vendor/
 /composer.lock
 /output_prod/
+/output_dev/
 /app/_data/
