@@ -183,3 +183,13 @@ td {
 .critnotdone {
     color : orange;
 }
+
+.achievementmeta span {
+
+    font-size: xx-large;
+    font-weight: bolder;
+}
+.achievementcate span {
+    font-size: large;
+    font-weight: bolder;
+}

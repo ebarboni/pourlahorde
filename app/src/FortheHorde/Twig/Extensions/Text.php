@@ -522,10 +522,9 @@ class Text extends Twig_Extension {
                 //}
                 //reput ?
             } elseif ($acrit->max == 25) {
-                // if ($val == 1) {
-                //$val = '';
-                //}
-                //reput ?
+                if ($val >= 25) {
+                    $val = '';
+                }
             } elseif ($acrit->max == 250) {
                 // if ($val == 1) {
                 //$val = '';
@@ -559,7 +558,9 @@ class Text extends Twig_Extension {
                 
             } elseif ($acrit->max == 42000) {
 
-
+                if ($val >= 42000) {
+                    $val = '';
+                }
 
                 //reput ?
             } elseif ($acrit->max == 150000) {
@@ -613,35 +614,67 @@ class Text extends Twig_Extension {
         return $tmp;
     }
 
+    private function displayCat($achs, $criterias, $complete) {
+        $tmp = '';
+        if (isset($achs->categories)) {
+
+            foreach ($achs->categories as $acat) {
+                $tmp .= '<div class="achievementcate"><span>' . $acat->name . '</span>';
+                foreach ($acat->achievements as $achievementin) {
+                    if ($achievementin->factionId == 2 || $achievementin->factionId == 0) {
+                        if (!array_key_exists($achievementin->id, $complete)) {
+                            $tmp .= $this->displayAchievement($achievementin, $criterias, false);
+                            //'<h4>' . $achievementin->title . '</h4>' . '(' . $achievementin->description . ')';
+                            //     $cool .= '<br/>';
+                        }
+                    }
+                }
+                foreach ($acat->achievements as $achievementin) {
+                    if ($achievementin->factionId == 2 || $achievementin->factionId == 0) {
+                        if (array_key_exists($achievementin->id, $complete)) {
+                            $tmp .= $this->displayAchievement($achievementin, $criterias, true);
+
+                            //     $cool .= '<br/>';
+                        }
+                    }
+                    // $cool .= '<br/>';
+                }$tmp .= '</div>';
+            }
+        }
+        return $tmp;
+    }
+
     public function showGUAchievement(Twig_Environment $env) {
         $cool = '<div class="col-md-10">';
         $complete = $this->getCompletedAchievement();
         $criterias = $this->getCompletedCriterias();
         foreach ($this->getAchievementJSon()->achievements as $achievement) {
-
-            $cool .= '<div class="achievementmeta">' . $achievement->name;
-            $cool .= '<div class="achievementgrid">';
-            foreach ($achievement->achievements as $achievementin) {
-                if ($achievementin->factionId == 2 || $achievementin->factionId == 0) {
-                    if (!array_key_exists($achievementin->id, $complete)) {
-                        $cool .= $this->displayAchievement($achievementin, $criterias, false);
-                        //'<h4>' . $achievementin->title . '</h4>' . '(' . $achievementin->description . ')';
-                        //     $cool .= '<br/>';
+            if ($achievement->id != 15093) {
+                $cool .= '<div class="achievementmeta"><span>' . $achievement->name . '</span>';
+                $cool .= '<div class="achievementgrid">';
+                $cool .= $this->displayCat($achievement, $criterias, $complete);
+                foreach ($achievement->achievements as $achievementin) {
+                    if ($achievementin->factionId == 2 || $achievementin->factionId == 0) {
+                        if (!array_key_exists($achievementin->id, $complete)) {
+                            $cool .= $this->displayAchievement($achievementin, $criterias, false);
+                            //'<h4>' . $achievementin->title . '</h4>' . '(' . $achievementin->description . ')';
+                            //     $cool .= '<br/>';
+                        }
                     }
                 }
-            }
-            foreach ($achievement->achievements as $achievementin) {
-                if ($achievementin->factionId == 2 || $achievementin->factionId == 0) {
-                    if (array_key_exists($achievementin->id, $complete)) {
-                        $cool .= $this->displayAchievement($achievementin, $criterias, true);
+                foreach ($achievement->achievements as $achievementin) {
+                    if ($achievementin->factionId == 2 || $achievementin->factionId == 0) {
+                        if (array_key_exists($achievementin->id, $complete)) {
+                            $cool .= $this->displayAchievement($achievementin, $criterias, true);
 
-                        //     $cool .= '<br/>';
+                            //     $cool .= '<br/>';
+                        }
                     }
+                    // $cool .= '<br/>';
                 }
-                // $cool .= '<br/>';
+                $cool .= '</div>';
+                $cool .= '</div>';
             }
-            $cool .= '</div>';
-            $cool .= '</div>';
         }
         $cool .= "</div>";
         return $cool;
