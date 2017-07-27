@@ -149,3 +149,37 @@ td {
     vertical-align: top;
     text-align: left;
 }
+.achievementmeta{
+    font-size: large;
+    color:#f8b700;
+
+}
+.achievementgrid{
+    font-size: smaller;
+}
+.achdone{
+    opacity: .5;
+}
+.achdescription{
+    color: #ebdec2;
+}
+.achtitle{
+    font-size: medium;
+    font-weight: bold;
+    color: #f8b700;
+}
+.anach::after{
+    border-top: 1px solid grey;
+}
+.anach {
+    margin-left: 30px;
+}
+.critcomp{
+    color :green;
+}
+.critincomp{
+    color :red;
+}
+.critnotdone {
+    color : orange;
+}

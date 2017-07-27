@@ -453,6 +453,23 @@ class Text extends Twig_Extension {
         return $mains;
     }
 
+    private function getCompletedCriterias() {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
+        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $json = fread($myfile, filesize($path));
+        fclose($myfile);
+        $json_decoded = json_decode($json);
+        $mains = array();
+
+        $i = 0;
+        foreach ($json_decoded->achievements->criteria as $criterariaid) {
+            $mains[$criterariaid] = $json_decoded->achievements->criteriaQuantity[$i];
+            $i++;
+        }
+        ksort($mains);
+        return $mains;
+    }
+
     private function getAchievementJSon() {
         $path = realpath(__DIR__ . "/../../../../../app/_data/achievementguild.json");
         $myfile = fopen($path, "r") or die("Unable to open file!");
@@ -463,30 +480,168 @@ class Text extends Twig_Extension {
         return $json_decoded;
     }
 
+    private function displayAchievement($ach, $cri, $done) {
+        $doneclass = "";
+        if (!$done) {
+            $doneclass .= ' achdone';
+        }
+        $tmp = '<div class=" anach ' . $doneclass . '"><div class="achtitle">' . $ach->title . '' . '</div><div class="achdescription">' . $ach->description . '</div>';
+        $tmp .= '<ul class=" aul">';
+        foreach ($ach->criteria as $acrit) {
+            $crid = $acrit->id;
+            if ($crid == 15327 || $crid == 14794) {
+                continue;
+            }
+
+            $val = '';
+            $status = 'critincomp';
+            $cmp = false;
+            if (array_key_exists($crid, $cri)) {
+                $val = $cri[$crid];
+                $cpm = true;
+                $status = 'critcomp';
+            }
+            if ($val >= $acrit->max) {
+                $status = 'critcomp';
+            } else {
+                $status = 'critincomp';
+            }
+            if ($acrit->max == 110) { //max level ??
+                //$tmp .= '/' . $acrit->max;
+                if ($val >= 110) {
+                    $val = '';
+                }
+            } elseif ($acrit->max == 1) {
+                // if ($val == 1) {
+                $val = '';
+                //}
+                //boolean ?
+            } elseif ($acrit->max == 100) {
+                // if ($val == 1) {
+                //$val = '';
+                //}
+                //reput ?
+            } elseif ($acrit->max == 25) {
+                // if ($val == 1) {
+                //$val = '';
+                //}
+                //reput ?
+            } elseif ($acrit->max == 250) {
+                // if ($val == 1) {
+                //$val = '';
+                //}
+                //reput ?
+            } elseif ($acrit->max == 50) {
+                
+            } elseif ($acrit->max == 500) {
+                
+            } elseif ($acrit->max == 525) {
+                if ($val >= 525) {
+                    $val = '';
+                }
+            } elseif ($acrit->max == 600) {
+                if ($val >= 600) {
+                    $val = '';
+                }
+            } elseif ($acrit->max == 7500) {
+                
+            } elseif ($acrit->max == 2500) {
+                
+            } elseif ($acrit->max == 1500) {
+                
+            } elseif ($acrit->max == 1000) {
+                
+            } elseif ($acrit->max == 3000) {
+                
+            } elseif ($acrit->max == 5000) {
+                
+            } elseif ($acrit->max == 10000) {
+                
+            } elseif ($acrit->max == 42000) {
+
+                $val = '';
+
+                //reput ?
+            } elseif ($acrit->max == 150000) {
+
+                $val = '';
+            } elseif ($acrit->max == 15000) {
+                
+            } elseif ($acrit->max == 25000) {
+                
+            } elseif ($acrit->max == 75000) {
+                
+            } elseif ($acrit->max == 30000) {
+                
+            } elseif ($acrit->max == 50000) {
+                
+            } elseif ($acrit->max == 100000) {
+                
+            } elseif ($acrit->max == 250000) {
+                
+            } elseif ($acrit->max == 1000000) {
+                
+            } elseif ($acrit->max == 2000) {
+                
+            } elseif ($acrit->max == 1000000000) {
+                // if ($val == 1) {
+                $val = floor($val / 10000);
+                //}
+                //reput ?
+            } elseif ($acrit->max == 2000000000) {
+                // if ($val == 1) {
+                $val = floor($val / 10000);
+                //}
+                //reput ?
+            } elseif ($acrit->max == 500000000) {
+                // if ($val == 1) {
+                $val = floor($val / 10000);
+                //}
+                //reput ?
+            } else {
+                $status = 'critnotdone';
+                $val = 'max' + $acrit->max;
+            }
+            $tmp .= '<li class="' . $status . '">';//(' . $crid . ')';
+            if ($acrit->description != "") {
+                $tmp .= $acrit->description;
+            }
+            $tmp .= ' ' . $val . '</li>';
+        }
+        $tmp .= '</ul>';
+        $tmp .= '</div>';
+        return $tmp;
+    }
+
     public function showGUAchievement(Twig_Environment $env) {
         $cool = '<div class="col-md-10">';
         $complete = $this->getCompletedAchievement();
+        $criterias = $this->getCompletedCriterias();
         foreach ($this->getAchievementJSon()->achievements as $achievement) {
 
-            $cool .= '<h2>' . $achievement->name . '(' . $achievement->id . ')' . '</h2>';
+            $cool .= '<div class="achievementmeta">' . $achievement->name;
+            $cool .= '<div class="achievementgrid">';
             foreach ($achievement->achievements as $achievementin) {
-                if ($achievementin->factionId == 2  || $achievementin->factionId == 0) {
+                if ($achievementin->factionId == 2 || $achievementin->factionId == 0) {
                     if (!array_key_exists($achievementin->id, $complete)) {
-                        $cool .= '<h4>' . $achievementin->title . '</h4>' . '(' . $achievementin->description . ')';
+                        $cool .= $this->displayAchievement($achievementin, $criterias, false);
+                        //'<h4>' . $achievementin->title . '</h4>' . '(' . $achievementin->description . ')';
                         //     $cool .= '<br/>';
                     }
                 }
             }
             foreach ($achievement->achievements as $achievementin) {
-                if ($achievementin->factionId == 2  || $achievementin->factionId == 0) {
+                if ($achievementin->factionId == 2 || $achievementin->factionId == 0) {
                     if (array_key_exists($achievementin->id, $complete)) {
-                        $cool .= '<del><h4>' . $achievementin->title . '</h4>' . '(' . $achievementin->description . ')</del>';
+                        $cool .= $this->displayAchievement($achievementin, $criterias, true);
 
                         //     $cool .= '<br/>';
                     }
                 }
                 // $cool .= '<br/>';
             }
+            $cool .= '</div>';
+            $cool .= '</div>';
         }
         $cool .= "</div>";
         return $cool;
