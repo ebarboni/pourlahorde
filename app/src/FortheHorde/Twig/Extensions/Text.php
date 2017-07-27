@@ -559,7 +559,7 @@ class Text extends Twig_Extension {
                 
             } elseif ($acrit->max == 42000) {
 
-                $val = '';
+
 
                 //reput ?
             } elseif ($acrit->max == 150000) {
@@ -602,7 +602,7 @@ class Text extends Twig_Extension {
                 $status = 'critnotdone';
                 $val = 'max' + $acrit->max;
             }
-            $tmp .= '<li class="' . $status . '">';//(' . $crid . ')';
+            $tmp .= '<li class="' . $status . '">'; //(' . $crid . ')';
             if ($acrit->description != "") {
                 $tmp .= $acrit->description;
             }
