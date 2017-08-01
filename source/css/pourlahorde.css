@@ -193,3 +193,9 @@ td {
     font-size: large;
     font-weight: bolder;
 }
+.achimage{
+    float: left;
+    width: 34px;
+    border: aliceblue solid 1px;
+    margin-right: 6px;
+}

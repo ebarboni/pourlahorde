@@ -480,20 +480,28 @@ class Text extends Twig_Extension {
         return $json_decoded;
     }
 
+    private $critids = array();
+
     private function displayAchievement($ach, $cri, $done) {
         $doneclass = "";
         if (!$done) {
             $doneclass .= ' achdone';
         }
-        $tmp = '<div class=" anach ' . $doneclass . '"><div class="achtitle">' . $ach->title . '' . '</div><div class="achdescription">' . $ach->description . '</div>';
+        $tmp = '<div class=" anach ' . $doneclass . '">';
+        $icon = '';
+        if (isset($ach->icon)) {
+            $icon = '<img class="achimage" src="http://media.blizzard.com/wow/icons/56/' . $ach->icon . '.jpg"/>';
+        }
+        $tmp .= $icon . '<div class="achtitle">' . $ach->title . '' . '</div><div class="achdescription">' . $ach->description . '</div>';
         $tmp .= '<ul class=" aul">';
+
         foreach ($ach->criteria as $acrit) {
             $crid = $acrit->id;
             if ($crid == 15327 || $crid == 14794) {
                 continue;
             }
 
-            $val = '';
+            $val = '0';
             $status = 'critincomp';
             $cmp = false;
             if (array_key_exists($crid, $cri)) {
@@ -506,103 +514,131 @@ class Text extends Twig_Extension {
             } else {
                 $status = 'critincomp';
             }
-            if ($acrit->max == 110) { //max level ??
-                //$tmp .= '/' . $acrit->max;
-                if ($val >= 110) {
-                    $val = '';
-                }
-            } elseif ($acrit->max == 1) {
-                // if ($val == 1) {
-                $val = '';
-                //}
-                //boolean ?
-            } elseif ($acrit->max == 100) {
-                // if ($val == 1) {
-                //$val = '';
-                //}
-                //reput ?
-            } elseif ($acrit->max == 25) {
-                if ($val >= 25) {
-                    $val = '';
-                }
-            } elseif ($acrit->max == 250) {
-                // if ($val == 1) {
-                //$val = '';
-                //}
-                //reput ?
-            } elseif ($acrit->max == 50) {
-                
-            } elseif ($acrit->max == 500) {
-                
-            } elseif ($acrit->max == 525) {
-                if ($val >= 525) {
-                    $val = '';
-                }
-            } elseif ($acrit->max == 600) {
-                if ($val >= 600) {
-                    $val = '';
-                }
-            } elseif ($acrit->max == 7500) {
-                
-            } elseif ($acrit->max == 2500) {
-                
-            } elseif ($acrit->max == 1500) {
-                
-            } elseif ($acrit->max == 1000) {
-                
-            } elseif ($acrit->max == 3000) {
-                
-            } elseif ($acrit->max == 5000) {
-                
-            } elseif ($acrit->max == 10000) {
-                
-            } elseif ($acrit->max == 42000) {
-
-                if ($val >= 42000) {
-                    $val = '';
-                }
-
-                //reput ?
-            } elseif ($acrit->max == 150000) {
-
-                $val = '';
-            } elseif ($acrit->max == 15000) {
-                
-            } elseif ($acrit->max == 25000) {
-                
-            } elseif ($acrit->max == 75000) {
-                
-            } elseif ($acrit->max == 30000) {
-                
-            } elseif ($acrit->max == 50000) {
-                
-            } elseif ($acrit->max == 100000) {
-                
-            } elseif ($acrit->max == 250000) {
-                
-            } elseif ($acrit->max == 1000000) {
-                
-            } elseif ($acrit->max == 2000) {
-                
-            } elseif ($acrit->max == 1000000000) {
-                // if ($val == 1) {
-                $val = floor($val / 10000);
-                //}
-                //reput ?
-            } elseif ($acrit->max == 2000000000) {
-                // if ($val == 1) {
-                $val = floor($val / 10000);
-                //}
-                //reput ?
-            } elseif ($acrit->max == 500000000) {
-                // if ($val == 1) {
-                $val = floor($val / 10000);
-                //}
-                //reput ?
-            } else {
-                $status = 'critnotdone';
-                $val = 'max' + $acrit->max;
+            $icon = '';
+            if (isset($acrit->icon)) {
+                $icon = '<img class="tradeskill" src="http://media.blizzard.com/wow/icons/56/' . $acrit->icon . '.jpg"/>';
             }
+            if (in_array($acrit->id, array(14500, 14805))) {
+
+                $val = $icon . $val . " / " . $acrit->max;
+                // boolean
+            } elseif (in_array($acrit->id, array(14576, 14577, 14578, 14579, 14580, 19473, 14581,
+                        21189, 21191, 21192, 21193, 21194, 21195, 21197
+                    ))) {
+                $val = '';
+
+                // max level
+            } elseif (in_array($acrit->id, array(14537, 14538, 14539, 14540, 14541, 14542, 14543, 14648, 22117,
+                        14544, 14545, 14546, 14547, 14548, 14549, 14649, 22118, 34793,
+                        14550, 14551, 14552, 14553, 14554, 14650, 22119,
+                        14555, 14556, 14557, 14558, 14559, 14560, 14651, 14652, 14653, 22120,
+                        14561, 14562, 14563, 14564, 14565, 14566, 14567, 22121,
+                        14568, 14569, 14570, 14571, 14572, 22255, 14574, 14575,
+                        19462, 19454, 19455, 19456, 19458, 19457, 19459,
+                        19469, 19468, 19472, 19465, 19464, 14573, 19463
+                    ))) {
+
+                $val = $icon . $val . " / " . $acrit->max;
+            } else {
+                $this->critids[$acrit->id] = 1;
+            }
+            /* if ($acrit->max == 110) { //max level ??
+              //$tmp .= '/' . $acrit->max;
+              if ($val >= 110) {
+              $val = '';
+              }
+              } elseif ($acrit->max == 1) {
+              // if ($val == 1) {
+              $val = '';
+              //}
+              //boolean ?
+              } elseif ($acrit->max == 100) {
+              // if ($val == 1) {
+              //$val = '';
+              //}
+              //reput ?
+              } elseif ($acrit->max == 25) {
+              if ($val >= 25) {
+              $val = '';
+              }
+              } elseif ($acrit->max == 250) {
+              // if ($val == 1) {
+              //$val = '';
+              //}
+              //reput ?
+              } elseif ($acrit->max == 50) {
+
+              } elseif ($acrit->max == 500) {
+
+              } elseif ($acrit->max == 525) {
+              if ($val >= 525) {
+              $val = '';
+              }
+              } elseif ($acrit->max == 600) {
+              if ($val >= 600) {
+              $val = '';
+              }
+              } elseif ($acrit->max == 7500) {
+
+              } elseif ($acrit->max == 2500) {
+
+              } elseif ($acrit->max == 1500) {
+
+              } elseif ($acrit->max == 1000) {
+
+              } elseif ($acrit->max == 3000) {
+
+              } elseif ($acrit->max == 5000) {
+
+              } elseif ($acrit->max == 10000) {
+
+              } elseif ($acrit->max == 42000) {
+
+              if ($val >= 42000) {
+              $val = '';
+              }
+
+              //reput ?
+              } elseif ($acrit->max == 150000) {
+
+              $val = '';
+              } elseif ($acrit->max == 15000) {
+
+              } elseif ($acrit->max == 25000) {
+
+              } elseif ($acrit->max == 75000) {
+
+              } elseif ($acrit->max == 30000) {
+
+              } elseif ($acrit->max == 50000) {
+
+              } elseif ($acrit->max == 100000) {
+
+              } elseif ($acrit->max == 250000) {
+
+              } elseif ($acrit->max == 1000000) {
+
+              } elseif ($acrit->max == 2000) {
+
+              } elseif ($acrit->max == 1000000000) {
+              // if ($val == 1) {
+              $val = floor($val / 10000);
+              //}
+              //reput ?
+              } elseif ($acrit->max == 2000000000) {
+              // if ($val == 1) {
+              $val = floor($val / 10000);
+              //}
+              //reput ?
+              } elseif ($acrit->max == 500000000) {
+              // if ($val == 1) {
+              $val = floor($val / 10000);
+              //}
+              //reput ?
+              } else {
+              $status = 'critnotdone';
+              $val = 'max' + $acrit->max;
+              } */
             $tmp .= '<li class="' . $status . '">'; //(' . $crid . ')';
             if ($acrit->description != "") {
                 $tmp .= $acrit->description;
@@ -649,7 +685,7 @@ class Text extends Twig_Extension {
         $complete = $this->getCompletedAchievement();
         $criterias = $this->getCompletedCriterias();
         foreach ($this->getAchievementJSon()->achievements as $achievement) {
-            if ($achievement->id != 15093) {
+            if ($achievement->id != 15093) { // tour de force
                 $cool .= '<div class="achievementmeta"><span>' . $achievement->name . '</span>';
                 $cool .= '<div class="achievementgrid">';
                 $cool .= $this->displayCat($achievement, $criterias, $complete);
@@ -677,6 +713,8 @@ class Text extends Twig_Extension {
             }
         }
         $cool .= "</div>";
+        $cool .= count($this->critids);
+        $cool .= implode(', ', array_keys($this->critids));
         return $cool;
     }
 
