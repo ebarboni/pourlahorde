@@ -198,4 +198,8 @@ td {
     width: 34px;
     border: aliceblue solid 1px;
     margin-right: 6px;
+    border-radius: 2px;
+}
+.aul{
+    list-style: none;
 }
