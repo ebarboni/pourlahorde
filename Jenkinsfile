@@ -30,6 +30,7 @@ sleep 1
 }
 }
 stage ('build') {
+   sh 'rm -Rf output_prod/'
    sh './vendor/bin/sculpin generate --env=prod'
 }
 stage ('deploy') {
