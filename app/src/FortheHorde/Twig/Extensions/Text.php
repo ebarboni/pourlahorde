@@ -128,9 +128,39 @@ class Text extends Twig_Extension {
 
     private function displayRoster($charobject) {
         $color = $this->getColor($charobject->character->class);
-        $c = '<div class="aperso">';
+        $d = '';
+        $mainandalt = [
+            "Absozen" => ["Absocreep", "Absofang", "Absohavok", "Absoluthion"],
+            "Alleister" => ["Arkeaiin"],
+            "Banniway" => ["Baniway", "Baniways", "Banniways", "Bäniways", "Bänniways"],
+            "Emmental" => ["Barillium", "Bleuh", 'Lopinel', 'Morchort', 'Poalhan', 'Rhonium', 'Rouflakette', 'Shiromi', 'Zefresis'],
+            "Helianthe" => ['Ireene', 'Nehelina'],
+            "Hylidev" => ['Feorn'],
+            "Krows" => [],
+            "Laycka" => ['Lioz', 'Liøz'],
+            "Poilant" => ['Fourras', 'Panoramix', 'Raedsyndar', 'Sharisad', 'Widdershins'],
+            "Poilhan" => ['Fkaffe', 'Fkoil', 'Iakf', 'Narjhhan'],
+            "Rengonocho" => ['Baouss', 'Gimeno', 'Zapova'],
+            "Rhtaar" => ['Hvance', 'Yllaltan'],
+            "Saethia" => [],
+            "Shuntor" => [],
+            "Sneakyzouz" => ['Elementzouz'],
+            "Taoling" => ['Gaiana', 'Meï']
+        ];
+        foreach ($mainandalt as $main => $alts) {
+            if ($main == $charobject->character->name) {
+                // main
+                $d = 'main';
+            }
+            if (in_array($charobject->character->name, $alts)) {
+                $d = 'alt ' . $main;
+            }
+        }
+        $c = '<div class="aperso ' . $d . ' ">';
         $c .= '<img src="https://render-eu.worldofwarcraft.com/character/' . $charobject->character->thumbnail . '" class="persoimg" height="84" width="84" />';
-        $c .= '<span class="pname ' . $color . '">' . $charobject->character->name;
+
+
+        $c .= '<span class="pname ' . $color . '"><span class="ppname">' . $charobject->character->name . '</span>';
         if ($charobject->character->level < 110) { // max level
             $c .= '<span class="level">' . $charobject->character->level . '</span>';
         }

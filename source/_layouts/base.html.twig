@@ -24,14 +24,26 @@
             // tooltip options
         {% block wowHeadTags %}{% endblock %}
 
-               $(document).ready(function () {
-                   // update tooltips
-                   if (typeof $WowheadPower == 'undefined') {
-                       $.getScript('//wow.zamimg.com/widgets/power.js');
-                   } else {
-                       $WowheadPower.refreshLinks();
-                   }
-               });
+            $(document).ready(function () {
+                // update tooltips
+                if (typeof $WowheadPower == 'undefined') {
+                    $.getScript('//wow.zamimg.com/widgets/power.js');
+                } else {
+                    $WowheadPower.refreshLinks();
+                }
+                $(".main").click(
+                        function ( ) {
+                            $('.persoimg').css({'border-color': 'lightgray'});
+                            $(this).find('.persoimg').css({'border-color': 'red'});
+                            name = "." + $(this).find('.ppname').text();
+                            $('.alt').css({opacity: .3});
+                            $(name).css({opacity: 1.0}); //each(alert("salut"));
+
+
+
+                        });
+            });
+
     </script>
 </head>
 <body>
