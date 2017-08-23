@@ -140,7 +140,7 @@ class Text extends Twig_Extension {
             "Laycka" => ['Lioz', 'Liøz'],
             "Poilant" => ['Fourras', 'Panoramix', 'Raedsyndar', 'Sharisad', 'Widdershins'],
             "Poilhan" => ['Fkaffe', 'Fkoil', 'Iakf', 'Narjhhan'],
-            "Rengonocho" => ['Baouss', 'Gimeno', 'Zapova'],
+            "Rengonocho" => ['Baouss', 'Berlonocho','Gimeno', 'Zapova'],
             "Rhtaar" => ['Hvance', 'Yllaltan'],
             "Saethia" => [],
             "Shuntor" => [],
