@@ -50,6 +50,8 @@ h2 { color:darkgoldenrod;clear:both;
 .persoimg {
     display:table-row;
     border-radius: 3px;
+    width: 84px;
+    height:84px;
     border: lightgrey solid 1px;
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-crisp-edges;
