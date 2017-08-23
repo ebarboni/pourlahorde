@@ -140,7 +140,7 @@ class Text extends Twig_Extension {
             "Laycka" => ['Lioz', 'Liøz'],
             "Poilant" => ['Fourras', 'Panoramix', 'Raedsyndar', 'Sharisad', 'Widdershins'],
             "Poilhan" => ['Fkaffe', 'Fkoil', 'Iakf', 'Narjhhan'],
-            "Rengonocho" => ['Baouss', 'Berlonocho','Gimeno', 'Zapova'],
+            "Rengonocho" => ['Baouss', 'Berlonocho', 'Gimeno', 'Zapova'],
             "Rhtaar" => ['Hvance', 'Yllaltan'],
             "Saethia" => [],
             "Shuntor" => [],
@@ -157,8 +157,11 @@ class Text extends Twig_Extension {
             }
         }
         $c = '<div class="aperso ' . $d . ' ">';
-        $c .= '<img src="https://render-eu.worldofwarcraft.com/character/' . $charobject->character->thumbnail . '" class="persoimg" height="84" width="84" />';
-
+        if ($charobject->character->level < 10) {
+            $c .= '<img src="http://eu.battle.net/wow/static/images/2d/avatar/' . $charobject->character->race . '-' . $charobject->character->gender . '.jpg" class="persoimg" height="84" width="84" />';
+        } else {
+            $c .= '<img src="https://render-eu.worldofwarcraft.com/character/' . $charobject->character->thumbnail . '" class="persoimg" height="84" width="84" />';
+        }
 
         $c .= '<span class="pname ' . $color . '"><span class="ppname">' . $charobject->character->name . '</span>';
         if ($charobject->character->level < 110) { // max level
