@@ -129,11 +129,12 @@ class Text extends Twig_Extension {
     private function displayRoster($charobject) {
         $color = $this->getColor($charobject->character->class);
         $d = '';
+        //'Shiromi'
         $mainandalt = [
             "Absozen" => ["Absocreep", "Absofang", "Absohavok", "Absoluthion"],
             "Alleister" => ["Arkeaiin"],
             "Banniway" => ["Baniway", "Baniways", "Banniways", "Bäniways", "Bänniways"],
-            "Emmental" => ["Barillium", "Bleuh", 'Lopinel', 'Morchort', 'Poalhan', 'Rhonium', 'Rouflakette', 'Shiromi', 'Zefresis'],
+            "Emmental" => ["Barillium", "Bleuh", 'Lopinel', 'Morchort', 'Poalhan', 'Rhonium', 'Rouflakette', 'Zefresis'],
             "Helianthe" => ['Ireene', 'Nehelina'],
             "Hylidev" => ['Feorn'],
             "Krows" => [],
