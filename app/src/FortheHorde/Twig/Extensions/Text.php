@@ -132,7 +132,7 @@ class Text extends Twig_Extension {
         //'Shiromi'
         $mainandalt = [
             "Absozen" => ["Absocreep", "Absofang", "Absohavok", "Absoluthion"],
-            "Alleister" => ["Arkeaiin"],
+            "Arkeaiin" => ["Alleister","Khalima"],
             "Banniway" => ["Baniway", "Baniways", "Banniways", "Bäniways", "Bänniways"],
             "Emmental" => ["Barillium", "Bleuh", 'Lopinel', 'Morchort', 'Poalhan', 'Rhonium', 'Rouflakette', 'Zefresis'],
             "Helianthe" => ['Ireene', 'Nehelina'],
