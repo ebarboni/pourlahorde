@@ -138,7 +138,7 @@ class Text extends Twig_Extension {
             "Helianthe" => ['Ireene', 'Nehelina'],
             "Hylidev" => ['Feorn'],
             "Krows" => [],
-            "Laycka" => ['Lioz', 'Liøz'],
+            "Laycka" => ['Lioz', 'Liøz','Shiromi'],
             "Poilant" => ['Fourras', 'Panoramix', 'Raedsyndar', 'Sharisad', 'Widdershins'],
             "Poilhan" => ['Fkaffe', 'Fkoil', 'Iakf', 'Narjhhan'],
             "Rengonocho" => ['Baouss', 'Berlonocho', 'Gimeno', 'Zapova'],
