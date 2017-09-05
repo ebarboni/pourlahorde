@@ -144,7 +144,7 @@ class Text extends Twig_Extension {
             "Rengonocho" => ['Baouss', 'Berlonocho', 'Gimeno', 'Zapova'],
             "Rhtaar" => ['Hvance', 'Yllaltan'],
             "Saethia" => [],
-            "Shuntor" => [],
+            "Shuntor" => ['Kathor'],
             "Sneakyzouz" => ['Elementzouz'],
             "Taoling" => ['Gaiana', 'Meï']
         ];
