@@ -134,6 +134,7 @@ class Text extends Twig_Extension {
             "Absozen" => ["Absocreep", "Absofang", "Absohavok", "Absoluthion"],
             "Arkeaiin" => ["Alleister","Khalima"],
             "Banniway" => ["Baniway", "Baniways", "Banniways", "Bäniways", "Bänniways"],
+            "Caliwiel" => [],
             "Emmental" => ["Barillium", "Bleuh", 'Lopinel', 'Morchort', 'Poalhan', 'Rhonium', 'Rouflakette', 'Zefresis'],
             "Helianthe" => ['Ireene', 'Nehelina'],
             "Hylidev" => ['Feorn'],
@@ -144,7 +145,7 @@ class Text extends Twig_Extension {
             "Rengonocho" => ['Baouss', 'Berlonocho', 'Gimeno', 'Zapova'],
             "Rhtaar" => ['Hvance', 'Yllaltan'],
             "Saethia" => [],
-            "Shuntor" => ['Kathor'],
+            "Shuntor" => ['Kathor','Shunthor'],
             "Sneakyzouz" => ['Elementzouz'],
             "Taoling" => ['Gaiana', 'Meï']
         ];
