@@ -133,7 +133,7 @@ class Text extends Twig_Extension {
         $mainandalt = [
             "Absozen" => ["Absocreep", "Absofang", "Absohavok", "Absoluthion"],
             "Arkeaiin" => ["Alleister","Khalima"],
-            "Banniway" => ["Baniway", "Baniways", "Banniways", "Bäniways", "Bänniways"],
+            "Banniway" => ["Baniway", "Baniways", "Banniways", "Bäniways", "Bänniways","Yawinaab"],
             "Caliwiel" => [],
             "Emmental" => ["Barillium", "Bleuh", 'Lopinel', 'Morchort', 'Poalhan', 'Rhonium', 'Rouflakette', 'Zefresis'],
             "Helianthe" => ['Ireene', 'Nehelina'],
@@ -142,7 +142,7 @@ class Text extends Twig_Extension {
             "Laycka" => ['Lioz', 'Liøz','Shiromi'],
             "Poilant" => ['Fourras', 'Panoramix', 'Raedsyndar', 'Sharisad', 'Widdershins'],
             "Poilhan" => ['Fkaffe', 'Fkoil', 'Iakf', 'Narjhhan'],
-            "Rengonocho" => ['Baouss', 'Berlonocho', 'Gimeno', 'Zapova'],
+            "Rengonocho" => ['Baouss', 'Berlonocho', 'Crinacha','Gimeno', 'Zapova'],
             "Rhtaar" => ['Hvance', 'Yllaltan'],
             "Saethia" => [],
             "Shuntor" => ['Kathor','Shunthor'],
