@@ -6,8 +6,6 @@ title: Pour la horde : profession
 {{ showTrade() }}
 
 
-
-
 Pour faire des motos il nous faut:
 
 | {{ item(44503) }}     | Emmental | Poilant | Poilhan | Rhtaar |
