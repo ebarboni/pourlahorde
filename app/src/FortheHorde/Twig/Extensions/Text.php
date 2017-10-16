@@ -140,14 +140,14 @@ class Text extends Twig_Extension {
             "Hylidev" => ['Feorn'],
             "Krows" => [],
             "Laycka" => ['Lioz', 'Liøz','Shiromi'],
-            "Mÿlady" => ['Mirïana'],
+            "Mÿlady" => ['Mirïana','Lïnx'],
             "Poilant" => ['Fourras', 'Panoramix', 'Raedsyndar', 'Sharisad', 'Widdershins'],
             "Poilhan" => ['Fkaffe', 'Fkoil', 'Iakf', 'Narjhhan'],
             "Rengonocho" => ['Baouss', 'Berlonocho', 'Crinacha','Gimeno', 'Zapova'],
             "Rhtaar" => ['Hvance', 'Yllaltan'],
             "Saethia" => [],
             "Shuntor" => ['Kathor','Shunty','Shunthor'],
-            "Sneakyzouz" => ['Elementzouz'],
+            "Sneakyzouz" => ['Elementzouz','Pèrefab'],
             "Taoling" => ['Gaiana', 'Meï']
         ];
         foreach ($mainandalt as $main => $alts) {
