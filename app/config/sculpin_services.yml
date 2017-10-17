@@ -3,6 +3,18 @@ services:
         class: FortheHorde\Twig\Extensions\WowHead
         tags: 
            - { name: twig.extension }
+    forthehorde.extension.achievement:
+        class: FortheHorde\Twig\Extensions\Achievement
+        tags: 
+           - { name: twig.extension }
+    forthehorde.extension.ilevel:
+        class: FortheHorde\Twig\Extensions\ILevel
+        tags: 
+           - { name: twig.extension }
+    forthehorde.extension.trade:
+        class: FortheHorde\Twig\Extensions\Trade
+        tags: 
+           - { name: twig.extension }       
     forthehorde.extension.text:
         class: FortheHorde\Twig\Extensions\Text
         tags: 
