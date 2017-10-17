@@ -1,6 +1,14 @@
 services:
+    forthehorde.extension.wowhead:
+        class: FortheHorde\Twig\Extensions\WowHead
+        tags: 
+           - { name: twig.extension }
     forthehorde.extension.text:
         class: FortheHorde\Twig\Extensions\Text
         tags: 
-           - { name: twig.extension }
+           - { name: twig.extension }       
+           
+           
+           
+           
            
