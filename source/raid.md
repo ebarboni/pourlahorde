@@ -4,6 +4,7 @@ title: Pour la horde : profession
 ---
 
 ## Cuisine
+ {{ recipe(10,133570,1,133565,5,124109,5,124118,3,133588,2,133589) }}
 
    10x{{ item(133570)}} (rang 3):  
    
