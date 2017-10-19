@@ -29,7 +29,7 @@ class Text extends Twig_Extension {
             "Caliwiel" => [],
             "Emmental" => ["Barillium", "Bleuh", 'Lopinel', 'Morchort', 'Poalhan', 'Rhonium', 'Roqvefort', 'Rouflakette', 'Zefresis'],
             "Helianthe" => ['Ireene', 'Nehelina'],
-            "Hylidev" => ['Feorn'],
+            "Hylidev" => ['Feorn','Sokea'],
             "Krows" => [],
             "Laycka" => ['Lioz', 'Liøz', 'Shiromi'],
             "Mÿlady" => ['Mirïana', 'Lïnx'],
