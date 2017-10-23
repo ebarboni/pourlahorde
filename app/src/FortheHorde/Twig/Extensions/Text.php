@@ -23,13 +23,13 @@ class Text extends Twig_Extension {
         $d = '';
         //'Shiromi'
         $mainandalt = [
-            "Absozen" => ["Absocreep", "Absofang", "Absohavok", "Absoluthion", 'Absorea'],
+            "Absozen" => ['Absoarka', "Absocreep", "Absofang", "Absohavok", "Absoluthion", 'Absorea'],
             "Arkeaiin" => ["Alleister", "Khalima"],
             "Banniway" => ["Baniway", "Baniways", "Banniways", "Bäniways", "Bänniways", "Yawinaab"],
             "Caliwiel" => [],
             "Emmental" => ["Barillium", "Bleuh", 'Lopinel', 'Morchort', 'Poalhan', 'Rhonium', 'Roqvefort', 'Rouflakette', 'Zefresis'],
             "Helianthe" => ['Ireene', 'Nehelina'],
-            "Hylidev" => ['Feorn','Sokea'],
+            "Hylidev" => ['Feorn', 'Sokea'],
             "Krows" => [],
             "Laycka" => ['Lioz', 'Liøz', 'Shiromi'],
             "Mÿlady" => ['Mirïana', 'Lïnx'],
