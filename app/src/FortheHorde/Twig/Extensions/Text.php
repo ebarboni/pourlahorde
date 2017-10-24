@@ -34,12 +34,12 @@ class Text extends Twig_Extension {
             "Laycka" => ['Lioz', 'Liøz', 'Shiromi'],
             "Mÿlady" => ['Mirïana', 'Lïnx'],
             "Poilant" => ['Fourras', 'Panoramix', 'Raedsyndar', 'Sharisad', 'Widdershins'],
-            "Poilhan" => ['Fkaffe', 'Fkoil', 'Iakf', 'Narjhhan'],
+            "Poilhan" => ['Fkaffe', 'Fkoil', 'Grond', 'Iakf', 'Narjhhan'],
             "Rengonocho" => ['Baouss', 'Berlonocho', 'Crinacha', 'Gimeno', 'Zapova'],
             "Rhtaar" => ['Hvance', 'Yllaltan'],
             "Saethia" => [],
             "Shuntor" => ['Kathor', 'Shunty', 'Shunthor'],
-            "Sneakyzouz" => ['Elementzouz', 'Pèrefab'],
+            "Sneakyzouz" => ['Coachfab', 'Elementzouz', 'Pèrefab'],
             "Taoling" => ['Gaiana', 'Meï']
         ];
         foreach ($mainandalt as $main => $alts) {
