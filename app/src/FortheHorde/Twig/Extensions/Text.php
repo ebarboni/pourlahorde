@@ -27,7 +27,7 @@ class Text extends Twig_Extension {
             "Arkeaiin" => ["Alleister", "Khalima"],
             "Banniway" => ["Baniway", "Baniways", "Banniways", "Bäniways", "Bänniways", "Yawinaab"],
             "Caliwiel" => [],
-            "Emmental" => ["Barillium", "Bleuh", 'Lopinel', 'Morchort', 'Poalhan', 'Rhonium', 'Roqvefort', 'Rouflakette', 'Cabecou'],
+            "Emmental" => ["Barillium", "Bleuh", 'Chèvredoux' , 'Lopinel', 'Morchort', 'Poalhan', 'Roqvefort', 'Rouflakette', 'Cabecou'],
             "Helianthe" => ['Ireene', 'Nehelina'],
             "Hylidev" => ['Feorn', 'Sokea'],
             "Krows" => [],
