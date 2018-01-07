@@ -23,7 +23,7 @@ class Text extends Twig_Extension {
         $d = '';
         //'Shiromi'
         $mainandalt = [
-            "Absozen" => ['Absoarka', "Absocreep", "Absofang", "Absohavok", "Absoluthion", 'Absorea'],
+            "Absofang" => ['Absoarka', "Absocreep", "Absozen", "Absohavok", "Absoluthion", 'Absorea'],
             "Arkeaiin" => ["Alleister", "Khalima"],
             "Banniway" => ["Baniway", "Baniways", "Banniways", "Bäniways", "Bänniways", "Yawinaab"],
             "Caliwiel" => [],
