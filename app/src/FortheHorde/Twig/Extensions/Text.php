@@ -34,7 +34,7 @@ class Text extends Twig_Extension {
             "Laycka" => ['Lioz', 'Liøz', 'Shiromi'],
             "Mÿlady" => ['Mirïana', 'Lïnx'],
             "Poilant" => ['Fourras', 'Panoramix', 'Raedsyndar', 'Sharisad', 'Widdershins'],
-            "Poilhan" => ['Fkaffe', 'Fkoil', 'Grond', 'Iakf', 'Narjhhan'],
+            "Poilhan" => ['Fkaffe', 'Fkoil', 'Grond', 'Iakf', 'Narjhhan','Makroff'],
             "Rengonocho" => ['Baouss', 'Berlonocho', 'Crinacha', 'Gimeno', 'Zapova'],
             "Rhtaar" => ['Hvance', 'Yllaltan'],
             "Saethia" => [],
