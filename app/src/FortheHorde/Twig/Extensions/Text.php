@@ -24,7 +24,7 @@ class Text extends Twig_Extension {
         //'Shiromi'
         $mainandalt = [
             "Absofang" => ['Absoarka', "Absocreep", "Absozen", "Absohavok", "Absoluthion", 'Absorea'],
-            "Arkeaiin" => ["Alleister", "Khalima",'Alleyster'],
+            "Arkeaiin" => ["Alleister", "Khalima",'Alleyster','Myrrdin','Elrudel'],
             "Banniway" => ["Baniway", "Baniways", "Banniways", "Bäniways", "Bänniways", "Yawinaab"],
             "Caliwiel" => [],
             "Emmental" => ["Barillium", "Bleuh", 'Chèvredoux' , 'Lopinel', 'Morchort', 'Poalhan', 'Roqvefort', 'Rouflakette', 'Cabecou'],
@@ -40,7 +40,7 @@ class Text extends Twig_Extension {
             "Saethia" => [],
             "Shuntor" => ['Kathor', 'Shunty', 'Shunthor'],
             "Sneakyzouz" => ['Coachfab', 'Elementzouz', 'Pèrefab'],
-            "Taoling" => ['Gaiana', 'Meï']
+            "Taoling" => ['Gaiana', 'Meï','Lohki']
         ];
         foreach ($mainandalt as $main => $alts) {
             if ($main == $charobject->character->name) {
