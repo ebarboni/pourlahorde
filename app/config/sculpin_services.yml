@@ -7,6 +7,10 @@ services:
         class: FortheHorde\Twig\Extensions\Achievement
         tags: 
            - { name: twig.extension }
+    forthehorde.extension.playerachievement:
+        class: FortheHorde\Twig\Extensions\PlayerAchievement
+        tags: 
+           - { name: twig.extension }
     forthehorde.extension.ilevel:
         class: FortheHorde\Twig\Extensions\ILevel
         tags: 
