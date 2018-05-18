@@ -20,7 +20,7 @@ sh 'mkdir -p app/_data/'
 sh "curl -o app/_data/guildA.json 'https://eu.api.battle.net/wow/guild/Elune/Pour%20la%20horde?fields=achievements%2Cchallenge%2Cmembers%2Cnews&locale=fr_FR&apikey=${env.APIKEY}'"
 def ga = env.WORKSPACE + '/app/_data/guildA.json'
 
-sh "curl -o app/_data/guildH.json 'https://eu.api.battle.net/wow/guild/Elune/Woodoo%20la%20Awmy?fields=achievements%2Cchallenge%2Cmembers%2Cnews&locale=fr_FR&apikey=${env.APIKEY}'"
+sh "curl -o app/_data/guildH.json 'https://eu.api.battle.net/wow/guild/Elune/Woodoo%20Awmy?fields=achievements%2Cchallenge%2Cmembers%2Cnews&locale=fr_FR&apikey=${env.APIKEY}'"
 def gh = env.WORKSPACE + '/app/_data/guildH.json'
 
 sh "curl -o app/_data/achievementguild.json 'https://eu.api.battle.net/wow/data/guild/achievements?locale=fr_FR&apikey=${env.APIKEY}'"
