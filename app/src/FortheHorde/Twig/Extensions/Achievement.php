@@ -15,8 +15,8 @@ class Achievement extends Twig_Extension {
         return $functions;
     }
 
-    private function getCompletedAchievement() {
-        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
+    private function getCompletedAchievement($faction) {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/guild" . $faction . ".json");
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
@@ -29,8 +29,8 @@ class Achievement extends Twig_Extension {
         return $mains;
     }
 
-    private function getCompletedCriterias() {
-        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
+    private function getCompletedCriterias($faction) {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/guild" . $faction . ".json");
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
@@ -239,10 +239,10 @@ class Achievement extends Twig_Extension {
         return $tmp;
     }
 
-    public function showGUAchievement(Twig_Environment $env) {
+    public function showGUAchievement(Twig_Environment $env, $faction) {
         $cool = '<div class="col-md-10">';
-        $complete = $this->getCompletedAchievement();
-        $criterias = $this->getCompletedCriterias();
+        $complete = $this->getCompletedAchievement($faction);
+        $criterias = $this->getCompletedCriterias($faction);
         foreach ($this->getAchievementJSon()->achievements as $achievement) {
             if ($achievement->id != 15093) { // tour de force
                 $cool .= '<div class="achievementmeta"><span>' . $achievement->name . '</span>';
