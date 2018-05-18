@@ -194,7 +194,7 @@ class ILevel extends Twig_Extension {
         return $cool;
     }
 
-    public function itemLevel(Twig_Environment $env) {
+    public function itemLevel(Twig_Environment $env, $faction) {
         $cool = '<table class="roster">';
         $cool .= '<tr>';
         $cool .= "<th>Name</th>";
@@ -207,12 +207,12 @@ class ILevel extends Twig_Extension {
         $cool .= '<th>Audit</th>';
         $cool .= '</tr>';
 
-        foreach (Utils::getMains() as $character) {
-            $cool .= $this->displayrowItem("mainchar", $character);
+        foreach (Utils::getMains($faction) as $character) {
+            $cool .= $this->displayrowItem("mainchar", $character, $faction);
         }
 
-        foreach (Utils::getAlts() as $character) {
-            $cool .= $this->displayrowItem("altchar", $character);
+        foreach (Utils::getAlts($faction) as $character) {
+            $cool .= $this->displayrowItem("altchar", $character, $faction);
         }
         $cool .= "</table>";
         return $cool;

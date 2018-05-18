@@ -1,0 +1,210 @@
+
+html, 
+body, 
+div {
+    padding:0;
+    margin:0;
+
+}
+html {font-family: PT Sans }
+body{ color: white;
+      background-color: #231a13;}
+
+h2 { color:darkgoldenrod;clear:both;
+}
+.content { padding: 10px;}
+.server { color: lightsteelblue;font-size: 15px !important;}
+.banner {
+    font-size: 40px !important;
+    /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
+
+    width: 100%;
+
+    position: relative;
+    background: black;
+    color: darkblue;
+    text-align: left;
+    padding: .5em 1.5em; /* Adjust to suit */
+    /*margin: 2em auto 3em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+}
+
+.aperso {
+    display:table;
+    float:left;
+    border-spacing: 8px;
+    width: 12%;
+}
+.pname {
+    display:table-row;
+    text-align: center;
+}
+.tradeskill {
+    border-radius: 3px;
+    border: lightgrey solid 1px; 
+}
+
+.wowitem{
+    border-radius: 3px;
+    border: 1px solid;
+}
+.persoimg {
+    display:table-row;
+    border-radius: 3px;
+    width: 84px;
+    height:84px;
+    border: lightgrey solid 1px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+.roster{display: table;}
+.level{color:white;font-size: 8px;}
+
+nav {
+    color:white;
+    font-size: 15px;
+}
+nav li {
+    display: inline;
+    list-style: none;
+}
+nav a {
+    display:inline-block;
+    margin: 0 30px;
+    color: wheat;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.jumbotron {
+    padding: 0rem 0rem;
+    color:bisque;
+    background-color: #333;
+    text-shadow: #fff 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px;
+}
+
+.jumbotron p { 
+    color : lightskyblue;
+    text-shadow:none;
+} 
+
+td {
+    border-width:1px;
+    border-style:solid; 
+    border-color: #332a23;
+    text-align: center;
+}
+
+.mainchar {
+    font-weight: bold;
+}
+.altchar {
+    font-weight: normal;
+}
+.trademax {
+    color:goldenrod;
+}
+.notmaxed {
+    font-size: xx-small;
+    color: lightgrey;
+}
+
+.paladin {
+    color:#f58cba;
+}
+.warrior {
+    color:#c79c6e;
+}
+.hunter {
+    color:#abd473;
+}
+.rogue{
+    color:#fff569;
+}
+.priest{
+    color : #ffffff;
+}
+.monk{
+    color : #00ff96;
+}
+.dk{
+    color:#c41f3b;
+}
+.shaman {
+    color:#0070de;
+}
+.mage{
+    color:#69ccf0;
+}
+.warlock {color:#9482c9;}
+.druid{color:#ff7d0a;}
+.dh{color:#A330C9;}
+.anitem{
+    font-weight: normal; font-size: xx-small;
+}
+
+.audit{
+    font-weight: lighter;
+    font-size: x-small;
+    vertical-align: top;
+    text-align: left;
+}
+.achievementmeta{
+    font-size: large;
+    color:#f8b700;
+
+}
+.achievementgrid{
+    font-size: smaller;
+}
+.achdone{
+    opacity: .5;
+}
+.achdescription{
+    color: #ebdec2;
+}
+.achtitle{
+    font-size: medium;
+    font-weight: bold;
+    color: #f8b700;
+}
+.anach::after{
+    border-top: 1px solid grey;
+}
+.anach {
+    margin-left: 30px;
+}
+.critcomp{
+    color :cyan;
+}
+.critincomp{
+    color :red;
+}
+.critnotdone {
+    color : orange;
+}
+
+.achievementmeta span {
+
+    font-size: xx-large;
+    font-weight: bolder;
+}
+.achievementcate span {
+    font-size: large;
+    font-weight: bolder;
+}
+.achimage{
+    float: left;
+    width: 34px;
+    border: aliceblue solid 1px;
+    margin-right: 6px;
+    border-radius: 2px;
+}
+.aul{
+    list-style: none;
+}
+.alt {
+    opacity: .3;
+}

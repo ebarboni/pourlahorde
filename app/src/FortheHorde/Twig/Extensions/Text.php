@@ -67,18 +67,18 @@ class Text extends Twig_Extension {
         return $c;
     }
 
-    public function showGURoster(Twig_Environment $env) {
+    public function showGURoster(Twig_Environment $env,$faction) {
         $cool = '<div class="col-md-10">';
-        foreach (Utils::getMains() as $character) {
+        foreach (Utils::getMains($faction) as $character) {
             $cool .= $this->displayRoster($character);
         }
         $cool .= "</div>";
         return $cool;
     }
 
-    public function showGURosterAlts(Twig_Environment $env) {
+    public function showGURosterAlts(Twig_Environment $env, $faction) {
         $cool = '<div class="col-md-10">';
-        foreach (Utils::getAlts() as $character) {
+        foreach (Utils::getAlts($faction) as $character) {
             $cool .= $this->displayRoster($character);
         }
         $cool .= "</div>";

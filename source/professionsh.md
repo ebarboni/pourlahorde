@@ -1,9 +1,9 @@
 ---
-layout: defaulta
+layout: defaulth
 title: Pour la horde : profession
 ---
 
-{{ showTrade('A') }}
+{{ showTrade('H') }}
 
 
 Pour faire des motos il nous faut:

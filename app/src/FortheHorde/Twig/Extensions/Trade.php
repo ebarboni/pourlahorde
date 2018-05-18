@@ -101,9 +101,9 @@ class Trade extends Twig_Extension {
         return $cool;
     }
 
-    public function showTrade(Twig_Environment $env) {
+    public function showTrade(Twig_Environment $env,$faction) {
 
-        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
+        $path = realpath(__DIR__ . "/../../../../../app/_data/guild" . $faction . ".json");
 
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
@@ -126,10 +126,10 @@ class Trade extends Twig_Extension {
             "356" => [],
             "794" => []];
         $json_decoded = json_decode($json);
-        foreach (Utils::getMains() as $character) {
+        foreach (Utils::getMains($faction) as $character) {
             $trade = $this->getprofession($character->character->name, $trade);
         }
-        foreach (Utils::getAlts() as $character) {
+        foreach (Utils::getAlts($faction) as $character) {
             $trade = $this->getprofession($character->character->name, $trade);
         }
 
@@ -140,10 +140,10 @@ class Trade extends Twig_Extension {
             $cool .= '<th><img class="tradeskill" src="http://media.blizzard.com/wow/icons/56/' . $atrade['icon'] . '.jpg"/></th>';
         }
         $cool .= "</tr>";
-        foreach (Utils::getMains() as $character) {
+        foreach (Utils::getMains($faction) as $character) {
             $cool .= $this->displayrowtrade("mainchar", $character, $trade);
         }
-        foreach (Utils::getAlts() as $character) {
+        foreach (Utils::getAlts($faction) as $character) {
             $cool .= $this->displayrowtrade("altchar", $character, $trade);
         }
         //$cool .= var_dump($trade);

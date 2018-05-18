@@ -34,8 +34,8 @@ class Utils {
         return "cyan";
     }
 
-    static function getMains() {
-        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
+    static function getMains($faction) {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/guild" . $faction . ".json");
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
@@ -52,8 +52,8 @@ class Utils {
         return $mains;
     }
 
-    static function getAlts() {
-        $path = realpath(__DIR__ . "/../../../../../app/_data/guild.json");
+    static function getAlts($faction) {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/guild" . $faction . ".json");
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);

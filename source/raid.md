@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: defaulta
 title: Pour la horde : profession
 ---
 

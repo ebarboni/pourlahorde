@@ -1,14 +1,14 @@
 ---
-layout : defaulta
+layout : defaulth
 title: Pour la horde
 use:
 - posts
 ---
 
 ##Persos principaux
-{{ showMain('A') }}
+{{ showMain('H') }}
 
 ##Persos secondaires
-{{ showAlts('A') }}
+{{ showAlts('H') }}
 
 
