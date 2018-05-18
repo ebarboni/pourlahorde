@@ -32,7 +32,6 @@ for (charact  in characterA.get('members') ) {
 sh "curl -o app/_data/${n}.json 'https://eu.api.battle.net/wow/character/Elune/${n}?fields=professions,items,statistics,progression,audit,talents,achievements,reputation&locale=fr_FR&apikey=${env.APIKEY}'"
 sleep 1
 }
-}
 def characterH = jsonParse(readFile(gh))
 for (charact  in characterH.get('members') ) {
  def n =  charact.get('character').get('name').toString()
