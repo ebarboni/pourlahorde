@@ -133,9 +133,10 @@ class ILevel extends Twig_Extension {
                 10 => 'anneau',
                 11 => 'anneau',
                 12 => 'bijou',
-                13 => '2inconnu',
+                13 => 'bijou' ,
                 14 => 'cape',
-                15 => 'main gauche'];
+                15 => 'main gauche',
+                16 => 'main droite?'];
             $auditgem = [];
             for ($i = 0; $i < 20; $i++) {
                 if (array_key_exists($i, $itemesocket) && ($itemesocket[$i] >= 1)) {
