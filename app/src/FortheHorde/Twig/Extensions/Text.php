@@ -18,30 +18,47 @@ class Text extends Twig_Extension {
 
 // count for ilevel
 
-    private function displayRoster($charobject) {
+    private function displayRoster($charobject, $faction) {
         $color = Utils::getColor($charobject->character->class);
         $d = '';
         //'Shiromi'
-        $mainandalt = [
-            "Absofang" => ['Absoarka', "Absocreep", "Absozen", "Absohavok", "Absoluthion", 'Absorea'],
-            "Myrrdin" => ["Alleister", "Khalima",'Alleyster','Elrudel'],
-            "Banniway" => ["Baniway", "Baniways", "Banniways", "Bäniways", "Bänniways", 'Rainbowdashh',"Yawinaab"],
-            "Caliwiel" => [],
-            "Emmental" => ["Barillium", "Bleuh", 'Chèvredoux' , 'Lopinel', 'Morchort', 'Poalhan', 'Roqvefort', 'Rouflakette', 'Cabecou'],
-            "Helianthe" => ['Ireene', 'Nehelina'],
-            "Hylidev" => ['Feorn', 'Sokea'],
-            "Krows" => [],
-            "Laycka" => ['Lioz', 'Liøz', 'Shiromi'],
-            "Mÿlady" => ['Mirïana', 'Lïnx'],
-            "Poilant" => ['Fourras', 'Panoramix', 'Raedsyndar', 'Sharisad', 'Widdershins'],
-            "Poilhan" => ['Fkaffe', 'Fkoil', 'Grond', 'Iakf', 'Narjhhan','Makroff'],
-            "Rengonocho" => ['Baouss', 'Berlonocho', 'Crinacha', 'Gimeno', 'Zapova'],
-            "Rhtaar" => ['Hvance', 'Yllaltan'],
-            "Saethia" => [],
-            "Shuntor" => ['Kathor', 'Shunty', 'Shunthor'],
-            "Sneakyzouz" => ['Coachfab', 'Elementzouz', 'Pèrefab'],
-            "Lohki" => ['Gaiana', 'Meï','Taoling']
-        ];
+        if ($faction = 'A') {
+            $mainandalt = [
+                "Absofang" => ['Absoarka', "Absocreep", "Absozen", "Absohavok", "Absoluthion", 'Absorea'],
+                "Myrrdin" => ["Alleister", "Khalima", 'Alleyster', 'Elrudel'],
+                "Banniway" => ["Baniway", "Baniways", "Banniways", "Bäniways", "Bänniways", 'Rainbowdashh', "Yawinaab"],
+                "Caliwiel" => [],
+                "Emmental" => ["Barillium", "Bleuh", 'Chèvredoux', 'Lopinel', 'Morchort', 'Poalhan', 'Roqvefort', 'Rouflakette', 'Cabecou'],
+                "Helianthe" => ['Ireene', 'Nehelina'],
+                "Hylidev" => ['Feorn', 'Sokea'],
+                "Krows" => [],
+                "Laycka" => ['Lioz', 'Liøz', 'Shiromi'],
+                "Mÿlady" => ['Mirïana', 'Lïnx'],
+                "Poilant" => ['Fourras', 'Panoramix', 'Raedsyndar', 'Sharisad', 'Widdershins'],
+                "Poilhan" => ['Fkaffe', 'Fkoil', 'Grond', 'Iakf', 'Narjhhan', 'Makroff'],
+                "Rengonocho" => ['Baouss', 'Berlonocho', 'Crinacha', 'Gimeno', 'Zapova'],
+                "Rhtaar" => ['Hvance', 'Yllaltan'],
+                "Saethia" => [],
+                "Shuntor" => ['Kathor', 'Shunty', 'Shunthor'],
+                "Sneakyzouz" => ['Coachfab', 'Elementzouz', 'Pèrefab'],
+                "Lohki" => ['Gaiana', 'Meï', 'Taoling']
+            ];
+        } else {
+            //Dremora,Grimmlock,Grishnok,Halani
+            $mainandalt = [
+                "Fkaïroc" => ['Aache', 'Aibus', 'Borderpat', 'Illidawi'],
+                "Absohawok" => ["Absojöllnir", "Absoriah", 'Absotera'],
+                "Bänniways" => ["Sweetiebelle"],
+                "Baouss" => ['Oxynocho'],
+                "Emmental" => ["Aclasse", "Meuhane", 'Moumental', "Wanjin"],
+                "Elrudel" => ['Maëlfiel', "Wazzuli"],
+                "Fabsneaky" => ['Wildfab'],
+                "Hirine" => ['Hiejire', 'Pwalhan'],
+                "Petrollhahn" => [],
+                "Tynae" => ['Vàsea'],
+                "Varhos" => [],
+            ];
+        }
         foreach ($mainandalt as $main => $alts) {
             if ($main == $charobject->character->name) {
                 // main
@@ -67,10 +84,10 @@ class Text extends Twig_Extension {
         return $c;
     }
 
-    public function showGURoster(Twig_Environment $env,$faction) {
+    public function showGURoster(Twig_Environment $env, $faction) {
         $cool = '<div class="col-md-10">';
         foreach (Utils::getMains($faction) as $character) {
-            $cool .= $this->displayRoster($character);
+            $cool .= $this->displayRoster($character, $faction);
         }
         $cool .= "</div>";
         return $cool;
@@ -79,7 +96,7 @@ class Text extends Twig_Extension {
     public function showGURosterAlts(Twig_Environment $env, $faction) {
         $cool = '<div class="col-md-10">';
         foreach (Utils::getAlts($faction) as $character) {
-            $cool .= $this->displayRoster($character);
+            $cool .= $this->displayRoster($character, $faction);
         }
         $cool .= "</div>";
         return $cool;
