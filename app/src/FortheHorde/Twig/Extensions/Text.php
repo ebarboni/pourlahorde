@@ -22,7 +22,7 @@ class Text extends Twig_Extension {
         $color = Utils::getColor($charobject->character->class);
         $d = '';
         //'Shiromi'
-        if ($faction = 'A') {
+        if ($faction == 'A') {
             $mainandalt = [
                 "Absofang" => ['Absoarka', "Absocreep", "Absozen", "Absohavok", "Absoluthion", 'Absorea'],
                 "Myrrdin" => ["Alleister", "Khalima", 'Alleyster', 'Elrudel'],
