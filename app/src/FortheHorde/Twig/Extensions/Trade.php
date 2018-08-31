@@ -110,7 +110,7 @@ class Trade extends Twig_Extension {
         $cool = '<tr class="' . $cssclass . '">';
         $cool .= '<td class=' . Utils::getColor($character->character->class) . '>' . $character->character->name . '</td>';
         foreach ($this->tradeall as $key1 => $atrade1) {
-            $currentkey = $atrade1[6];
+            $currentkey = $atrade1[7];
             // echo "$currentkey,";
             //if ($character->character->name = "Illidawi") {
             // echo "<br>o:" . $currentkey . "," . $key1 . "::" . $character->character->name;
