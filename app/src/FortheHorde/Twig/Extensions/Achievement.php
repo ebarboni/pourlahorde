@@ -67,7 +67,7 @@ class Achievement extends Twig_Extension {
         $tmp = '<div class=" anach ' . $doneclass . '">';
         $icon = '';
         if (isset($ach->icon)) {
-            $icon = '<img class="achimage" src="http://media.blizzard.com/wow/icons/56/' . $ach->icon . '.jpg"/>';
+            $icon = '<img class="achimage" src="https://render-eu.worldofwarcraft.com/icons/56/' . $ach->icon . '.jpg"/>';
         }
         $tmp .= $icon . '<div class="achtitle">' . $ach->title . '' . '</div><div class="achdescription">' . $ach->description . '</div>';
         $tmp .= '<ul class=" aul">';

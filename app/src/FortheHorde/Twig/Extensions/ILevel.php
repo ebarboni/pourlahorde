@@ -77,7 +77,7 @@ class ILevel extends Twig_Extension {
             $wowh = '<a href="http://fr.wowhead.com/item=' . $json_decoded["items"][$this->slotNameID[$key]]["id"] . '" rel="item=' .
                     $json_decoded["items"][$this->slotNameID[$key]]["id"] . '&amp;bonus=' .
                     implode(":", $json_decoded["items"][$this->slotNameID[$key]]["bonusLists"])
-                    . $set . $gem . $ench . '&amp;lvl=' . $json_decoded["level"] . '"><img class="wowitem q' . $json_decoded["items"][$this->slotNameID[$key]]['quality'] . '" src="http://media.blizzard.com/wow/icons/36/' . $json_decoded["items"][$this->slotNameID[$key]]["icon"] . '.jpg"/></a><br>';
+                    . $set . $gem . $ench . '&amp;lvl=' . $json_decoded["level"] . '"><img class="wowitem q' . $json_decoded["items"][$this->slotNameID[$key]]['quality'] . '" src="https://render-eu.worldofwarcraft.com/icons/36/' . $json_decoded["items"][$this->slotNameID[$key]]["icon"] . '.jpg"/></a><br>';
         }
 
         if ($ii == 0 && !$art) {
