@@ -214,7 +214,7 @@ class Trade extends Twig_Extension {
         $cool .= "<th>Name</th>";
         foreach ($this->tradeall as $key => $atradeall) {
 
-            $cool .= '<th><img class="tradeskill" src="http://media.blizzard.com/wow/icons/56/' . $trade[$key]['icon'] . '.jpg"/></th>';
+            $cool .= '<th><img class="tradeskill" src="https://render-eu.worldofwarcraft.com/icons/56/' . $trade[$key]['icon'] . '.jpg"/></th>';
         }
         $cool .= "</tr>";
         foreach (Utils::getMains($faction) as $character) {

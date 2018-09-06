@@ -67,7 +67,7 @@ class PlayerAchievement extends Twig_Extension {
         $tmp = '<div class=" anach ' . $doneclass . '">';
         $icon = '';
         if (isset($ach->icon)) {
-            $icon = '<img class="achimage" src="http://media.blizzard.com/wow/icons/56/' . $ach->icon . '.jpg"/>';
+            $icon = '<img class="achimage" src="https://render-eu.worldofwarcraft.com/icons/56/' . $ach->icon . '.jpg"/>';
         }
         $tmp .= $icon . '<div class="achtitle">' . $ach->title . '' . '</div><div class="achdescription">' . $ach->description . '</div>';
         $tmp .= '<ul class=" aul">';
@@ -95,7 +95,7 @@ class PlayerAchievement extends Twig_Extension {
             }
             $icon = '';
             if (isset($acrit->icon)) {
-                $icon = '<img class="tradeskill" src="http://media.blizzard.com/wow/icons/56/' . $acrit->icon . '.jpg"/>';
+                $icon = '<img class="tradeskill" src="https://render-eu.worldofwarcraft.com/icons/56/' . $acrit->icon . '.jpg"/>';
             }
             if (in_array($acrit->id, array(14500, 14805))) {
 
