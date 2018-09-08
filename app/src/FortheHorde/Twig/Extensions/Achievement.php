@@ -212,7 +212,7 @@ class Achievement extends Twig_Extension {
     private function displayCat($achs, $criterias, $complete, $faction) {
         $tmp = '';
         if ($faction == 'A') {
-            $magicID = 2;
+            $magicID = 0;
         } else {
             $magicID = 1;
         }
@@ -221,7 +221,7 @@ class Achievement extends Twig_Extension {
             foreach ($achs->categories as $acat) {
                 $tmp .= '<div class="achievementcate"><span>' . $acat->name . '</span>';
                 foreach ($acat->achievements as $achievementin) {
-                    if ($achievementin->factionId == $magicID || $achievementin->factionId == 0) {
+                    if ($achievementin->factionId == $magicID || $achievementin->factionId == 2) {
                         if (!array_key_exists($achievementin->id, $complete)) {
                             $tmp .= $this->displayAchievement($achievementin, $criterias, false);
                             //'<h4>' . $achievementin->title . '</h4>' . '(' . $achievementin->description . ')';
@@ -230,7 +230,7 @@ class Achievement extends Twig_Extension {
                     }
                 }
                 foreach ($acat->achievements as $achievementin) {
-                    if ($achievementin->factionId == $magicID || $achievementin->factionId == 0) {
+                    if ($achievementin->factionId == $magicID || $achievementin->factionId == 2) {
                         if (array_key_exists($achievementin->id, $complete)) {
                             $tmp .= $this->displayAchievement($achievementin, $criterias, true);
 
@@ -249,7 +249,7 @@ class Achievement extends Twig_Extension {
         $complete = $this->getCompletedAchievement($faction);
         $criterias = $this->getCompletedCriterias($faction);
         if ($faction == 'A') {
-            $magicID = 2;
+            $magicID = 0;
         } else {
             $magicID = 1;
         }
@@ -259,7 +259,7 @@ class Achievement extends Twig_Extension {
                 $cool .= '<div class="achievementgrid">';
                 $cool .= $this->displayCat($achievement, $criterias, $complete, $faction);
                 foreach ($achievement->achievements as $achievementin) {
-                    if ($achievementin->factionId == $magicID || $achievementin->factionId == 0) {
+                    if ($achievementin->factionId == $magicID || $achievementin->factionId == 2) {
                         if (!array_key_exists($achievementin->id, $complete)) {
                             $cool .= $this->displayAchievement($achievementin, $criterias, false);
                             //'<h4>' . $achievementin->title . '</h4>' . '(' . $achievementin->description . ')';
@@ -268,7 +268,7 @@ class Achievement extends Twig_Extension {
                     }
                 }
                 foreach ($achievement->achievements as $achievementin) {
-                    if ($achievementin->factionId == $magicID || $achievementin->factionId == 0) {
+                    if ($achievementin->factionId == $magicID || $achievementin->factionId == 2) {
                         if (array_key_exists($achievementin->id, $complete)) {
                             $cool .= $this->displayAchievement($achievementin, $criterias, true);
 
