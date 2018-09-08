@@ -48,12 +48,12 @@ class Text extends Twig_Extension {
             $mainandalt = [
                 "Fkaïroc" => ['Aache', 'Aibus', 'Borderpat', 'Illidawi'],
                 "Absohawok" => ["Absojöllnir", "Absoriah", 'Absotera'],
-                "Sweetiebelle" => ["Bänniways","Yawinaab"],
+                "Sweetiebelle" => ["Bänniways", "Yawinaab"],
                 "Baouss" => ['Oxynocho'],
                 "Emmental" => ["Aclasse", "Meuhane", 'Moumental', "Wanjin"],
-                "Elrudel" => ['Maëlfiel', "Wazzuli",'Grimmlock'],
+                "Elrudel" => ['Maëlfiel', "Wazzuli", 'Grimmlock'],
                 "Fabsneaky" => ['Wildfab'],
-                "Hirine" => ['Hiejire', 'Pwalhan','Halani'],
+                "Hirine" => ['Hiejire', 'Pwalhan', 'Halani'],
                 "Petrollhahn" => [],
                 "Tynae" => ['Vàsea'],
                 "Varhos" => [],
@@ -76,7 +76,7 @@ class Text extends Twig_Extension {
         }
 
         $c .= '<span class="pname ' . $color . '"><span class="ppname">' . $charobject->character->name . '</span>';
-        if ($charobject->character->level < 110) { // max level
+        if ($charobject->character->level < 120) { // max level
             $c .= '<span class="level">' . $charobject->character->level . '</span>';
         }
         $c .= '</span>';
