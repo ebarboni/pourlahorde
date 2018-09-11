@@ -49,6 +49,7 @@ class Utils {
             }
         }
         ksort($mains);
+       
         return $mains;
     }
 
@@ -66,7 +67,7 @@ class Utils {
                 }
             }
         }
-        ksort($alts);
+        ksort($alts); 
         return $alts;
     }
 

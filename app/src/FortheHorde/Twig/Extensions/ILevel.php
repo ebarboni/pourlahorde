@@ -95,13 +95,20 @@ class ILevel extends Twig_Extension {
         $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
+        $tmp = "";
         $json_decoded = json_decode($json, true);
         if (@array_key_exists('items', $json_decoded)) {
-            return '<td>' . $json_decoded["items"]['averageItemLevel'] . '</td><td>' . $json_decoded["items"]['averageItemLevelEquipped'] . '</td>';
+            $tmp = '<td>' . $json_decoded["items"]['averageItemLevel'] . '</td><td>' . $json_decoded["items"]['averageItemLevelEquipped'] . '</td>';
         } //<td>' . floor($tmp / $di) . '</td>';
         else {
-            return '<td></td><td></td>';
+            $tmp = '<td></td><td></td>';
         }
+        if (@$json_decoded["items"]['neck']['azeriteItem']['azeriteLevel'] > 0) {
+            $tmp .= '<td>'.$json_decoded["items"]['neck']['azeriteItem']['azeriteLevel'].'</td>';
+        } else {
+            $tmp .= '<td></td>';
+        }
+        return $tmp;
     }
 
     private function displayAudit($character) {
@@ -133,7 +140,7 @@ class ILevel extends Twig_Extension {
                 10 => 'anneau',
                 11 => 'anneau',
                 12 => 'bijou',
-                13 => 'bijou' ,
+                13 => 'bijou',
                 14 => 'cape',
                 15 => 'main gauche',
                 16 => 'main droite?'];
@@ -201,6 +208,7 @@ class ILevel extends Twig_Extension {
         $cool .= "<th>Name</th>";
         $cool .= "<th>Pot.</th>";
         $cool .= "<th>Equ.</th>";
+        $cool .= "<th>Azerite</th>";
         //$cool .= "<th>Calc</th>";
         foreach ($this->displayitem as $item) {
             $cool .= '<th>&nbsp;</th>';

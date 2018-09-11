@@ -90,7 +90,8 @@ class Trade extends Twig_Extension {
 
     private function getprofession($name, $trade) {
         $path = realpath(__DIR__ . "/../../../../../app/_data/" . $name . ".json");
-        $myfile = fopen($path, "r") or die("Unable to open file!");
+        echo $path."\n";
+        $myfile = fopen($path, "r") or die("Unable to open file!" );
         $json = fread($myfile, filesize($path));
         fclose($myfile);
         $json_decoded = json_decode($json);
