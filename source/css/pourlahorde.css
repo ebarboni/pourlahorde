@@ -144,7 +144,9 @@ td {
 .anitem{
     font-weight: normal; font-size: xx-small;
 }
-
+.anitemaze{
+    color:gold;
+}
 .audit{
     font-weight: lighter;
     font-size: x-small;

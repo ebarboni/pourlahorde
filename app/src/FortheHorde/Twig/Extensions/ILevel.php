@@ -97,7 +97,11 @@ class ILevel extends Twig_Extension {
         } else if ($ii == 0 && $art) {
             return '<td class="anitem">' . $wowh . '&nbsp;</td>';
         } else {
-            return '<td class="anitem">' . $wowh . $ii . '</td>';
+            if ($aze == '') {
+                return '<td class="anitem">' . $wowh . $ii . '</td>';
+            } else {
+                return '<td class="anitem anitemaze">' . $wowh . $ii . '</td>';
+            };
         }
         //<a href="http://fr.wowhead.com/item=' . $id . '" >item</a>
     }
