@@ -90,8 +90,7 @@ class Trade extends Twig_Extension {
 
     private function getprofession($name, $trade) {
         $path = realpath(__DIR__ . "/../../../../../app/_data/" . $name . ".json");
-        echo $path."\n";
-        $myfile = fopen($path, "r") or die("Unable to open file!" );
+        $myfile = fopen($path, "r") or die("Unable to open file!");
         $json = fread($myfile, filesize($path));
         fclose($myfile);
         $json_decoded = json_decode($json);
@@ -199,17 +198,7 @@ class Trade extends Twig_Extension {
         foreach (Utils::getAlts($faction) as $character) {
             $trade = $this->getprofession($character->character->name, $trade);
         }
-      /*  foreach ($trade as $key => $valie) {
-            echo " <br><i>" . $key . "</i>";
-            foreach ($valie as $key1 => $vale) {
-                echo "<b>" . $key1 . "</b>:";
-                if (is_array($vale)) {
-                    foreach ($vale as $key1 => $vve) {
-                        echo "[" . $key1 . ":" . $vve . "],";
-                    }
-                }
-            }
-        }*/
+
         $cool = '<table class="roster">';
         $cool .= "<tr>";
         $cool .= "<th>Name</th>";

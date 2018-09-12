@@ -49,7 +49,7 @@ class Text extends Twig_Extension {
                 "Fkaïroc" => ['Aache', 'Aibus', 'Borderpat', 'Illidawi'],
                 "Absohawok" => ["Absojöllnir", "Absoriah", 'Absotera'],
                 "Sweetiebelle" => ["Bänniways", "Yawinaab"],
-                "Baouss" => ['Oxynocho'],
+                "Baouss" => ['Oxynocho','Taurocho'],
                 "Emmental" => ["Aclasse", "Meuhane", 'Moumental', "Wanjin"],
                 "Elrudel" => ['Maëlfiel', "Wazzuli", 'Grimmlock'],
                 "Fabsneaky" => ['Wildfab'],

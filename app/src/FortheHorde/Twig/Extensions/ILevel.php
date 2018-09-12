@@ -74,10 +74,22 @@ class ILevel extends Twig_Extension {
                     }
                 }
             }
+            $aze = '';
+            if (!empty($json_decoded["items"][$this->slotNameID[$key]]["azeriteEmpoweredItem"]['azeritePowers'][0])) {
+                $aze .= '&amp;azerite-powers=';
+
+                $aze .= $json_decoded["class"];
+                for ($i = 1; $i < 4; $i++) {
+                    if (!empty($json_decoded["items"][$this->slotNameID[$key]]["azeriteEmpoweredItem"]['azeritePowers'][$i])) {
+                        $aze .= ':' . $json_decoded["items"][$this->slotNameID[$key]]["azeriteEmpoweredItem"]['azeritePowers'][$i]['id'];
+                    }
+                }
+            }
+
             $wowh = '<a href="http://fr.wowhead.com/item=' . $json_decoded["items"][$this->slotNameID[$key]]["id"] . '" rel="item=' .
                     $json_decoded["items"][$this->slotNameID[$key]]["id"] . '&amp;bonus=' .
                     implode(":", $json_decoded["items"][$this->slotNameID[$key]]["bonusLists"])
-                    . $set . $gem . $ench . '&amp;lvl=' . $json_decoded["level"] . '"><img class="wowitem q' . $json_decoded["items"][$this->slotNameID[$key]]['quality'] . '" src="https://render-eu.worldofwarcraft.com/icons/36/' . $json_decoded["items"][$this->slotNameID[$key]]["icon"] . '.jpg"/></a><br>';
+                    . $set . $gem . $ench . $aze . '&amp;lvl=' . $json_decoded["level"] . '"><img class="wowitem q' . $json_decoded["items"][$this->slotNameID[$key]]['quality'] . '" src="https://render-eu.worldofwarcraft.com/icons/36/' . $json_decoded["items"][$this->slotNameID[$key]]["icon"] . '.jpg"/></a><br>';
         }
 
         if ($ii == 0 && !$art) {
@@ -104,7 +116,7 @@ class ILevel extends Twig_Extension {
             $tmp = '<td></td><td></td>';
         }
         if (@$json_decoded["items"]['neck']['azeriteItem']['azeriteLevel'] > 0) {
-            $tmp .= '<td>'.$json_decoded["items"]['neck']['azeriteItem']['azeriteLevel'].'</td>';
+            $tmp .= '<td>' . $json_decoded["items"]['neck']['azeriteItem']['azeriteLevel'] . '</td>';
         } else {
             $tmp .= '<td></td>';
         }
@@ -186,7 +198,7 @@ class ILevel extends Twig_Extension {
 
     private function displayrowItem($classname, $character) {
         $cool = '<tr class="' . $classname . '">';
-        $cool .= '<td class=' . Utils::getColor($character->character->class) . '>' . $character->character->name . '</td>';
+        $cool .= '<td class=' . Utils::getColor($character->character->class) . '><a class=' . Utils::getColor($character->character->class) . ' target="_blank" href="https://worldofwarcraft.com/fr-fr/character/elune/' . $character->character->name . '">' . $character->character->name . '</a></td>';
 
 
         $itemlist = "";
