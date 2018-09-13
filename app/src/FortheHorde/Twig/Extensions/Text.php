@@ -51,7 +51,7 @@ class Text extends Twig_Extension {
                 "Sweetiebelle" => ["Bänniways", "Yawinaab"],
                 "Baouss" => ['Oxynocho','Taurocho'],
                 "Emmental" => ["Aclasse", "Meuhane", 'Moumental', "Wanjin"],
-                "Elrudel" => ['Maëlfiel', "Wazzuli", 'Grimmlock'],
+                "Elrudel" => ['Maëlfiel', "Wazzuli", 'Grimmlock','Grishnok'],
                 "Fabsneaky" => ['Wildfab'],
                 "Hirine" => ['Hiejire', 'Pwalhan', 'Halani'],
                 "Petrollhahn" => [],
