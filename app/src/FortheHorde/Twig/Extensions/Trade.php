@@ -1,4 +1,4 @@
-<?php
+x<?php
 
 namespace FortheHorde\Twig\Extensions;
 
@@ -213,7 +213,6 @@ class Trade extends Twig_Extension {
         foreach (Utils::getAlts($faction) as $character) {
             $cool .= $this->displayrowtrade("altchar", $character, $trade);
         }
-//$cool .= var_dump($trade);
         $cool .= "</table>";
         return $cool;
     }
