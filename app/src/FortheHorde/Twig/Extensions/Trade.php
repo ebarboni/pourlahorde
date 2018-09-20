@@ -16,43 +16,7 @@ class Trade extends Twig_Extension {
     }
 
 // count for ilevel
-    private $displayitem = [1, 2, 3, 4, 5, 9, 16, 17, 10, 6, 7, 8, 11, 12, 13, 14];
-    private $slotNameID = [
-        1 => "head",
-        2 => "neck",
-        3 => "shoulder",
-        4 => "back",
-        5 => "chest",
-        9 => "wrist",
-        16 => "mainHand",
-        17 => "offHand",
-        10 => "hands",
-        6 => "waist",
-        7 => "legs",
-        8 => "feet",
-        11 => "finger1",
-        12 => "finger2",
-        13 => "trinket1",
-        14 => "trinket2",
-    ];
-    private $nameofSlot = [
-        1 => "casque",
-        2 => "neck",
-        3 => "shoulder",
-        4 => "back",
-        5 => "chest",
-        9 => "wrist",
-        16 => "mainHand",
-        17 => "offHand",
-        10 => "hands",
-        6 => "waist",
-        7 => "legs",
-        8 => "feet",
-        11 => "finger1",
-        12 => "finger2",
-        13 => "trinket1",
-        14 => "trinket2",
-    ];
+
     private $tradeall = [
 // herbo
         "182" => ["2556", "2555", "2554", "2553", "2552", "2551", "2550", "2549"],
@@ -89,20 +53,17 @@ class Trade extends Twig_Extension {
     ];
 
     private function getprofession($name, $trade) {
-        $path = realpath(__DIR__ . "/../../../../../app/_data/" . $name . ".json");
-        $myfile = fopen($path, "r") or die("Unable to open file!");
-        $json = fread($myfile, filesize($path));
-        fclose($myfile);
-        $json_decoded = json_decode($json);
-        if (property_exists($json_decoded, 'professions')) {
-            foreach ($json_decoded->professions as $typeofprof) {
-                foreach ($typeofprof as $prof) {
-                    $trade[$prof->id][$name] = ["rank" => $prof->rank, "max" => $prof->max];
-                    $trade[$prof->id]["icon"] = @$prof->icon;
-                }
+        $json_decoded = Utils::getDecodedPlayer($name);
+        // no profession exit
+        if (!property_exists($json_decoded, 'professions')) {
+            return $trade;
+        }
+        foreach ($json_decoded->professions as $typeofprof) {
+            foreach ($typeofprof as $prof) {
+                $trade[$prof->id][$name] = ["rank" => $prof->rank, "max" => $prof->max];
+                $trade[$prof->id]["icon"] = @$prof->icon;
             }
         }
-
         return $trade;
     }
 
@@ -181,29 +142,27 @@ class Trade extends Twig_Extension {
         return $cool;
     }
 
-    public function showTrade(Twig_Environment $env, $faction) {
-
-        $path = realpath(__DIR__ . "/../../../../../app/_data/guild" . $faction . ".json");
-
-        $myfile = fopen($path, "r") or die("Unable to open file!");
-        $json = fread($myfile, filesize($path));
-        fclose($myfile);
-// 182	186	393	171	773	164	202	755	165	333	197	185	129	356	794	
-
+    private function getTrade($faction) {
         $trade = array();
-        $json_decoded = json_decode($json);
         foreach (Utils::getMains($faction) as $character) {
             $trade = $this->getprofession($character->character->name, $trade);
         }
         foreach (Utils::getAlts($faction) as $character) {
             $trade = $this->getprofession($character->character->name, $trade);
         }
+        return $trade;
+    }
+
+    public function showTrade(Twig_Environment $env, $faction) {
+
+// 182	186	393	171	773	164	202	755	165	333	197	185	129	356	794	
+
+        $trade = $this->getTrade($faction);
 
         $cool = '<table class="roster">';
         $cool .= "<tr>";
         $cool .= "<th>Name</th>";
-        foreach ($this->tradeall as $key => $atradeall) {
-
+        foreach (array_keys($this->tradeall) as $key) {
             $cool .= '<th><img class="tradeskill" src="https://render-eu.worldofwarcraft.com/icons/56/' . $trade[$key]['icon'] . '.jpg"/></th>';
         }
         $cool .= "</tr>";

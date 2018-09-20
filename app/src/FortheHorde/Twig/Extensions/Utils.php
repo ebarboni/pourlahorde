@@ -34,6 +34,14 @@ class Utils {
         return "cyan";
     }
 
+    static function getDecodedPlayer($name) {
+        $path = realpath(__DIR__ . "/../../../../../app/_data/" . $name . ".json");
+        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $json = fread($myfile, filesize($path));
+        fclose($myfile);
+        return json_decode($json);
+    }
+
     static function getMains($faction) {
         $path = realpath(__DIR__ . "/../../../../../app/_data/guild" . $faction . ".json");
         $myfile = fopen($path, "r") or die("Unable to open file!");
@@ -49,7 +57,7 @@ class Utils {
             }
         }
         ksort($mains);
-       
+
         return $mains;
     }
 
@@ -67,7 +75,7 @@ class Utils {
                 }
             }
         }
-        ksort($alts); 
+        ksort($alts);
         return $alts;
     }
 
