@@ -26,7 +26,7 @@ class PersoGen implements DataSourceInterface {
             $guild = "Pour la Horde";
         }
         @mkdir(realpath(__DIR__ . "/../../../../source") . "/persos/", 0777, true);
-        $t = realpath(__DIR__ . "/../../../../source/persos") . "/" . $name . ".md";
+        $t = realpath(__DIR__ . "/../../../../source/persos") . "/" . urlencode($name) . ".md";
         $myfile = fopen($t, "w");
         $txt = "---\n" . "layout: " . $layout . "\n" . "title: $guild  \n" . "---\n"
                 . "\n"
@@ -48,7 +48,7 @@ class PersoGen implements DataSourceInterface {
 
         $source = new FileSource(
                 new Analyzer(), $this, new SplFileInfo(
-                $t, "persos/", "persos/" . $name . '.html'
+                $t, "persos/", "persos/" . urlencode($name) . '.html'
                 ), false, true
         );
         $source->canBeFormatted();
