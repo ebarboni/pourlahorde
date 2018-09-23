@@ -23,7 +23,7 @@ class UtilVs {
         fclose($myfile);
         $json_decoded = json_decode($json);
         $mains = array();
-        for ($rank = 0; $rank <= 0; $rank++) {
+        for ($rank = 0; $rank <= 10; $rank++) {
             foreach ($json_decoded->members as $character) {
                 if ($character->rank == $rank) {
                     $mains[$character->character->name] = $character;
