@@ -1,4 +1,10 @@
 services:
+    custom_data_source:
+        class: FortheHorde\Perso\PersoGen
+        tags:
+            - { name: sculpin.data_source }
+            
+    
     forthehorde.extension.wowhead:
         class: FortheHorde\Twig\Extensions\WowHead
         tags: 
