@@ -25,8 +25,8 @@ class PersoGen implements DataSourceInterface {
         } else {
             $guild = "Pour la Horde";
         }
-        @mkdir(realpath(__DIR__ . "/../../../../source") . "/_persos/", 0777, true);
-        $t = realpath(__DIR__ . "/../../../../source/_persos") . "/" . $name . ".md";
+        @mkdir(realpath(__DIR__ . "/../../../../source") . "/persos/", 0777, true);
+        $t = realpath(__DIR__ . "/../../../../source/persos") . "/" . $name . ".md";
         $myfile = fopen($t, "w");
         $txt = "---\n" . "layout: " . $layout . "\n" . "title: $guild  \n" . "---\n"
                 . "\n"
