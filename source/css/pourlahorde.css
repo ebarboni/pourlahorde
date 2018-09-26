@@ -59,6 +59,18 @@ h2 { color:darkgoldenrod;clear:both;
     image-rendering: crisp-edges;
     -ms-interpolation-mode: nearest-neighbor;
 }
+.persoimgmini {
+    display:table-row;
+    border-radius: 3px;
+    width: 36px;
+    height:36px;
+    border: lightgrey solid 1px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
 .roster{display: table;}
 .level{color:white;font-size: 8px;}
 

@@ -25,8 +25,25 @@ class PersoGen implements DataSourceInterface {
         } else {
             $guild = "Pour la Horde";
         }
-        @mkdir(realpath(__DIR__ . "/../../../../source") . "/persos/", 0777, true);
-        $t = realpath(__DIR__ . "/../../../../source/persos") . "/" . urlencode($name) . ".md";
+
+        //elune/83/163331155-avatar.jpg
+        $subpath = explode('/', str_replace("-avatar.jpg", '', $character->character->thumbnail)); //str_replace("-avatar.jpg", "", );
+        $path1 = implode('/', array($subpath[0], $subpath[1]));
+        $path2 = $subpath[2];
+        $path2 = str_replace("0", "A", $path2);
+        $path2 = str_replace("1", "B", $path2);
+        $path2 = str_replace("2", "C", $path2);
+        $path2 = str_replace("3", "D", $path2);
+        $path2 = str_replace("4", "E", $path2);
+        $path2 = str_replace("5", "F", $path2);
+        $path2 = str_replace("6", "G", $path2);
+        $path2 = str_replace("7", "H", $path2);
+        $path2 = str_replace("8", "I", $path2);
+        $path2 = str_replace("9", "J", $path2);
+
+
+        @mkdir(realpath(__DIR__ . "/../../../../source") . "/persos/" . $path1, 0777, true);
+        $t = realpath(__DIR__ . "/../../../../source/persos") . "/" . $path1 . '/' . $path2 . ".md";
         $myfile = fopen($t, "w");
         $txt = "---\n" . "layout: " . $layout . "\n" . "title: $guild  \n" . "---\n"
                 . "\n"
@@ -45,11 +62,17 @@ class PersoGen implements DataSourceInterface {
         }
         fwrite($myfile, $txt);
         fclose($myfile);
-
+        /* echo "\n";
+          echo "\n";
+          echo $t;
+          echo "\n";
+          echo "persos/" . $path1;
+          echo "persos/" . $path1 . '/' . $path2 . '.html';
+          echo "\n"; */
         $source = new FileSource(
                 new Analyzer(), $this, new SplFileInfo(
-                $t, "persos/", "persos/" . urlencode($name) . '.html'
-                ), false, true
+                $t, "persos/" . $path1 . "/", "persos/" . $path1 . '/' . $path2 . '.html'
+                ), true, true
         );
         $source->canBeFormatted();
         $source->setIsNotGenerated();

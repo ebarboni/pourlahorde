@@ -69,7 +69,7 @@ class Trade extends Twig_Extension {
 
     private function displayrowtrade($cssclass, $character, $trade) {
         $cool = '<tr class="' . $cssclass . '">';
-        $cool .= '<td class=' . Utils::getColor($character->character->class) . '>' . $character->character->name . '</td>';
+        $cool .= Utils::getCellforPerso($character);//'<td class=' . Utils::getColor($character->character->class) . '>' . $character->character->name . '</td>';
         foreach ($this->tradeall as $key1 => $atrade1) {
             $currentkey = $atrade1[7];
             // echo "$currentkey,";

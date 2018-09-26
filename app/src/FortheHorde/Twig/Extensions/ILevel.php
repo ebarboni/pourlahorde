@@ -120,7 +120,9 @@ class ILevel extends Twig_Extension {
             $tmp = '<td></td><td></td>';
         }
         if (@$json_decoded["items"]['neck']['azeriteItem']['azeriteLevel'] > 0) {
-            $tmp .= '<td>' . $json_decoded["items"]['neck']['azeriteItem']['azeriteLevel'] . '</td>';
+            $tmp .= '<td>' . $json_decoded["items"]['neck']['azeriteItem']['azeriteLevel'];
+            $tmp .= '<br>' . '<span class="anitem">' . number_format(100 * ($json_decoded["items"]['neck']['azeriteItem']['azeriteExperience'] / ($json_decoded["items"]['neck']['azeriteItem']['azeriteExperience'] + $json_decoded["items"]['neck']['azeriteItem']['azeriteExperienceRemaining'])), 2, ',', '') . '</span>';
+            $tmp .= '</td>';
         } else {
             $tmp .= '<td></td>';
         }
@@ -202,7 +204,7 @@ class ILevel extends Twig_Extension {
 
     private function displayrowItem($classname, $character) {
         $cool = '<tr class="' . $classname . '">';
-        $cool .= '<td class=' . Utils::getColor($character->character->class) . '><a class=' . Utils::getColor($character->character->class) . ' target="_blank" href="https://worldofwarcraft.com/fr-fr/character/elune/' . $character->character->name . '">' . $character->character->name . '</a></td>';
+        $cool .= Utils::getCellforPerso($character); //';
 
 
         $itemlist = "";
