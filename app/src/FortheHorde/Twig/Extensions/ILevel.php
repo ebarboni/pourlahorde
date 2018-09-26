@@ -121,7 +121,7 @@ class ILevel extends Twig_Extension {
         }
         if (@$json_decoded["items"]['neck']['azeriteItem']['azeriteLevel'] > 0) {
             $tmp .= '<td>' . $json_decoded["items"]['neck']['azeriteItem']['azeriteLevel'];
-            $tmp .= '<br>' . '<span class="anitem">' . number_format(100 * ($json_decoded["items"]['neck']['azeriteItem']['azeriteExperience'] / ($json_decoded["items"]['neck']['azeriteItem']['azeriteExperience'] + $json_decoded["items"]['neck']['azeriteItem']['azeriteExperienceRemaining'])), 2, ',', '') . '</span>';
+            $tmp .= '<br>' . '<span class="anitem">' . number_format(100 * ($json_decoded["items"]['neck']['azeriteItem']['azeriteExperience'] / $json_decoded["items"]['neck']['azeriteItem']['azeriteExperienceRemaining']), 2, ',', '') . '</span>';
             $tmp .= '</td>';
         } else {
             $tmp .= '<td></td>';
