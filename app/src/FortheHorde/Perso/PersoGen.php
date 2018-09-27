@@ -45,21 +45,21 @@ class PersoGen implements DataSourceInterface {
         @mkdir(realpath(__DIR__ . "/../../../../source") . "/persos/" . $path1, 0777, true);
         $t = realpath(__DIR__ . "/../../../../source/persos") . "/" . $path1 . '/' . $path2 . ".md";
         $myfile = fopen($t, "w");
-        $txt = "---\n" . "layout: " . $layout . "\n" . "title: $guild  \n" . "---\n"
+        $txt = "---\n" . "layout: " . $layout . "\n" . "title: $guild - $name  \n" . "---\n"
                 . "\n"
-                . "$name"
                 . ""
-                . "";
+                . ""
+                . " {{ showCharDetails('$name') }} \n";
         // echo $txt;
 
 
-        $chardata = UtilVs::getDecodedPlayer($name);
-        //--echo $chardata;
-        if (isset($chardata->stats)) {
-            foreach ($chardata->stats as $key => $value) {
-                $txt .= "\n\n**" . $key . "** => " . $value;
-            }
-        }
+        /* $chardata = UtilVs::getDecodedPlayer($name);
+          //--echo $chardata;
+          if (isset($chardata->stats)) {
+          foreach ($chardata->stats as $key => $value) {
+          $txt .= "\n\n**" . $key . "** => " . $value;
+          }
+          } */
         fwrite($myfile, $txt);
         fclose($myfile);
         /* echo "\n";

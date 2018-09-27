@@ -50,7 +50,7 @@ class Utils {
         $path2 = str_replace("8", "I", $path2);
         $path2 = str_replace("9", "J", $path2);
         if ($character->character->level < 10) {
-            $c .= '<img src="http://eu.battle.net/wow/static/images/2d/avatar/' . $character->character->race . '-' . $character->character->gender . '.jpg" class="persoimgmini" height="36" width="36" />';
+            $c .= '<img src="http://eu.battle.net/wow/static/images/2d/avatar/' . $character->character->race . '-' . $character->character->gender . '.jpg" class="persoimgmini" height="36" width="36" />' . "<br>";
         } else {
             $c .= '<a href="../persos/' . $path1 . '/' . $path2 . '/index.html" target="_blank"><img src="https://render-eu.worldofwarcraft.com/character/' . $character->character->thumbnail . '" class="persoimgmini" height="36" width="36" /></a>';
         }

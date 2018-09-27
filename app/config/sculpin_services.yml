@@ -29,8 +29,7 @@ services:
         class: FortheHorde\Twig\Extensions\Text
         tags: 
            - { name: twig.extension }       
-           
-           
-           
-           
-           
+    forthehorde.extension.chardetails:
+        class: FortheHorde\Twig\Extensions\CharDetails
+        tags: 
+           - { name: twig.extension }       
