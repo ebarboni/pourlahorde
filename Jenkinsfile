@@ -28,7 +28,7 @@ sh "curl -o app/_data/guildH.json 'https://eu.api.blizzard.com/wow/guild/Elune/W
 def gh = env.WORKSPACE + '/app/_data/guildH.json'
 
 sh "curl -o app/_data/achievementguild.json 'https://eu.api.blizzard.com/wow/data/guild/achievements?locale=fr_FR&access_token=${accesstoken}'"
-sh "curl -o app/_data/achievementperso.json 'https:/eu.api.blizzard.com/wow/data/character/achievements?locale=fr_FR&access_token=${accesstoken}'"
+sh "curl -o app/_data/achievementperso.json 'https://eu.api.blizzard.com/wow/data/character/achievements?locale=fr_FR&access_token=${accesstoken}'"
 
 def characterA = jsonParse(readFile(ga))
 for (charact  in characterA.get('members') ) {
