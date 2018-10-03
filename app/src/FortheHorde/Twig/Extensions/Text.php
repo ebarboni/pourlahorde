@@ -47,7 +47,7 @@ class Text extends Twig_Extension {
             //Dremora,Grimmlock,Grishnok,Halani
             $mainandalt = [
                 "Fkaïroc" => ['Aache', 'Aibus', 'Borderpat', 'Illidawi'],
-                "Absohawok" => ["Absojöllnir", "Absoriah", 'Absotera', 'Absolis'],
+                "Absohawok" => ["Absojöllnir", "Absoriah", 'Absotera', 'Absolis','Absokor'],
                 "Sweetiebelle" => ["Bänniways", "Yawinaab"],
                 "Baouss" => ['Oxynocho', 'Taurocho'],
                 "Emmental" => ["Aclasse", "Meuhane", 'Moumental', "Wanjin"],
