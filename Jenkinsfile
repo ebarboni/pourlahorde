@@ -14,7 +14,7 @@ node('setekhmaseter') {
    sh "composer install"
 }
 stage('get data'){
-
+sh 'rm -Rf source/persos/'
 sh 'mkdir -p app/_data/'
 
 sh "curl -o app/_data/data.json -X POST 'https://eu.battle.net/oauth/token' -u3492455326544be3b53cdb7dab3eb671:${env.APIKEY} -d grant_type=client_credentials "
