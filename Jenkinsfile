@@ -32,13 +32,13 @@ sh "curl -o app/_data/achievementperso.json 'https://eu.api.blizzard.com/wow/dat
 
 def characterA = jsonParse(readFile(ga))
 for (charact  in characterA.get('members') ) {
- def n =  new String(charact.get('character').get('name').toString().getBytes(),"UTF-8")
+ def n =  java.net.URLEncoder.encode(charact.get('character').get('name').toString().getBytes(),"UTF-8")
 sh "curl -o app/_data/${n}.json 'https://eu.api.blizzard.com/wow/character/Elune/${n}?fields=stats,professions,items,statistics,progression,audit,talents,achievements,reputation&locale=fr_FR&access_token=${accesstoken}'"
 sleep (time:50,unit:'MILLISECONDS')
 }
 def characterH = jsonParse(readFile(gh))
 for (charact  in characterH.get('members') ) {
- def n =  new String(charact.get('character').get('name').toString().getBytes(),"UTF-8")
+ def n =  java.net.URLEncoder.encode(charact.get('character').get('name').toString().getBytes(),"UTF-8")
 sh "curl -o app/_data/${n}.json 'https://eu.api.blizzard.com/wow/character/Elune/${n}?fields=stats,professions,items,statistics,progression,audit,talents,achievements,reputation&locale=fr_FR&access_token=${accesstoken}'"
 sleep (time:50,unit:'MILLISECONDS')
 }
