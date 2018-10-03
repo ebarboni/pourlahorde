@@ -61,7 +61,7 @@ class Utils {
 
     static function getDecodedPlayer($name) {
         $path = realpath(__DIR__ . "/../../../../../app/_data/" . $name . ".json");
-        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $myfile = fopen($path, "r") or die("Unable to open file!" . $name);
         $json = fread($myfile, filesize($path));
         fclose($myfile);
         return json_decode($json);
@@ -69,7 +69,7 @@ class Utils {
 
     static function getMains($faction) {
         $path = realpath(__DIR__ . "/../../../../../app/_data/guild" . $faction . ".json");
-        $myfile = fopen($path, "r") or die("Unable to open file!");
+        $myfile = fopen($path, "r") or die("Unable to open file!" . $name);
         $json = fread($myfile, filesize($path));
         fclose($myfile);
         $json_decoded = json_decode($json);
