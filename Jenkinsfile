@@ -33,13 +33,13 @@ sh "curl -o app/_data/achievementperso.json 'https://eu.api.blizzard.com/wow/dat
 def characterA = jsonParse(readFile(ga))
 for (charact  in characterA.get('members') ) {
  def n =  charact.get('character').get('name').toString()
-sh "curl -o app/_data/${n}.json 'https://eu.api.blizzard.com/wow/character/Elune/${n}?fields=stats,professions,items,statistics,progression,audit,talents,achievements,reputation&locale=fr_FR&apikey=${accesstoken}'"
+sh "curl -o app/_data/${n}.json 'https://eu.api.blizzard.com/wow/character/Elune/${n}?fields=stats,professions,items,statistics,progression,audit,talents,achievements,reputation&locale=fr_FR&access_token=${accesstoken}'"
 sleep 1
 }
 def characterH = jsonParse(readFile(gh))
 for (charact  in characterH.get('members') ) {
  def n =  charact.get('character').get('name').toString()
-sh "curl -o app/_data/${n}.json 'https://eu.api.blizzard.com/wow/character/Elune/${n}?fields=stats,professions,items,statistics,progression,audit,talents,achievements,reputation&locale=fr_FR&apikey=${accesstoken}'"
+sh "curl -o app/_data/${n}.json 'https://eu.api.blizzard.com/wow/character/Elune/${n}?fields=stats,professions,items,statistics,progression,audit,talents,achievements,reputation&locale=fr_FR&access_token=${accesstoken}'"
 sleep 1
 }
 }
