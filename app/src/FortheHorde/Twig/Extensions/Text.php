@@ -80,7 +80,7 @@ class Text extends Twig_Extension {
             $this->mainandalt = [
                 "Absofang" => ["Absocreep", "Absozen", "Absoluthion", 'Absorea'],
                 "Myrrdin" => ["Alleister", 'Elrudel'],
-                "Banniway" => ["Baniway", "Baniways", "Banniways", "Bänniways", 'Rainbowdashh', "Yawinaab"],
+                "Banniway" => ["Baniway", "Banniways", "Bänniways", 'Rainbowdashh', "Yawinaab"],
                 "Caliwiel" => [],
                 "Emmental" => ["Barillium", "Bleuh", 'Chèvredoux', 'Lopinel', 'Morchort', 'Poalhan', 'Roqvefort', 'Rouflakette', 'Cabecou'],
                 "Helianthe" => ['Ireene'],
