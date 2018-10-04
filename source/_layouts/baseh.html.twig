@@ -19,23 +19,23 @@
 
 
     </head>
-    <body>
-        <nav class="navbar navbar-expand-md navbar-dark static-top bg-dark"> 
-            <ul class="nav navbar-nav">
-                <li class="nav-item active"><a class="nav-link"  href="{{ site.url }}/indexh/">Fief</a></li>
-                <li class="nav-item active"><a class="nav-link"  href="{{ site.url }}/professionsh/">Métiers</a></li>
-                <li class="nav-item active"><a class="nav-link"  href="{{ site.url }}/statsh/">Stuff</a></li>
-                <li class="nav-item active"><a class="nav-link"  href="{{ site.url }}/guildachievementsh/">HF</a></li>
-            </ul>
-        </nav>
-        <div class="jumbotron-fluid">
+    <body> <div class="jumbotron-fluid" style="padding-bottom: 10px;">
             <div class="container">
+                <p class="server">Elune</p>
                 <h1 class="display-3">Woodoo Awmy</h1>
-                <p>Elune</p>
             </div>
         </div>
+        <nav class="navbar navbar-expand-md navbar-dark static-top bg-dark"> 
+            <ul class="nav navbar-nav">
+                <li class="nav-item active"><a class="nav-link"  href="{{ site.url }}/indexh/">Caserne</a></li>
+                <li class="nav-item active"><a class="nav-link"  href="{{ site.url }}/professionsh/">Comptoir</a></li>
+                <li class="nav-item active"><a class="nav-link"  href="{{ site.url }}/statsh/">Stuff</a></li>
+                <li class="nav-item active"><a class="nav-link"  href="{{ site.url }}/guildachievementsh/">Hall des légendes</a></li>
+            </ul>
+        </nav>
 
-        <div class="container">
+
+        <div class="container-fluid">
     {% block content_wrapper %}{% block content %}{% endblock %}{% endblock %}
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
@@ -45,25 +45,25 @@
         // tooltip options
     {% block wowHeadTags %}{% endblock %}
 
-           $(document).ready(function () {
-               // update tooltips
-               if (typeof $WowheadPower == 'undefined') {
-                   $.getScript('//wow.zamimg.com/widgets/power.js');
-               } else {
-                   $WowheadPower.refreshLinks();
-               }
-               $(".main").click(
-                       function ( ) {
-                           $('.persoimg').css({'border-color': 'lightgray'});
-                           $(this).find('.persoimg').css({'border-color': 'red'});
-                           name = "." + $(this).find('.ppname').text();
-                           $('.alt').css({opacity: .3});
-                           $(name).css({opacity: 1.0}); //each(alert("salut"));
+        $(document).ready(function () {
+            // update tooltips
+            if (typeof $WowheadPower == 'undefined') {
+                $.getScript('//wow.zamimg.com/widgets/power.js');
+            } else {
+                $WowheadPower.refreshLinks();
+            }
+            $(".main").click(
+                    function ( ) {
+                        $('.persoimg').css({'border-color': 'lightgray'});
+                        $(this).find('.persoimg').css({'border-color': 'red'});
+                        name = "." + $(this).find('.ppname').text();
+                        $('.alt').css({opacity: .3});
+                        $(name).css({opacity: 1.0}); //each(alert("salut"));
 
 
 
-                       });
-           });
+                    });
+        });
 
 </script>
 </div>

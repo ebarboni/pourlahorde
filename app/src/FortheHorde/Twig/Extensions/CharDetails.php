@@ -19,55 +19,58 @@ class CharDetails extends Twig_Extension {
 
     public function showCharDetails(Twig_Environment $env, $name) {
         $charobject = Utils::getDecodedPlayer($name);
-        $color = Utils::getColor($charobject->class);
-        $d = '';
-        $c = '<span class="pname ' . $color . '">' . $charobject->name . '</span>';
-        $c .= '<div class="aperso ' . $d . ' ">';
-        if ($charobject->level < 10) {
-            $c .= '<img src="http://eu.battle.net/wow/static/images/2d/avatar/' . $charobject->race . '-' . $charobject->gender . '.jpg" class="persoimg" height="84" width="84" />';
-        } else {
-            $c .= '<img class="overflowingVertical" src="https://render-eu.worldofwarcraft.com/character/' . str_replace('-avatar', '-inset', $charobject->thumbnail) . '" height="116" width="230" />';
-        }
+        if (isset($charobject->class)) {
+            $color = Utils::getColor($charobject->class);
+            echo 'name' . $name;
+            $d = '';
+            $c = '<span class="pname ' . $color . '">' . $charobject->name . '</span>';
+            $c .= '<div class="aperso ' . $d . ' ">';
+            if ($charobject->level < 10) {
+                $c .= '<img src="http://eu.battle.net/wow/static/images/2d/avatar/' . $charobject->race . '-' . $charobject->gender . '.jpg" class="persoimg" height="84" width="84" />';
+            } else {
+                $c .= '<img class="overflowingVertical" src="https://render-eu.worldofwarcraft.com/character/' . str_replace('-avatar', '-inset', $charobject->thumbnail) . '" height="116" width="230" />';
+            }
 
 
-        if ($charobject->level < 120) { // max level
-            $c .= '<span class="level">' . $charobject->level . '</span>';
-        }
+            if ($charobject->level < 120) { // max level
+                $c .= '<span class="level">' . $charobject->level . '</span>';
+            }
 
-        $c .= '</div>';
-        $c .= '<nav>
+            $c .= '</div>';
+            $c .= '<nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Stats</a>
     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Statistics</a>
     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Achievements</a>
   </div>
 </nav>';
-        $statstxt = '<table>';
-        if (isset($charobject->stats)) {
-            foreach ($charobject->stats as $key => $value) {
-                $statstxt .= "<tr><td>" . $key . "</td><td>" . $value . "</td></tr>";
+            $statstxt = '<table>';
+            if (isset($charobject->stats)) {
+                foreach ($charobject->stats as $key => $value) {
+                    $statstxt .= "<tr><td>" . $key . "</td><td>" . $value . "</td></tr>";
+                }
             }
-        }
-        $statstxt .= '</table>';
+            $statstxt .= '</table>';
 
 
-        $statisticsstxt = '<div>';
-        if (isset($charobject->statistics)) {
-            $statisticsstxt .= '<span>' . $charobject->statistics->name . '</span>';
-            foreach ($charobject->statistics->subCategories as $key => $value) {
-                //   $statisticsstxt .= '<div>';
-                $statisticsstxt .= $this->getMoreStats($value);
-                //   $statisticsstxt .= '</div>';
+            $statisticsstxt = '<div>';
+            if (isset($charobject->statistics)) {
+                $statisticsstxt .= '<span>' . $charobject->statistics->name . '</span>';
+                foreach ($charobject->statistics->subCategories as $key => $value) {
+                    //   $statisticsstxt .= '<div>';
+                    $statisticsstxt .= $this->getMoreStats($value);
+                    //   $statisticsstxt .= '</div>';
+                }
             }
-        }
-        $statisticsstxt .= '</div>';
-        $c .= '<div class="tab-content" id="nav-tabContent">
+            $statisticsstxt .= '</div>';
+            $c .= '<div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">' . $statstxt . '</div>
   
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">' . $statisticsstxt . '</div>
   <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">plus tard</div>
 </div>';
-        return $c;
+            return $c;
+        }
     }
 
     private function getMoreStats($sub) {

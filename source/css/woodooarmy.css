@@ -13,7 +13,7 @@ body{ color: white;
 h2 { color:darkgoldenrod;clear:both;
 }
 .content { padding: 10px;}
-.server { color: lightsteelblue;font-size: 15px !important;}
+.server { color: lightsteelblue;font-size: 15px !important;float:right;margin-top: 30px;}
 .banner {
     font-size: 40px !important;
     /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
@@ -31,8 +31,18 @@ h2 { color:darkgoldenrod;clear:both;
 .aperso {
     display:table;
     float:left;
-    border-spacing: 8px;
-    width: 12%;
+    border-spacing: 8px;   
+}.persoimgs {
+    display:table-row;
+    border-radius: 3px;
+    width: 66px;
+    height:66px;
+    border: lightgrey solid 1px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
 }
 .pname {
     display:table-row;

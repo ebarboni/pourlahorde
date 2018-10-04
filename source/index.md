@@ -5,10 +5,6 @@ use:
 - posts
 ---
 
-##Persos principaux
 {{ showMain('A') }}
-
-##Persos secondaires
-{{ showAlts('A') }}
 
 
