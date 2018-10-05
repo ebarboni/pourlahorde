@@ -1,5 +1,5 @@
 ---
-layout : defaulta
+layout : icononlya
 title: Pour la horde
 use:
 - posts

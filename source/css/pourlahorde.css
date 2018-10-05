@@ -57,6 +57,13 @@ h2 { color:darkgoldenrod;clear:both;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     -ms-interpolation-mode: nearest-neighbor;
+}.mw{
+    width: 30px;
+}.mw1{
+    width: 40px;
+}
+.stuff{
+    display: none;
 }
 .persoimgs {
     display:table-row;

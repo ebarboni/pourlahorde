@@ -54,13 +54,18 @@
         } else {
             $WowheadPower.refreshLinks();
         }
-        $(".main").click(
+        $(".vignette").click(
                 function ( ) {
-                    $('.persoimg').css({'border-color': 'lightgray'});
-                    $(this).find('.persoimg').css({'border-color': 'red'});
                     name = "." + $(this).find('.ppname').text();
-                    $('.alt').css({opacity: .3});
-                    $(name).css({opacity: 1.0}); //each(alert("salut"));
+                    if ($('.stuff' + name).css('display') === 'inline-flex') {
+                        $('.stuff').css({'display': 'none'});
+                    } else {
+                        $('.stuff').css({'display': 'none'});
+                        $('.stuff' + name).css({'display': 'inline-flex'});
+                    }
+                    // name = "." + $(this).find('.ppname').text();
+                    //$('.alt').css({opacity: .3});
+                    //$(name).css({opacity: 1.0}); //each(alert("salut"));
 
 
 
