@@ -58,10 +58,10 @@
                 function ( ) {
                     name = "." + $(this).find('.ppname').text();
                     if ($('.stuff' + name).css('display') === 'inline-flex') {
-                        $('.stuff').css({'display': 'none'});
+                        $('.stuff').hide(50);//css({'display': 'none'});
                     } else {
-                        $('.stuff').css({'display': 'none'});
-                        $('.stuff' + name).css({'display': 'inline-flex'});
+                        $('.stuff').hide(50);/*css({'display': 'none'});*/
+                        $('.stuff' + name).css({'display': 'inline-flex'});/**/
                     }
                     // name = "." + $(this).find('.ppname').text();
                     //$('.alt').css({opacity: .3});

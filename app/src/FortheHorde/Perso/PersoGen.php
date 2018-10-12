@@ -17,9 +17,9 @@ class PersoGen implements DataSourceInterface {
     private function doAchar($faction, $character, $sourceSet) {
         $name = $character->character->name;
         if ($faction == 'H') {
-            $layout = "defaulth";
+            $layout = "icononlyh";
         } else {
-            $layout = "defaulta";
+            $layout = "icononlya";
         }if ($faction == 'H') {
             $guild = "Woodoo Awmy";
         } else {

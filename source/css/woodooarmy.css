@@ -46,11 +46,24 @@ h2 { color:darkgoldenrod;clear:both;
 }
 .mw{
     width: 30px;
-}.mw1{
-    width: 40px;
+    padding-bottom: 20px;
+    padding-top:20px;
+}
+.mw1{
+    width: 40px; 
+    padding-bottom: 20px;
+    padding-top:20px;
+}
+.mw2{
+    padding-bottom: 20px;
+    padding-top:20px;
 }
 .stuff{
     display: none;
+    background-color: #441a13;
+    border-radius: .25rem;
+    padding-left:30px;
+    padding-right:30px;
 }
 .pname {
     display:table-row;
@@ -174,7 +187,7 @@ td {
 .druid{color:#ff7d0a;}
 .dh{color:#A330C9;}
 .anitem{
-    font-weight: normal; font-size: xx-small;
+    font-weight: normal; font-size: xx-small;text-align: center;
 }
 
 .audit{
