@@ -6,7 +6,7 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
-node('setekhmaseter') {
+node('setekhmaster') {
    stage('install tools') {
 
    git 'https://ebarboni@github.com/ebarboni/pourlahorde.git'
