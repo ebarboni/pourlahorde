@@ -81,7 +81,8 @@ class Utils {
     }
 
     static function getDecodedPlayer($name) {
-        $path = realpath(__DIR__ . "/../../../../../app/_data/" . $name . ".json");
+        echo "".$name;
+        $path = realpath(__DIR__ . "/../../../../../app/_data/" . urlencode($name) . ".json");
         $myfile = fopen($path, "r") or die("Unable to open file!" . $name);
         $json = fread($myfile, filesize($path));
         fclose($myfile);
