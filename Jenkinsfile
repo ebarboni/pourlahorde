@@ -51,6 +51,6 @@ stage ('build') {
    sh './vendor/bin/sculpin generate --env=prod'
 }
 stage ('deploy') {
-   sh "tar -zcvf /tmp/site.tar.gz output_prod/"
+   sh "cp -r output_prod/ /opt/site/"
 }
 }
