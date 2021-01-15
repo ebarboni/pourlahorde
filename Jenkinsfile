@@ -21,10 +21,10 @@ sh "curl -o app/_data/data.json -X POST 'https://eu.battle.net/oauth/token' -u34
 def tk = env.WORKSPACE + '/app/_data/data.json'
 def accesstoken = jsonParse(readFile(tk)).get('access_token')
 sh 'rm app/_data/data.json'
-sh "curl -o app/_data/guildA.json 'https://eu.api.blizzard.com/data/wow/guild/elune/pour%20la%20horde/roster?namespace=profile-eu&locale=fr_FR&access_token=${accesstoken}'"
+sh "curl -o app/_data/guildA.json 'https://eu.api.blizzard.com/data/wow/guild/elune/pour-la-horde/roster?namespace=profile-eu&locale=fr_FR&access_token=${accesstoken}'"
 def ga = env.WORKSPACE + '/app/_data/guildA.json'
 
-sh "curl -o app/_data/guildH.json 'https://eu.api.blizzard.com/data/wow/guild/elune/woodoo%20awmy/roster?namespace=profile-eu&locale=fr_FR&access_token=${accesstoken}'"
+sh "curl -o app/_data/guildH.json 'https://eu.api.blizzard.com/data/wow/guild/elune/woodoo-awmy/roster?namespace=profile-eu&locale=fr_FR&access_token=${accesstoken}'"
 def gh = env.WORKSPACE + '/app/_data/guildH.json'
 
 sh "curl -o app/_data/achievementguild.json 'https://eu.api.blizzard.com/wow/data/guild/achievements?locale=fr_FR&access_token=${accesstoken}'"
